@@ -3,7 +3,7 @@ import {
   Briefcase, 
   Target, 
   MapPin, 
-  DollarSign, 
+  IndianRupee, 
   FolderOpen, 
   Zap,
   TrendingUp,
@@ -40,7 +40,7 @@ const features = [
   },
   {
     id: 4,
-    icon: <DollarSign strokeWidth={1.5} />,
+    icon: <IndianRupee strokeWidth={1.5} />,
     iconBg: "bg-gradient-to-br from-pink-500 to-rose-600 shadow-pink-200",
     accent: "bg-pink-500",
     title: "Real Budgets & Accounts",

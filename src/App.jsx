@@ -31,9 +31,9 @@ export default function App() {
             <Courses />
             <Why />
             <Who />
+            <Testimonial />
             <Learning />
             <Faq />
-            <Testimonial />
             <Contact />
             <Footer />
           </>

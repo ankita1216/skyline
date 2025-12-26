@@ -11,8 +11,8 @@ const faqs = [
     answer: "Not at all. Our Foundation tracks are designed for absolute beginners. We start from the basics and build up to advanced concepts."
   },
   {
-    question: "Is this course pre-recorded or live?",
-    answer: "It is a hybrid model. You get high-quality recorded modules for theory, combined with intense, instructor-led offline practical sessions."
+    "question": "How is this course delivered?",
+    "answer": "This is a fully offline course. All sessions are conducted in person with live, instructor-led teaching and hands-on practical training."
   },
   {
     question: "Do you provide placement assistance?",
