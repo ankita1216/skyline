@@ -1,5 +1,5 @@
 // src/components/ContactEnrollmentForm.jsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { 
   User, 
   Mail, 
@@ -8,7 +8,8 @@ import {
   Calendar, 
   Send,
   CheckCircle2,
-  ShieldCheck
+  ShieldCheck,
+  Clock // Added Clock Icon
 } from "lucide-react";
 import { supabase } from "../lib/supabaseClient"; 
 
@@ -18,12 +19,32 @@ export default function ContactEnrollmentForm() {
     email: "",
     phone: "",
     course: "",
-    batch: ""
+    batch: "",
+    best_time_to_call: "" // New Field
+  });
+
+  const [utmParams, setUtmParams] = useState({
+    utm_source: "",
+    utm_medium: "",
+    utm_campaign: "",
+    utm_term: "",
+    utm_content: ""
   });
 
   const [loading, setLoading] = useState(false);
   const [successMsg, setSuccessMsg] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    setUtmParams({
+      utm_source: params.get("utm_source") || "",
+      utm_medium: params.get("utm_medium") || "",
+      utm_campaign: params.get("utm_campaign") || "",
+      utm_term: params.get("utm_term") || "",
+      utm_content: params.get("utm_content") || ""
+    });
+  }, []);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -38,6 +59,7 @@ export default function ContactEnrollmentForm() {
     if (!formData.phone.trim()) return "Please enter your phone number.";
     if (!formData.course) return "Please select a course.";
     if (!formData.batch) return "Please select a batch.";
+    if (!formData.best_time_to_call) return "Please select a preferred time to call."; // Validation
     return null;
   };
 
@@ -54,23 +76,36 @@ export default function ContactEnrollmentForm() {
 
     setLoading(true);
 
+    const submissionData = {
+      name: formData.name.trim(),
+      email: formData.email.trim(),
+      phone: formData.phone.trim(),
+      course: formData.course,
+      batch: formData.batch,
+      best_time_to_call: formData.best_time_to_call, // Include in payload
+      ...utmParams
+    };
+
     try {
-      const { data, error } = await supabase
+      const { error } = await supabase
         .from("enrollments")
-        .insert([
-          {
-            name: formData.name.trim(),
-            email: formData.email.trim(),
-            phone: formData.phone.trim(),
-            course: formData.course,
-            batch: formData.batch
-          }
-        ]);
+        .insert([submissionData]);
 
       if (error) throw error;
 
+      try {
+        await fetch("https://connect.pabbly.com/workflow/sendwebhookdata/IjU3NjcwNTZkMDYzZTA0M2M1MjY5NTUzMDUxMzMi_pc", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(submissionData),
+        });
+      } catch (webhookError) {
+        console.error("Webhook trigger failed:", webhookError);
+      }
+
       setSuccessMsg("Thanks! Your booking request has been received. We'll call you shortly.");
-      setFormData({ name: "", email: "", phone: "", course: "", batch: "" });
+      setFormData({ name: "", email: "", phone: "", course: "", batch: "", best_time_to_call: "" });
+      
     } catch (err) {
       console.error("Insert error:", err);
       setErrorMsg("Something went wrong — please try again later.");
@@ -80,10 +115,8 @@ export default function ContactEnrollmentForm() {
   };
 
   return (
-    // FIXED: Adjusted padding for mobile (py-12) vs desktop (lg:py-28)
     <section id="contact" className="relative w-full py-12 lg:py-28 bg-[#FDFCFE] overflow-hidden">
       
-      {/* Background Pattern */}
       <div className="absolute inset-0 opacity-[0.4]" 
            style={{ 
              backgroundImage: 'linear-gradient(#E2E8F0 1px, transparent 1px), linear-gradient(90deg, #E2E8F0 1px, transparent 1px)', 
@@ -103,7 +136,6 @@ export default function ContactEnrollmentForm() {
                Expert Guidance
             </div>
 
-            {/* FIXED: Smaller text on mobile (text-3xl) to prevent overflow/wrapping issues */}
             <h2 className="text-3xl md:text-5xl lg:text-6xl text-[#1a1a2e] leading-tight lg:leading-[1.15] tracking-tight font-sans">
                <span className="font-light text-slate-600">Not sure which</span> <br/>
                <span className="font-bold text-[#3F348F]">Path to take?</span>
@@ -114,11 +146,7 @@ export default function ContactEnrollmentForm() {
             </p>
 
             <div className="flex flex-col gap-4 pt-4 max-w-md mx-auto lg:mx-0">
-               {[
-                 "In-depth Profile Analysis",
-                 "Customized Career Roadmap",
-                 "Scholarship Eligibility Check"
-               ].map((item, index) => (
+               {["In-depth Profile Analysis", "Customized Career Roadmap", "Scholarship Eligibility Check"].map((item, index) => (
                  <div key={index} className="flex items-center gap-4 bg-white p-3 md:p-4 rounded-xl border border-slate-100 shadow-sm hover:border-purple-100 hover:shadow-md transition-all">
                     <div className="bg-green-50 p-2 rounded-full text-green-600 shrink-0">
                       <CheckCircle2 className="w-5 h-5" />
@@ -139,58 +167,27 @@ export default function ContactEnrollmentForm() {
 
                 <div className="relative group">
                   <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                  <input 
-                    type="text" 
-                    name="name"
-                    value={formData.name}
-                    placeholder="Your Full Name" 
-                    className="w-full pl-12 pr-4 py-3.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-[#3F348F] focus:ring-4 focus:ring-purple-50 transition-all outline-none text-slate-700 font-medium text-sm md:text-base"
-                    required
-                    onChange={handleChange}
-                  />
+                  <input type="text" name="name" value={formData.name} placeholder="Your Full Name" className="w-full pl-12 pr-4 py-3.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-[#3F348F] focus:ring-4 focus:ring-purple-50 transition-all outline-none text-slate-700 font-medium text-sm md:text-base" required onChange={handleChange} />
                 </div>
 
                 <div className="relative group">
                   <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                  <input 
-                    type="email" 
-                    name="email"
-                    value={formData.email}
-                    placeholder="Email Address" 
-                    className="w-full pl-12 pr-4 py-3.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-[#3F348F] focus:ring-4 focus:ring-purple-50 transition-all outline-none text-slate-700 font-medium text-sm md:text-base"
-                    required
-                    onChange={handleChange}
-                  />
+                  <input type="email" name="email" value={formData.email} placeholder="Email Address" className="w-full pl-12 pr-4 py-3.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-[#3F348F] focus:ring-4 focus:ring-purple-50 transition-all outline-none text-slate-700 font-medium text-sm md:text-base" required onChange={handleChange} />
                 </div>
 
                 <div className="relative group">
                   <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                  <input 
-                    type="tel" 
-                    name="phone"
-                    value={formData.phone}
-                    placeholder="Phone Number" 
-                    className="w-full pl-12 pr-4 py-3.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-[#3F348F] focus:ring-4 focus:ring-purple-50 transition-all outline-none text-slate-700 font-medium text-sm md:text-base"
-                    required
-                    onChange={handleChange}
-                  />
+                  <input type="tel" name="phone" value={formData.phone} placeholder="Phone Number" className="w-full pl-12 pr-4 py-3.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-[#3F348F] focus:ring-4 focus:ring-purple-50 transition-all outline-none text-slate-700 font-medium text-sm md:text-base" required onChange={handleChange} />
                 </div>
 
                 <div className="flex flex-col md:flex-row gap-4 md:gap-5">
                   <div className="relative group flex-1">
                     <BookOpen className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                    <select 
-                      name="course"
-                      value={formData.course}
-                      className="w-full pl-12 pr-10 py-3.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-[#3F348F] focus:ring-4 focus:ring-purple-50 transition-all outline-none text-slate-700 font-medium appearance-none cursor-pointer text-sm md:text-base"
-                      required
-                      onChange={handleChange}
-                    >
+                    <select name="course" value={formData.course} className="w-full pl-12 pr-10 py-3.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-[#3F348F] focus:ring-4 focus:ring-purple-50 transition-all outline-none text-slate-700 font-medium appearance-none cursor-pointer text-sm md:text-base" required onChange={handleChange}>
                       <option value="" disabled>Select Course</option>
                       <option value="performance-marketing">Performance Marketing</option>
                       <option value="google-ads">Google Ads Specialist</option>
                       <option value="meta-ads">Meta Ads Mastery</option>
-                      {/* FIXED: Removed DTC Brand Strategy */}
                     </select>
                     <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
                       <svg className="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -199,20 +196,34 @@ export default function ContactEnrollmentForm() {
 
                   <div className="relative group flex-1">
                     <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                    <select 
-                      name="batch"
-                      value={formData.batch}
-                      className="w-full pl-12 pr-10 py-3.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-[#3F348F] focus:ring-4 focus:ring-purple-50 transition-all outline-none text-slate-700 font-medium appearance-none cursor-pointer text-sm md:text-base"
-                      required
-                      onChange={handleChange}
-                    >
+                    <select name="batch" value={formData.batch} className="w-full pl-12 pr-10 py-3.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-[#3F348F] focus:ring-4 focus:ring-purple-50 transition-all outline-none text-slate-700 font-medium appearance-none cursor-pointer text-sm md:text-base" required onChange={handleChange}>
                       <option value="" disabled>Preferred Batch</option>
-                      {/* FIXED: Only Saturday/Sunday options available */}
                       <option value="weekend-sat-sun">Weekend (Sat & Sun)</option>
                     </select>
                     <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
                       <svg className="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
                     </div>
+                  </div>
+                </div>
+
+                {/* NEW FIELD: Best Time to Call */}
+                <div className="relative group">
+                  <Clock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+                  <select 
+                    name="best_time_to_call"
+                    value={formData.best_time_to_call}
+                    className="w-full pl-12 pr-10 py-3.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-[#3F348F] focus:ring-4 focus:ring-purple-50 transition-all outline-none text-slate-700 font-medium appearance-none cursor-pointer text-sm md:text-base"
+                    required
+                    onChange={handleChange}
+                  >
+                    <option value="" disabled>Best Time for Call</option>
+                    <option value="morning">Morning (9 AM - 12 PM)</option>
+                    <option value="afternoon">Afternoon (12 PM - 4 PM)</option>
+                    <option value="evening">Evening (4 PM - 8 PM)</option>
+                    <option value="anytime">Anytime</option>
+                  </select>
+                  <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+                    <svg className="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
                   </div>
                 </div>
 
@@ -231,10 +242,8 @@ export default function ContactEnrollmentForm() {
 
               </form>
             </div>
-
             <div className="absolute -bottom-5 -right-5 w-full h-full border-2 border-[#FF0065] rounded-3xl z-0 opacity-20 hidden lg:block"></div>
           </div>
-
         </div>
       </div>
     </section>
