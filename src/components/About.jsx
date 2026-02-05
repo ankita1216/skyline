@@ -47,9 +47,8 @@ const STATS = [
 
 export default function WhySkyline() {
   return (
-    <section className="py-20 bg-white">
+    <section id="about" className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-6">
-
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
 
           {/* LEFT — IMAGE (CURVED STYLE) */}

@@ -1,251 +1,166 @@
-// src/components/ContactEnrollmentForm.jsx
-import React, { useState, useEffect } from "react";
-import { 
-  User, 
-  Mail, 
-  Phone, 
-  BookOpen, 
-  Calendar, 
-  Send,
-  CheckCircle2,
-  ShieldCheck,
-  Clock // Added Clock Icon
-} from "lucide-react";
-import { supabase } from "../lib/supabaseClient"; 
+import { useState } from "react";
+import { Send, Phone, Mail, MessageSquare, MapPin } from "lucide-react";
 
-export default function ContactEnrollmentForm() {
+const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
-    email: "",
     phone: "",
-    course: "",
-    batch: "",
-    best_time_to_call: "" // New Field
+    email: "",
+    message: "",
   });
-
-  const [utmParams, setUtmParams] = useState({
-    utm_source: "",
-    utm_medium: "",
-    utm_campaign: "",
-    utm_term: "",
-    utm_content: ""
-  });
-
-  const [loading, setLoading] = useState(false);
-  const [successMsg, setSuccessMsg] = useState("");
-  const [errorMsg, setErrorMsg] = useState("");
-
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    setUtmParams({
-      utm_source: params.get("utm_source") || "",
-      utm_medium: params.get("utm_medium") || "",
-      utm_campaign: params.get("utm_campaign") || "",
-      utm_term: params.get("utm_term") || "",
-      utm_content: params.get("utm_content") || ""
-    });
-  }, []);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    setErrorMsg("");
-    setSuccessMsg("");
   };
 
-  const validate = () => {
-    if (!formData.name.trim()) return "Please enter your name.";
-    const emailRe = /\S+@\S+\.\S+/;
-    if (!emailRe.test(formData.email)) return "Please enter a valid email.";
-    if (!formData.phone.trim()) return "Please enter your phone number.";
-    if (!formData.course) return "Please select a course.";
-    if (!formData.batch) return "Please select a batch.";
-    if (!formData.best_time_to_call) return "Please select a preferred time to call."; // Validation
-    return null;
-  };
-
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setErrorMsg("");
-    setSuccessMsg("");
-
-    const v = validate();
-    if (v) {
-      setErrorMsg(v);
-      return;
-    }
-
-    setLoading(true);
-
-    const submissionData = {
-      name: formData.name.trim(),
-      email: formData.email.trim(),
-      phone: formData.phone.trim(),
-      course: formData.course,
-      batch: formData.batch,
-      best_time_to_call: formData.best_time_to_call, // Include in payload
-      ...utmParams
-    };
-
-    try {
-      const { error } = await supabase
-        .from("enrollments")
-        .insert([submissionData]);
-
-      if (error) throw error;
-
-      try {
-        await fetch("https://connect.pabbly.com/workflow/sendwebhookdata/IjU3NjcwNTZkMDYzZTA0M2M1MjY5NTUzMDUxMzMi_pc", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(submissionData),
-        });
-      } catch (webhookError) {
-        console.error("Webhook trigger failed:", webhookError);
-      }
-
-      setSuccessMsg("Thanks! Your booking request has been received. We'll call you shortly.");
-      setFormData({ name: "", email: "", phone: "", course: "", batch: "", best_time_to_call: "" });
-      
-    } catch (err) {
-      console.error("Insert error:", err);
-      setErrorMsg("Something went wrong — please try again later.");
-    } finally {
-      setLoading(false);
-    }
+    console.log("Form Data:", formData);
   };
 
   return (
-    <section id="contact" className="relative w-full py-12 lg:py-28 bg-[#FDFCFE] overflow-hidden">
-      
-      <div className="absolute inset-0 opacity-[0.4]" 
-           style={{ 
-             backgroundImage: 'linear-gradient(#E2E8F0 1px, transparent 1px), linear-gradient(90deg, #E2E8F0 1px, transparent 1px)', 
-             backgroundSize: '40px 40px' 
-           }}>
-      </div>
+    <section
+      id="contact"
+      className="py-24 bg-[#B2BEB5] relative overflow-hidden"
+    >
+      {/* Decorative Background */}
+      <div className="absolute top-[-10%] left-[-10%] w-[40vw] h-[40vw] rounded-full bg-white/40 blur-3xl pointer-events-none" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[30vw] h-[30vw] rounded-full bg-white/30 blur-3xl pointer-events-none" />
 
-      <div className="absolute bottom-0 left-0 w-full h-[300px] bg-gradient-to-t from-purple-50 to-transparent opacity-60 pointer-events-none"></div>
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
-
-          {/* Left Side Content */}
-          <div className="space-y-6 lg:space-y-8 text-center lg:text-left relative">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-purple-50 border border-purple-100 text-[#3F348F] text-xs font-bold uppercase tracking-wider shadow-sm mx-auto lg:mx-0">
-               <ShieldCheck className="w-4 h-4 fill-current" />
-               Expert Guidance
-            </div>
-
-            <h2 className="text-3xl md:text-5xl lg:text-6xl text-[#1a1a2e] leading-tight lg:leading-[1.15] tracking-tight font-sans">
-               <span className="font-light text-slate-600">Not sure which</span> <br/>
-               <span className="font-bold text-[#3F348F]">Path to take?</span>
+        {/* Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+          <div className="max-w-2xl">
+            <span className="text-[#247994] font-bold tracking-[0.3em] text-xs uppercase">
+              Get in touch
+            </span>
+            <h2 className="text-4xl md:text-6xl font-bold text-slate-800 mt-4 tracking-tighter">
+              Let’s start your <br />
+              <span className="italic text-[#247994]">new chapter.</span>
             </h2>
+          </div>
 
-            <p className="text-base md:text-lg text-slate-500 mt-4 leading-relaxed max-w-lg mx-auto lg:mx-0 font-light">
-              Don't guess your future. Book a free 1-on-1 counseling session with our senior mentors. We will analyze your skills and suggest the perfect roadmap.
+          <div className="flex gap-4">
+            <a
+              href="tel:+919876543210"
+              className="p-4 rounded-full bg-white/70 border border-black/20 text-slate-700 hover:bg-[#247994] hover:text-white transition-all shadow-sm"
+            >
+              <Phone size={20} />
+            </a>
+            <a
+              href="mailto:info@example.com"
+              className="p-4 rounded-full bg-white/70 border border-black/20 text-slate-700 hover:bg-[#247994] hover:text-white transition-all shadow-sm"
+            >
+              <Mail size={20} />
+            </a>
+          </div>
+        </div>
+
+        {/* Main Content */}
+        <div className="grid lg:grid-cols-12 gap-0 rounded-[2rem] overflow-hidden shadow-2xl border border-black/20 bg-white/70 backdrop-blur-lg">
+
+          {/* Left – Form */}
+          <div className="lg:col-span-5 bg-white p-8 md:p-12">
+            <h3 className="text-2xl font-bold text-slate-800 mb-2">
+              Request a Call Back
+            </h3>
+            <p className="text-slate-500 mb-8 text-sm">
+              Fill out the form and our expert consultant will reach out within 24 hours.
             </p>
 
-            <div className="flex flex-col gap-4 pt-4 max-w-md mx-auto lg:mx-0">
-               {["In-depth Profile Analysis", "Customized Career Roadmap", "Scholarship Eligibility Check"].map((item, index) => (
-                 <div key={index} className="flex items-center gap-4 bg-white p-3 md:p-4 rounded-xl border border-slate-100 shadow-sm hover:border-purple-100 hover:shadow-md transition-all">
-                    <div className="bg-green-50 p-2 rounded-full text-green-600 shrink-0">
-                      <CheckCircle2 className="w-5 h-5" />
-                    </div>
-                    <span className="text-sm md:text-base text-slate-700 font-semibold text-left">{item}</span>
-                 </div>
-               ))}
+            <form onSubmit={handleSubmit} className="space-y-5">
+              <input
+                type="text"
+                name="name"
+                placeholder="Your Name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+                className="w-full bg-gray-50 border-b-2 border-gray-300 py-4 px-2 focus:outline-none focus:border-[#247994]"
+              />
+
+              <div className="grid md:grid-cols-2 gap-5">
+                <input
+                  type="tel"
+                  name="phone"
+                  placeholder="Phone Number"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  required
+                  className="w-full bg-gray-50 border-b-2 border-gray-300 py-4 px-2 focus:outline-none focus:border-[#247994]"
+                />
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Email Address"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  className="w-full bg-gray-50 border-b-2 border-gray-300 py-4 px-2 focus:outline-none focus:border-[#247994]"
+                />
+              </div>
+
+              <textarea
+                name="message"
+                rows="4"
+                placeholder="How can we help you?"
+                value={formData.message}
+                onChange={handleChange}
+                className="w-full bg-gray-50 border-b-2 border-gray-300 py-4 px-2 focus:outline-none focus:border-[#247994] resize-none"
+              />
+
+              <button
+                type="submit"
+                className="w-full bg-[#247994] text-white font-bold py-5 rounded-xl hover:bg-[#1a5b70] transition-all flex items-center justify-center gap-3 shadow-lg"
+              >
+                Submit Inquiry
+                <Send size={18} />
+              </button>
+            </form>
+          </div>
+
+          {/* Right – Map */}
+          <div className="lg:col-span-7 relative min-h-[400px]">
+            <iframe
+              title="Aakash Skyline Location"
+              src="https://www.google.com/maps?q=Aakash+Skyline+Mango+Jamshedpur&output=embed"
+              className="absolute inset-0 w-full h-full grayscale-[0.2] contrast-[1.05]"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
+
+            {/* Floating Info */}
+            <div className="absolute bottom-6 left-6 right-6 md:left-auto md:right-8 md:w-80 bg-white/80 backdrop-blur-xl p-6 rounded-2xl border border-black/20 text-slate-800 shadow-xl">
+              <h4 className="flex items-center gap-2 font-bold text-[#247994] mb-4 tracking-wider uppercase text-xs">
+                <MapPin size={14} /> Site Address
+              </h4>
+
+              <p className="text-sm leading-relaxed text-slate-600">
+                Aakash Skyline, Near NH-33,<br />
+                Mango, Jamshedpur, Jharkhand 831012
+              </p>
+
+              <div className="mt-6 pt-6 border-t border-black/10 flex items-center justify-between">
+                <div>
+                  <p className="text-[10px] text-slate-500 uppercase font-bold">
+                    Sales Desk
+                  </p>
+                  <p className="text-lg font-bold text-slate-800">
+                    +91 98765 43210
+                  </p>
+                </div>
+                <div className="w-10 h-10 bg-[#247994] text-white rounded-full flex items-center justify-center animate-pulse">
+                  <MessageSquare size={18} />
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* Right Side Form */}
-          <div className="relative w-full">
-            <div className="bg-white/90 backdrop-blur-xl border border-white rounded-3xl p-6 md:p-10 shadow-[0_20px_50px_rgba(63,52,143,0.15)] relative z-10">
-              <form onSubmit={handleSubmit} className="space-y-4 md:space-y-5 mt-2">
-
-                {errorMsg && <div className="text-red-600 bg-red-50 p-3 rounded-md text-sm">{errorMsg}</div>}
-                {successMsg && <div className="text-green-700 bg-green-50 p-3 rounded-md text-sm">{successMsg}</div>}
-
-                <div className="relative group">
-                  <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                  <input type="text" name="name" value={formData.name} placeholder="Your Full Name" className="w-full pl-12 pr-4 py-3.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-[#3F348F] focus:ring-4 focus:ring-purple-50 transition-all outline-none text-slate-700 font-medium text-sm md:text-base" required onChange={handleChange} />
-                </div>
-
-                <div className="relative group">
-                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                  <input type="email" name="email" value={formData.email} placeholder="Email Address" className="w-full pl-12 pr-4 py-3.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-[#3F348F] focus:ring-4 focus:ring-purple-50 transition-all outline-none text-slate-700 font-medium text-sm md:text-base" required onChange={handleChange} />
-                </div>
-
-                <div className="relative group">
-                  <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                  <input type="tel" name="phone" value={formData.phone} placeholder="Phone Number" className="w-full pl-12 pr-4 py-3.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-[#3F348F] focus:ring-4 focus:ring-purple-50 transition-all outline-none text-slate-700 font-medium text-sm md:text-base" required onChange={handleChange} />
-                </div>
-
-                <div className="flex flex-col md:flex-row gap-4 md:gap-5">
-                  <div className="relative group flex-1">
-                    <BookOpen className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                    <select name="course" value={formData.course} className="w-full pl-12 pr-10 py-3.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-[#3F348F] focus:ring-4 focus:ring-purple-50 transition-all outline-none text-slate-700 font-medium appearance-none cursor-pointer text-sm md:text-base" required onChange={handleChange}>
-                      <option value="" disabled>Select Course</option>
-                      <option value="performance-marketing">Performance Marketing</option>
-                      <option value="google-ads">Google Ads Specialist</option>
-                      <option value="meta-ads">Meta Ads Mastery</option>
-                    </select>
-                    <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
-                      <svg className="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
-                    </div>
-                  </div>
-
-                  <div className="relative group flex-1">
-                    <Calendar className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                    <select name="batch" value={formData.batch} className="w-full pl-12 pr-10 py-3.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-[#3F348F] focus:ring-4 focus:ring-purple-50 transition-all outline-none text-slate-700 font-medium appearance-none cursor-pointer text-sm md:text-base" required onChange={handleChange}>
-                      <option value="" disabled>Preferred Batch</option>
-                      <option value="weekend-sat-sun">Weekend (Sat & Sun)</option>
-                    </select>
-                    <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
-                      <svg className="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
-                    </div>
-                  </div>
-                </div>
-
-                {/* NEW FIELD: Best Time to Call */}
-                <div className="relative group">
-                  <Clock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
-                  <select 
-                    name="best_time_to_call"
-                    value={formData.best_time_to_call}
-                    className="w-full pl-12 pr-10 py-3.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-[#3F348F] focus:ring-4 focus:ring-purple-50 transition-all outline-none text-slate-700 font-medium appearance-none cursor-pointer text-sm md:text-base"
-                    required
-                    onChange={handleChange}
-                  >
-                    <option value="" disabled>Best Time for Call</option>
-                    <option value="morning">Morning (9 AM - 12 PM)</option>
-                    <option value="afternoon">Afternoon (12 PM - 4 PM)</option>
-                    <option value="evening">Evening (4 PM - 8 PM)</option>
-                    <option value="anytime">Anytime</option>
-                  </select>
-                  <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
-                    <svg className="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
-                  </div>
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full py-3.5 md:py-4 bg-[#3F348F] text-white rounded-xl font-bold text-base md:text-lg hover:bg-[#322a72] transition-all shadow-lg shadow-purple-200 flex items-center justify-center gap-2 group mt-6 md:mt-8"
-                  disabled={loading}
-                >
-                  <Send className="w-5 h-5" />
-                  {loading ? "Sending..." : "Book a Free Counselling Call"}
-                </button>
-
-                <p className="text-center text-slate-400 text-xs mt-4">
-                  By booking, you agree to our Terms & Privacy Policy.
-                </p>
-
-              </form>
-            </div>
-            <div className="absolute -bottom-5 -right-5 w-full h-full border-2 border-[#FF0065] rounded-3xl z-0 opacity-20 hidden lg:block"></div>
-          </div>
         </div>
       </div>
     </section>
   );
-}
+};
+
+export default Contact;
