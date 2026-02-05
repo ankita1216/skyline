@@ -1,152 +1,137 @@
 import React from "react";
-import { ArrowRight, CheckCircle, Award, Users, MonitorPlay } from "lucide-react"; 
-// Ensure these paths match your actual folder structure
-import studentMale from "../assets/hero_section_boy.jpg"; 
-import studentFemale from "../assets/hero_section_girl.jpg";
+import { motion } from "framer-motion";
+import {
+  MapPin,
+  ArrowRight,
+  Download,
+  Building2,
+  ShoppingBag
+} from "lucide-react";
+import heroImg from "../assets/hero-banner.jpg";
 
-export default function HeroSection() {
+export default function Hero() {
   return (
-    // 1. UPDATED: Background color reverted to #faeef4
-    <section className="relative w-full min-h-[95vh] flex items-center justify-center overflow-hidden bg-[#faeef4] px-6 md:px-12 lg:px-24 py-24">
-      
-      {/* --- REFINED BACKGROUND ELEMENTS --- */}
-      {/* 2. UPDATED: Grid lines changed to soft purple (visible on light bg) */}
-      <div className="absolute inset-0 opacity-[0.3]" 
-           style={{ 
-             backgroundImage: 'linear-gradient(#e9d5ff 1px, transparent 1px), linear-gradient(90deg, #e9d5ff 1px, transparent 1px)', 
-             backgroundSize: '60px 60px' 
-           }}>
-      </div>
-      
-      {/* 3. UPDATED: Orbs changed to soft pinks/whites to blend with #faeef4 */}
-      <div className="absolute -top-[10%] -right-[10%] w-[600px] h-[600px] bg-white rounded-full blur-[100px] opacity-60"></div>
-      <div className="absolute top-[40%] -left-[10%] w-[500px] h-[500px] bg-[#fce7f3] rounded-full blur-[100px] opacity-60"></div>
+    <section className="relative min-h-[100vh] flex items-center bg-[#020617] overflow-hidden">
 
-      {/* --- MAIN CONTENT CONTAINER --- */}
-      <div className="max-w-[90rem] mx-auto w-full relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
-        
-        {/* --- LEFT IMAGE (The Outcome) --- */}
-        <div className="hidden lg:block lg:col-span-3 relative group">
-          <div className="relative mt-4 transform transition-transform duration-500 hover:-translate-y-2">
-            {/* Elegant thin border offset - PURPLE */}
-            <div className="absolute top-3 -left-3 w-full h-full border border-[#3F348F] rounded-2xl z-0 opacity-20"></div>
-            
-            <img 
-              src={studentFemale} 
-              alt="Professional Student" 
-              className="relative w-full h-[400px] object-cover rounded-2xl shadow-sm z-10 grayscale-[20%] group-hover:grayscale-0 transition-all duration-500"
-            />
-            
-            {/* Badge: Left Side */}
-            <div className="absolute -bottom-5 -right-5 bg-white px-5 py-3 rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-purple-50 flex items-center gap-3 z-20">
-               <div className="bg-purple-50 p-2 rounded-full text-[#3F348F]">
-                 <Award className="w-5 h-5" />
-               </div>
-               <div>
-                 <p className="text-[10px] text-gray-500 font-semibold uppercase tracking-wider">Certified</p>
-                 <p className="text-sm font-bold text-slate-800">Industry Ready</p>
-               </div>
+      {/* Dynamic Background with Parallax Effect */}
+      <motion.div
+        initial={{ scale: 1.2 }}
+        animate={{ scale: 1 }}
+        transition={{ duration: 1.5, ease: "easeOut" }}
+        className="absolute inset-0 z-0"
+      >
+        <img
+          src={heroImg}
+          alt="Akash Skyline Project"
+          className="w-full h-full object-cover opacity-60"
+        />
+        {/* Advanced Multi-layer Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-tr from-black via-black/40 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black" />
+      </motion.div>
+
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 py-20 lg:pt-32">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+
+          {/* Left Content Column */}
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-500/10 border border-cyan-500/20 backdrop-blur-md text-cyan-400 text-sm font-medium mb-8">
+              <MapPin size={16} className="animate-pulse" />
+              Mango, Jamshedpur
             </div>
-          </div>
-        </div>
 
-        {/* --- CENTER TEXT CONTENT --- */}
-        <div className="col-span-1 lg:col-span-6 text-center">
-          
-          <div className="mb-6 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/80 backdrop-blur-sm border border-purple-100 shadow-sm text-xs font-bold text-[#3F348F]">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FF0065] opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#FF0065]"></span>
-            </span>
-            New Offline Batches Starting Soon
-          </div>
+            <h1 className="text-5xl md:text-7xl font-extrabold text-white leading-[1.1] tracking-tight">
+              Elevate Your <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-emerald-400">
+                Lifestyle & Retail
+              </span>
+            </h1>
 
-          {/* Typography - Dark text for light background */}
-          <h1 className="text-5xl md:text-6xl lg:text-7xl text-[#1a1a2e] leading-[1.15] tracking-tight mb-6 font-sans">
-            <span className="font-light text-slate-600">Shape Your</span> <br/>
-            <span className="font-bold text-[#3F348F]">
-               Professional Career
-            </span>
-          </h1>
+            <p className="mt-8 text-lg md:text-xl text-slate-300 max-w-xl leading-relaxed">
+              Experience <span className="text-white font-semibold">Akash Skyline</span>:
+              A fusion of luxury living and a vibrant shopping arcade, designed for the modern visionary.
+            </p>
 
-          <p className="text-lg md:text-xl text-slate-500 max-w-lg mx-auto leading-relaxed font-light mb-10">
-            Master the skills that matter. Our specialized offline tracks are designed to take you from beginner to industry-expert.
-          </p>
+            <div className="mt-10 flex flex-col sm:flex-row gap-4">
+              <button className="group px-8 py-4 bg-cyan-600 text-white rounded-xl font-bold hover:bg-cyan-500 transition-all flex items-center justify-center gap-2 shadow-lg shadow-cyan-900/20">
+                Enquire Now
+                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+              </button>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <button className="min-w-[160px] px-8 py-4 bg-[#3F348F] text-white font-medium text-base rounded-full hover:bg-[#322a72] transition-all transform hover:scale-105 shadow-lg shadow-purple-900/10 flex items-center justify-center gap-2">
-              View All Courses
-              <ArrowRight className="w-4 h-4" />
-            </button>
-            <button className="min-w-[160px] px-8 py-4 bg-white text-slate-600 border border-slate-200 font-medium text-base rounded-full hover:bg-slate-50 transition-colors flex items-center justify-center gap-2 shadow-sm">
-              Talk to Expert
-            </button>
-          </div>
+              <button className="px-8 py-4 bg-white/5 border border-white/10 text-white rounded-xl font-bold hover:bg-white/10 transition-all flex items-center justify-center gap-2 backdrop-blur-sm">
+                <Download size={18} />
+                Brochure
+              </button>
+            </div>
 
-          {/* ======================================================= */}
-          {/* STATS CARDS */}
-          {/* ======================================================= */}
-          <div className="mt-14 grid grid-cols-1 sm:grid-cols-3 gap-5">
-            
-            {/* Card 1 */}
-            <div className="bg-white/60 backdrop-blur-md border border-white p-5 rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-center group cursor-default">
-              <div className="text-[#3F348F] mb-3 p-3 bg-purple-50 rounded-full group-hover:scale-110 transition-transform">
-                 <MonitorPlay className="w-6 h-6" />
+            {/* Floating Trust Indicators */}
+            <div className="mt-12 pt-8 border-t border-white/10 flex gap-8 items-center">
+              <div className="flex -space-x-3">
+                {[1, 2, 3, 4].map((i) => (
+                  <div
+                    key={i}
+                    className="w-10 h-10 rounded-full border-2 border-[#020617] bg-slate-800 overflow-hidden"
+                  >
+                    <img
+                      src={`https://i.pravatar.cc/150?u=${i}`}
+                      alt="user"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                ))}
               </div>
-              <h4 className="text-lg font-bold text-slate-800">3 Specialized</h4>
-              <p className="text-xs text-slate-500 font-medium uppercase tracking-wide">Mastery Tracks</p>
+              <p className="text-sm text-slate-400">
+                <span className="text-white font-bold">500+</span> Families trust us
+              </p>
             </div>
+          </motion.div>
 
-            {/* Card 2 */}
-            <div className="bg-white/60 backdrop-blur-md border border-white p-5 rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-center group cursor-default">
-               <div className="text-[#FF0065] mb-3 p-3 bg-pink-50 rounded-full group-hover:scale-110 transition-transform">
-                 <CheckCircle className="w-6 h-6" />
-               </div>
-              <h4 className="text-lg font-bold text-slate-800">100% Practical</h4>
-              <p className="text-xs text-slate-500 font-medium uppercase tracking-wide">Project Learning</p>
-            </div>
-
-            {/* Card 3 */}
-            <div className="bg-white/60 backdrop-blur-md border border-white p-5 rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center justify-center group cursor-default">
-               <div className="text-[#3F348F] mb-3 p-3 bg-purple-50 rounded-full group-hover:scale-110 transition-transform">
-                 <Users className="w-6 h-6" />
-               </div>
-              <h4 className="text-lg font-bold text-slate-800">1-on-1</h4>
-              <p className="text-xs text-slate-500 font-medium uppercase tracking-wide">Expert Mentorship</p>
-            </div>
-
-          </div>
-        </div>
-
-        {/* --- RIGHT IMAGE (The Process) --- */}
-        <div className="hidden lg:block lg:col-span-3 relative mt-12 lg:mt-0 group">
-           <div className="relative mt-4 transform transition-transform duration-500 hover:-translate-y-2">
-            {/* Elegant thin border offset - PINK */}
-            <div className="absolute top-3 -right-3 w-full h-full border border-[#FF0065] rounded-2xl z-0 opacity-20"></div>
-            
-            <img 
-              src={studentMale} 
-              alt="Lab Work" 
-              className="relative w-full h-[400px] object-cover rounded-2xl shadow-sm z-10 grayscale-[20%] group-hover:grayscale-0 transition-all duration-500"
+          {/* Right Column: Visual Features (NOW MOBILE VISIBLE) */}
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-12 lg:mt-0"
+          >
+            <FeatureCard
+              icon={<Building2 className="text-cyan-400" />}
+              title="Residential"
+              desc="Premium 3 & 4 BHK Apartments"
+            />
+            <FeatureCard
+              icon={<ShoppingBag className="text-emerald-400" />}
+              title="The Mall"
+              desc="Integrated AC Shopping Arcade"
             />
 
-            {/* Small card on the Right Image */}
-            <div className="absolute -bottom-5 -left-5 bg-white px-5 py-3 rounded-xl shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-blue-50 flex items-center gap-3 z-20">
-               <div className="bg-blue-50 p-2 rounded-full text-blue-600">
-                 <Users className="w-5 h-5" />
-               </div>
-               <div>
-                 <p className="text-[10px] text-gray-500 font-semibold uppercase tracking-wider">Community</p>
-                 <div className="flex items-center gap-1">
-                    <p className="text-sm font-bold text-slate-800">500+ Students</p>
-                 </div>
-               </div>
+            <div className="col-span-1 sm:col-span-2 p-6 rounded-2xl bg-gradient-to-br from-white/10 to-transparent border border-white/10 backdrop-blur-xl">
+              <h4 className="text-white font-bold mb-1">World-Class Amenities</h4>
+              <p className="text-slate-400 text-sm">
+                Gym, Infinity Pool, Club House & 24/7 Security
+              </p>
             </div>
+          </motion.div>
 
-          </div>
         </div>
-
       </div>
     </section>
+  );
+}
+
+function FeatureCard({ icon, title, desc }) {
+  return (
+    <div className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md hover:bg-white/10 transition-colors">
+      <div className="w-12 h-12 rounded-lg bg-black/40 flex items-center justify-center mb-4">
+        {icon}
+      </div>
+      <h3 className="text-white font-bold text-lg">{title}</h3>
+      <p className="text-slate-400 text-sm mt-1">{desc}</p>
+    </div>
   );
 }
