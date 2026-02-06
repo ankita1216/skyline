@@ -48,7 +48,7 @@ const Location = () => {
 
             <h3
               style={{ fontFamily: "Playfair Display, serif" }}
-              className="text-3xl md:text-5xl font-bold text-slate-900 mt-4 leading-tight"
+              className="text-4xl md:text-5xl font-bold text-slate-900 mt-4 leading-tight"
             >
               ARRIVE AT YOUR,{" "}
               <span className="text-[#247994] italic">PERFECT ADDRESS</span>
@@ -58,9 +58,9 @@ const Location = () => {
 
         <div className="grid lg:grid-cols-12 gap-10 items-center">
 
-          {/* LEFT – CARD STACK */}
+          {/* LEFT – CARD STACK (STRAIGHT NOW) */}
           <div className="lg:col-span-5 perspective-1000">
-            <div className="flex flex-col gap-4 transform lg:rotate-y-12">
+            <div className="flex flex-col gap-4 transform">
               {locationData.map((item, index) => {
                 const isActive = activeTab === index;
                 return (
@@ -70,18 +70,15 @@ const Location = () => {
                     className={`cursor-pointer transition-all duration-500
                       ${isActive
                         ? "translate-x-4 md:translate-x-6 scale-105 z-20"
-                        : "opacity-70 hover:opacity-100 hover:translate-x-2"}
-                    `}
+                        : "opacity-70 hover:opacity-100 hover:translate-x-2"}`}
                   >
                     <div
                       className={`p-5 md:p-6 rounded-3xl flex items-center gap-4 shadow-xl
-                        ${isActive ? "bg-white border-b-4 border-r-4 border-[#247994]" : "bg-white/80"}
-                      `}
+                        ${isActive ? "bg-white border-b-4 border-r-4 border-[#247994]" : "bg-white/80"}`}
                     >
                       <div
                         className={`w-12 h-12 md:w-14 md:h-14 rounded-2xl flex items-center justify-center shadow-lg
-                          ${isActive ? item.color + " text-white" : "bg-slate-100 text-slate-400"}
-                        `}
+                          ${isActive ? item.color + " text-white" : "bg-slate-100 text-slate-400"}`}
                       >
                         {item.icon}
                       </div>
@@ -131,36 +128,6 @@ const Location = () => {
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               />
-
-              {/* MAP OVERLAY */}
-              <div className="absolute top-4 left-4 bg-white/90 backdrop-blur px-4 py-2 rounded-xl shadow">
-                <p
-                  style={{ fontFamily: "Montserrat, sans-serif" }}
-                  className="text-[10px] uppercase tracking-widest font-bold text-[#247994]"
-                >
-                  Nearby
-                </p>
-                <p
-                  style={{ fontFamily: "Montserrat, sans-serif" }}
-                  className="text-sm md:text-lg font-bold text-slate-800"
-                >
-                  {locationData[activeTab].title}
-                </p>
-              </div>
-
-              {/* CTA */}
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-full px-4 sm:px-8">
-                <a
-                  href="https://maps.google.com?q=Mango,Jamshedpur,Jharkhand"
-                  target="_blank"
-                  rel="noreferrer"
-                  style={{ fontFamily: "Montserrat, sans-serif" }}
-                  className="flex items-center justify-center gap-3 w-full bg-slate-900 text-white py-3 md:py-4 rounded-xl md:rounded-2xl font-bold shadow-xl hover:bg-[#247994] transition-all"
-                >
-                  <MapPin size={18} className="text-[#247994]" />
-                  Open Real-Time Navigation
-                </a>
-              </div>
             </div>
           </div>
 
@@ -170,9 +137,6 @@ const Location = () => {
       <style jsx>{`
         .perspective-1000 {
           perspective: 1000px;
-        }
-        .rotate-y-12 {
-          transform: rotateY(-12deg);
         }
       `}</style>
     </section>

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Phone, Mail, MapPin, ArrowUpRight } from "lucide-react";
+import buildingImg from "../assets/hero-banner.jpg";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -40,31 +41,39 @@ const Contact = () => {
 
           <h2
             style={{ fontFamily: "Playfair Display, serif" }}
-            className="text-5xl md:text-8xl font-black text-black leading-tight tracking-tight"
+            className="text-4xl md:text-5xl font-black text-black leading-tight tracking-tight"
           >
-            Let’s Build Your <br />
-            <span className="italic text-[#247994]">
-              Dreamscape.
-            </span>
+            Let’s Build Your{" "}
+            <span className="italic text-[#247994]">Dreamscape.</span>
           </h2>
         </div>
 
         <div className="relative">
 
-          {/* MAP */}
-          <div className="w-full h-[500px] md:h-[700px] rounded-[3rem] overflow-hidden border border-white/30 bg-[#247994]">
-            <iframe
-              title="Aakash Skyline Location"
-              src="https://www.google.com/maps?q=Aakash+Skyline+Mango+Jamshedpur&output=embed"
-              className="w-full h-full border-0"
-              loading="lazy"
+          {/* IMAGE */}
+          <div className="relative w-full h-[500px] md:h-[700px] rounded-[3rem] overflow-hidden border border-white/30">
+            <img
+              src={buildingImg}
+              alt="Project Building"
+              className="w-full h-full object-cover"
             />
+
+            {/* ✨ IMAGE OVERLAY */}
+            <div className="absolute inset-0 bg-gradient-to-r from-black/35 via-black/15 to-transparent" />
           </div>
 
           {/* FORM */}
           <div className="absolute top-10 md:top-1/2 left-0 md:-translate-y-1/2 w-full md:w-[450px] lg:w-[500px]">
-            <div className="bg-[#247994] p-8 md:p-12 rounded-[2.5rem] border border-white/30 shadow-2xl">
-
+            <div
+              className="
+                bg-[#247994]/70
+                backdrop-blur-xl
+                p-8 md:p-12
+                rounded-[2.5rem]
+                border border-white/25
+                shadow-[0_30px_80px_rgba(0,0,0,0.35)]
+              "
+            >
               <div className="mb-8">
                 <h3
                   style={{ fontFamily: "Playfair Display, serif" }}
@@ -72,7 +81,7 @@ const Contact = () => {
                 >
                   Connect.
                 </h3>
-                <p className="text-white/80 text-sm">
+                <p className="text-white/85 text-sm leading-relaxed">
                   Experience the skyline first-hand. Request a private tour of the site.
                 </p>
               </div>
@@ -134,7 +143,7 @@ const Contact = () => {
                 key={i}
                 href={item.href}
                 style={{ fontFamily: "Montserrat, sans-serif" }}
-                className="flex items-center gap-4 bg-[#247994] border border-white/30 p-4 rounded-2xl text-white transition-all hover:-translate-x-2"
+                className="flex items-center gap-4 bg-[#247994]/90 backdrop-blur-md border border-white/30 p-4 rounded-2xl text-white transition-all hover:-translate-x-2"
               >
                 <span>{item.icon}</span>
                 <span className="text-sm font-medium pr-4">{item.label}</span>
@@ -143,7 +152,6 @@ const Contact = () => {
           </div>
 
         </div>
-
       </div>
     </section>
   );

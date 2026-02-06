@@ -1,40 +1,62 @@
 import { useState } from "react";
-import { Maximize2, X, CheckCircle2, Ruler, Layers, Home } from "lucide-react";
+import { X, CheckCircle2, Ruler, Layers, Home } from "lucide-react";
 
-import planA from "../assets/plan-a.jpg";
-import planB from "../assets/plan-b.jpg";
-import planC from "../assets/plan-c.jpg";
+import planA from "../assets/plan-a.jpg"; // UNIT PLAN (Residential)
+import planB from "../assets/plan-b.jpg"; // TYPICAL FLOOR (Commercial)
+import planC from "../assets/plan-c.jpg"; // 1ST FLOOR (Commercial)
+
+/* =======================
+   PLAN DATA (CORRECT)
+   ======================= */
 
 const plans = [
   {
     id: 1,
-    name: "UNIT PLAN",
-    bhk: "3 BHK / 2T",
+    name: "UNIT PLAN – TYPE E",
+    bhk: "3 BHK / 2 Toilets",
     area: "SBUA 1370 Sq.Ft",
     floors: "3rd – 11th Floor",
     image: planA,
-    highlight: "Perfect for growing families",
-    features: ["Master Bedroom", "Spacious Living", "2 Bathrooms", "Vaastu Compliant"],
+    highlight: "Well-planned residential unit with efficient space utilization",
+    features: [
+      "Living & Dining Area",
+      "3 Bedrooms",
+      "2 Toilets",
+      "Balcony",
+      "Kitchen with Utility",
+    ],
   },
   {
     id: 2,
-    name: "UPPER GROUND PLAN",
-    bhk: "3 BHK / 3T",
-    area: "SBUA 1480 Sq.Ft",
-    floors: "5th – 14th Floor",
+    name: "TYPICAL FLOOR PLAN",
+    bhk: "Commercial Floor Layout",
+    area: "Multiple Unit Sizes",
+    floors: "Typical Commercial Floors",
     image: planB,
-    highlight: "Most popular premium choice",
-    features: ["Premium Interiors", "Balcony View", "3 Bathrooms", "Cross Ventilation"],
+    highlight: "Optimized commercial planning with multiple retail units",
+    features: [
+      "Multiple Commercial Units",
+      "3000 mm Wide Corridors",
+      "Fire Lobby & Staircase",
+      "Lift Connectivity",
+      "Efficient Circulation",
+    ],
   },
   {
     id: 3,
     name: "1ST FLOOR PLAN",
-    bhk: "4 BHK / 3T",
-    area: "SBUA 1680 Sq.Ft",
-    floors: "7th – 18th Floor",
+    bhk: "Commercial Floor Layout",
+    area: "Mixed Large & Small Units",
+    floors: "1st Floor",
     image: planC,
-    highlight: "Luxury living redefined",
-    features: ["Penthouse Style", "Panoramic Views", "Utility Area", "Grand Foyer"],
+    highlight: "Anchor and retail units arranged around central circulation",
+    features: [
+      "Anchor / F&B Units",
+      "Wide Internal Corridors",
+      "Central Core & Lifts",
+      "Fire Safety Provisions",
+      "Clear Wayfinding",
+    ],
   },
 ];
 
@@ -44,7 +66,6 @@ const Plan = () => {
 
   return (
     <section id="plan" className="py-24 bg-white relative overflow-hidden">
-
       <div className="absolute top-0 left-0 w-full h-[400px] bg-[#247994]" />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
@@ -56,14 +77,14 @@ const Plan = () => {
               style={{ fontFamily: "Montserrat, sans-serif" }}
               className="text-amber-400 font-bold tracking-[0.3em] text-xs uppercase"
             >
-              Architectural Excellence
+              Architectural Plans
             </span>
 
             <h2
               style={{ fontFamily: "Playfair Display, serif" }}
-              className="text-4xl md:text-5xl font-black text-white mt-4 tracking-tight leading-[1.1]"
+              className="text-4xl md:text-5xl font-black text-white mt-4 leading-tight"
             >
-              Thoughtful <span className="italic">Floor Plans.</span>
+              Detailed <span className="italic">Floor Layouts.</span>
             </h2>
           </div>
 
@@ -71,8 +92,7 @@ const Plan = () => {
             style={{ fontFamily: "Inter, sans-serif" }}
             className="text-teal-50/80 max-w-sm text-sm md:text-base"
           >
-            Every square inch is engineered for maximum light, air ventilation,
-            and modern furniture layouts.
+            Clear planning for residential comfort and commercial efficiency.
           </p>
         </div>
 
@@ -116,42 +136,27 @@ const Plan = () => {
               />
             </div>
 
-            <p
-              style={{ fontFamily: "Montserrat, sans-serif" }}
-              className="text-center text-[10px] text-gray-400 mt-4 uppercase tracking-widest font-bold"
-            >
-              Click image to expand technical view
+            <p className="text-center text-[10px] text-gray-400 mt-4 uppercase tracking-widest font-bold">
+              Click image to expand
             </p>
           </div>
 
           {/* DETAILS */}
           <div className="lg:w-1/2 p-8 md:p-12 flex flex-col justify-center">
             <div className="mb-8">
-              <span
-                style={{ fontFamily: "Montserrat, sans-serif" }}
-                className="bg-[#247994]/10 text-[#247994] px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider"
-              >
-                Unit Specifications
+              <span className="bg-[#247994]/10 text-[#247994] px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider">
+                Plan Information
               </span>
 
-              <h3
-                style={{ fontFamily: "Playfair Display, serif" }}
-                className="text-4xl font-black text-gray-900 mt-4 leading-[1.15]"
-              >
+              <h3 className="text-4xl font-black text-gray-900 mt-4">
                 {active.bhk}
               </h3>
 
-              <p
-                style={{ fontFamily: "Inter, sans-serif" }}
-                className="text-xl font-medium text-gray-500 mt-1"
-              >
+              <p className="text-xl font-medium text-gray-500 mt-1">
                 {active.area}
               </p>
 
-              <p
-                style={{ fontFamily: "Inter, sans-serif" }}
-                className="text-gray-600 mt-4 italic text-sm border-l-2 border-amber-400 pl-4"
-              >
+              <p className="text-gray-600 mt-4 italic text-sm border-l-2 border-amber-400 pl-4">
                 "{active.highlight}"
               </p>
             </div>
@@ -162,16 +167,10 @@ const Plan = () => {
                   <Layers size={22} />
                 </div>
                 <div>
-                  <p
-                    style={{ fontFamily: "Montserrat, sans-serif" }}
-                    className="text-xs text-gray-400 font-bold uppercase"
-                  >
-                    Placement
+                  <p className="text-xs text-gray-400 font-bold uppercase">
+                    Floor
                   </p>
-                  <p
-                    style={{ fontFamily: "Inter, sans-serif" }}
-                    className="text-sm font-bold text-gray-800"
-                  >
+                  <p className="text-sm font-bold text-gray-800">
                     {active.floors}
                   </p>
                 </div>
@@ -182,17 +181,11 @@ const Plan = () => {
                   <Ruler size={22} />
                 </div>
                 <div>
-                  <p
-                    style={{ fontFamily: "Montserrat, sans-serif" }}
-                    className="text-xs text-gray-400 font-bold uppercase"
-                  >
-                    Total Area
+                  <p className="text-xs text-gray-400 font-bold uppercase">
+                    Area Info
                   </p>
-                  <p
-                    style={{ fontFamily: "Inter, sans-serif" }}
-                    className="text-sm font-bold text-gray-800"
-                  >
-                    {active.area.split(" ")[1]} Sq.Ft
+                  <p className="text-sm font-bold text-gray-800">
+                    {active.area}
                   </p>
                 </div>
               </div>
@@ -202,7 +195,6 @@ const Plan = () => {
               {active.features.map((feature, idx) => (
                 <div
                   key={idx}
-                  style={{ fontFamily: "Inter, sans-serif" }}
                   className="flex items-center gap-3 text-gray-700 text-sm font-medium"
                 >
                   <CheckCircle2 size={18} className="text-amber-500" />
@@ -225,7 +217,7 @@ const Plan = () => {
           </button>
           <img
             src={active.image}
-            alt="Floor Plan"
+            alt="Plan"
             className="max-w-full max-h-full object-contain rounded-lg"
           />
         </div>

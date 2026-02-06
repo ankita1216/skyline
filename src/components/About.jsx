@@ -48,7 +48,7 @@ export default function WhySkyline() {
               style={{ fontFamily: "Montserrat, sans-serif" }}
               className="uppercase tracking-[0.35em] text-sm text-[#0b647f] font-semibold mb-3"
             >
-              WHY SKY LINE
+              WHY SKYLINE
             </p>
 
             {/* HEADING */}

@@ -52,7 +52,7 @@ export default function Hero() {
               Mango, Jamshedpur
             </div>
 
-            {/* ✅ FIXED HEADING (2 LINES, PREMIUM LOOK) */}
+            {/* Heading */}
             <h1
               style={{ fontFamily: "Playfair Display, serif" }}
               className="
@@ -146,13 +146,16 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-12 lg:mt-0"
           >
-            <FeatureCard
-              icon={<Building2 className="text-[#247994]" />}
-              title="Residential"
-              desc="Premium 3 & 4 BHK Apartments"
-            />
+            {/* ✅ ONLY THIS CARD CHANGED */}
             <FeatureCard
               icon={<ShoppingBag className="text-[#247994]" />}
+              title="Urban Commercial"
+              desc="Premium retail, cafés & lifestyle brands with high footfall"
+            />
+
+            {/* UNCHANGED */}
+            <FeatureCard
+              icon={<Building2 className="text-[#247994]" />}
               title="The Mall"
               desc="Integrated AC Shopping Arcade"
             />
