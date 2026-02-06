@@ -37,11 +37,17 @@ const Gallery = () => {
   };
 
   return (
-    <section className="py-16 md:py-24 bg-[#B2BEB5] overflow-hidden min-h-[700px] flex flex-col justify-center relative">
-
+    <section
+      id="gallery"
+      style={{ fontFamily: "Inter, sans-serif" }}
+      className="py-16 md:py-24 bg-[#D6DDD9] overflow-hidden min-h-[700px] flex flex-col justify-center relative"
+    >
       {/* BACKGROUND TEXT */}
-      <div className="absolute top-10 left-4 md:left-10 opacity-[0.08] select-none pointer-events-none">
-        <h1 className="text-[25vw] md:text-[20vw] font-black text-black leading-none">
+      <div className="absolute top-10 left-4 md:left-10 opacity-[0.06] select-none pointer-events-none">
+        <h1
+          style={{ fontFamily: "Playfair Display, serif" }}
+          className="text-[25vw] md:text-[20vw] font-black text-black leading-none"
+        >
           GALLERY
         </h1>
       </div>
@@ -49,10 +55,17 @@ const Gallery = () => {
       {/* HEADER */}
       <div className="max-w-7xl mx-auto px-6 mb-8 md:mb-12 flex justify-between items-end relative z-10 w-full">
         <div className="max-w-[60%] md:max-w-none">
-          <h3 className="text-3xl md:text-6xl font-bold text-[#1f2933] tracking-tighter">
-            OUR <span className="text-[#6b7280] italic">VISION</span>
+          <h3
+            style={{ fontFamily: "Playfair Display, serif" }}
+            className="text-3xl md:text-6xl font-bold text-[#247994] tracking-tight leading-tight"
+          >
+            OUR <span className="italic">VISION</span>
           </h3>
-          <p className="text-gray-700 mt-1 font-mono uppercase tracking-widest text-[10px] md:text-sm">
+
+          <p
+            style={{ fontFamily: "Montserrat, sans-serif" }}
+            className="text-gray-700 mt-2 uppercase tracking-[0.3em] text-[10px] md:text-sm"
+          >
             Architecture in motion
           </p>
         </div>
@@ -101,10 +114,13 @@ const Gallery = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-70 group-hover:opacity-100 transition-opacity" />
 
               <div className="absolute bottom-6 left-6 md:bottom-10 md:left-10">
-                <h4 className="text-white text-2xl md:text-3xl font-black uppercase italic">
+                <h4
+                  style={{ fontFamily: "Montserrat, sans-serif" }}
+                  className="text-white text-2xl md:text-3xl font-bold uppercase tracking-wide"
+                >
                   {img.label}
                 </h4>
-                <div className="h-[2px] w-12 group-hover:w-full bg-black transition-all duration-700 mt-2" />
+                <div className="h-[2px] w-12 group-hover:w-full bg-white transition-all duration-700 mt-2" />
               </div>
             </div>
           </div>
@@ -117,7 +133,10 @@ const Gallery = () => {
           className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4"
           onClick={() => setActive(null)}
         >
-          <button className="absolute top-6 right-6 text-white/80 hover:text-white text-sm font-mono tracking-widest border border-white/20 px-4 py-2 rounded-full">
+          <button
+            style={{ fontFamily: "Montserrat, sans-serif" }}
+            className="absolute top-6 right-6 text-white/80 hover:text-white text-sm tracking-widest border border-white/20 px-4 py-2 rounded-full"
+          >
             CLOSE [X]
           </button>
           <img
@@ -128,14 +147,10 @@ const Gallery = () => {
         </div>
       )}
 
-      {/* SCROLLBAR + 3D */}
+      {/* SCROLLBAR */}
       <style dangerouslySetInnerHTML={{ __html: `
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { scrollbar-width: none; }
-        @media (min-width: 768px) {
-          .rotate-y-[-35deg] { transform: rotateY(-35deg); }
-          .rotate-y-0 { transform: rotateY(0deg) !important; }
-        }
       `}} />
     </section>
   );

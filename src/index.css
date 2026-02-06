@@ -1,8 +1,23 @@
 @import "tailwindcss";
-body {
-  font-family: 'Inter', sans-serif;
-}
+
 /* Heading utility class */
 .heading-font {
   font-family: 'DM Sans', sans-serif;
+}
+/* FONT SYSTEM */
+.font-heading {
+  font-family: "Playfair Display", serif;
+}
+
+.font-subheading {
+  font-family: "Montserrat", sans-serif;
+}
+
+.font-body {
+  font-family: "Inter", sans-serif;
+}
+
+/* Optional global default */
+body {
+  font-family: "Inter", sans-serif;
 }

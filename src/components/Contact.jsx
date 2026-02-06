@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Send, Phone, Mail, MessageSquare, MapPin } from "lucide-react";
+import { Phone, Mail, MapPin, ArrowUpRight } from "lucide-react";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -21,143 +21,129 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="py-24 bg-[#B2BEB5] relative overflow-hidden"
+      style={{ fontFamily: "Inter, sans-serif" }}
+      className="py-20 md:py-32 relative overflow-hidden"
     >
-      {/* Decorative Background */}
-      <div className="absolute top-[-10%] left-[-10%] w-[40vw] h-[40vw] rounded-full bg-white/40 blur-3xl pointer-events-none" />
-      <div className="absolute bottom-[-10%] right-[-10%] w-[30vw] h-[30vw] rounded-full bg-white/30 blur-3xl pointer-events-none" />
-
       <div className="max-w-7xl mx-auto px-6 relative z-10">
 
-        {/* Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-          <div className="max-w-2xl">
-            <span className="text-[#247994] font-bold tracking-[0.3em] text-xs uppercase">
-              Get in touch
+        {/* HEADER */}
+        <div className="flex flex-col mb-20">
+          <div
+            style={{ fontFamily: "Montserrat, sans-serif" }}
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/30 w-fit mb-6 bg-[#247994]"
+          >
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-white" />
+            <span className="text-white text-[10px] font-bold uppercase tracking-widest">
+              Available for Consultations
             </span>
-            <h2 className="text-4xl md:text-6xl font-bold text-slate-800 mt-4 tracking-tighter">
-              Let’s start your <br />
-              <span className="italic text-[#247994]">new chapter.</span>
-            </h2>
           </div>
 
-          <div className="flex gap-4">
-            <a
-              href="tel:+919876543210"
-              className="p-4 rounded-full bg-white/70 border border-black/20 text-slate-700 hover:bg-[#247994] hover:text-white transition-all shadow-sm"
-            >
-              <Phone size={20} />
-            </a>
-            <a
-              href="mailto:info@example.com"
-              className="p-4 rounded-full bg-white/70 border border-black/20 text-slate-700 hover:bg-[#247994] hover:text-white transition-all shadow-sm"
-            >
-              <Mail size={20} />
-            </a>
-          </div>
+          <h2
+            style={{ fontFamily: "Playfair Display, serif" }}
+            className="text-5xl md:text-8xl font-black text-black leading-tight tracking-tight"
+          >
+            Let’s Build Your <br />
+            <span className="italic text-[#247994]">
+              Dreamscape.
+            </span>
+          </h2>
         </div>
 
-        {/* Main Content */}
-        <div className="grid lg:grid-cols-12 gap-0 rounded-[2rem] overflow-hidden shadow-2xl border border-black/20 bg-white/70 backdrop-blur-lg">
+        <div className="relative">
 
-          {/* Left – Form */}
-          <div className="lg:col-span-5 bg-white p-8 md:p-12">
-            <h3 className="text-2xl font-bold text-slate-800 mb-2">
-              Request a Call Back
-            </h3>
-            <p className="text-slate-500 mb-8 text-sm">
-              Fill out the form and our expert consultant will reach out within 24 hours.
-            </p>
-
-            <form onSubmit={handleSubmit} className="space-y-5">
-              <input
-                type="text"
-                name="name"
-                placeholder="Your Name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-                className="w-full bg-gray-50 border-b-2 border-gray-300 py-4 px-2 focus:outline-none focus:border-[#247994]"
-              />
-
-              <div className="grid md:grid-cols-2 gap-5">
-                <input
-                  type="tel"
-                  name="phone"
-                  placeholder="Phone Number"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  required
-                  className="w-full bg-gray-50 border-b-2 border-gray-300 py-4 px-2 focus:outline-none focus:border-[#247994]"
-                />
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Email Address"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className="w-full bg-gray-50 border-b-2 border-gray-300 py-4 px-2 focus:outline-none focus:border-[#247994]"
-                />
-              </div>
-
-              <textarea
-                name="message"
-                rows="4"
-                placeholder="How can we help you?"
-                value={formData.message}
-                onChange={handleChange}
-                className="w-full bg-gray-50 border-b-2 border-gray-300 py-4 px-2 focus:outline-none focus:border-[#247994] resize-none"
-              />
-
-              <button
-                type="submit"
-                className="w-full bg-[#247994] text-white font-bold py-5 rounded-xl hover:bg-[#1a5b70] transition-all flex items-center justify-center gap-3 shadow-lg"
-              >
-                Submit Inquiry
-                <Send size={18} />
-              </button>
-            </form>
-          </div>
-
-          {/* Right – Map */}
-          <div className="lg:col-span-7 relative min-h-[400px]">
+          {/* MAP */}
+          <div className="w-full h-[500px] md:h-[700px] rounded-[3rem] overflow-hidden border border-white/30 bg-[#247994]">
             <iframe
               title="Aakash Skyline Location"
               src="https://www.google.com/maps?q=Aakash+Skyline+Mango+Jamshedpur&output=embed"
-              className="absolute inset-0 w-full h-full grayscale-[0.2] contrast-[1.05]"
+              className="w-full h-full border-0"
               loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            ></iframe>
+            />
+          </div>
 
-            {/* Floating Info */}
-            <div className="absolute bottom-6 left-6 right-6 md:left-auto md:right-8 md:w-80 bg-white/80 backdrop-blur-xl p-6 rounded-2xl border border-black/20 text-slate-800 shadow-xl">
-              <h4 className="flex items-center gap-2 font-bold text-[#247994] mb-4 tracking-wider uppercase text-xs">
-                <MapPin size={14} /> Site Address
-              </h4>
+          {/* FORM */}
+          <div className="absolute top-10 md:top-1/2 left-0 md:-translate-y-1/2 w-full md:w-[450px] lg:w-[500px]">
+            <div className="bg-[#247994] p-8 md:p-12 rounded-[2.5rem] border border-white/30 shadow-2xl">
 
-              <p className="text-sm leading-relaxed text-slate-600">
-                Aakash Skyline, Near NH-33,<br />
-                Mango, Jamshedpur, Jharkhand 831012
-              </p>
-
-              <div className="mt-6 pt-6 border-t border-black/10 flex items-center justify-between">
-                <div>
-                  <p className="text-[10px] text-slate-500 uppercase font-bold">
-                    Sales Desk
-                  </p>
-                  <p className="text-lg font-bold text-slate-800">
-                    +91 98765 43210
-                  </p>
-                </div>
-                <div className="w-10 h-10 bg-[#247994] text-white rounded-full flex items-center justify-center animate-pulse">
-                  <MessageSquare size={18} />
-                </div>
+              <div className="mb-8">
+                <h3
+                  style={{ fontFamily: "Playfair Display, serif" }}
+                  className="text-3xl font-bold text-white mb-2 italic"
+                >
+                  Connect.
+                </h3>
+                <p className="text-white/80 text-sm">
+                  Experience the skyline first-hand. Request a private tour of the site.
+                </p>
               </div>
+
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  className="w-full bg-transparent border-b border-white/50 py-4 text-white placeholder:text-white/70 focus:outline-none focus:border-white"
+                />
+
+                <div className="grid md:grid-cols-2 gap-6">
+                  <input
+                    type="tel"
+                    name="phone"
+                    placeholder="Phone"
+                    onChange={handleChange}
+                    className="w-full bg-transparent border-b border-white/50 py-4 text-white placeholder:text-white/70 focus:outline-none focus:border-white"
+                  />
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    onChange={handleChange}
+                    className="w-full bg-transparent border-b border-white/50 py-4 text-white placeholder:text-white/70 focus:outline-none focus:border-white"
+                  />
+                </div>
+
+                <textarea
+                  name="message"
+                  rows="3"
+                  placeholder="Message"
+                  onChange={handleChange}
+                  className="w-full bg-transparent border-b border-white/50 py-4 text-white placeholder:text-white/70 focus:outline-none focus:border-white resize-none"
+                />
+
+                <button
+                  type="submit"
+                  style={{ fontFamily: "Montserrat, sans-serif" }}
+                  className="w-full mt-6 bg-white text-[#247994] font-black py-5 rounded-2xl hover:opacity-90 transition-all flex items-center justify-center gap-3"
+                >
+                  SEND INQUIRY <ArrowUpRight size={20} />
+                </button>
+              </form>
             </div>
           </div>
 
+          {/* CONTACT PILLS */}
+          <div className="hidden lg:flex flex-col gap-4 absolute top-1/2 right-0 -translate-y-1/2">
+            {[
+              { icon: <Phone />, label: "+91 98765 43210", href: "tel:+919876543210" },
+              { icon: <Mail />, label: "sales@aakash.com", href: "mailto:sales@aakash.com" },
+              { icon: <MapPin />, label: "Site Location", href: "#" },
+            ].map((item, i) => (
+              <a
+                key={i}
+                href={item.href}
+                style={{ fontFamily: "Montserrat, sans-serif" }}
+                className="flex items-center gap-4 bg-[#247994] border border-white/30 p-4 rounded-2xl text-white transition-all hover:-translate-x-2"
+              >
+                <span>{item.icon}</span>
+                <span className="text-sm font-medium pr-4">{item.label}</span>
+              </a>
+            ))}
+          </div>
+
         </div>
+
       </div>
     </section>
   );

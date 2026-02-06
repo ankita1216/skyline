@@ -1,12 +1,12 @@
-import { useState } from "react";
+import { useState, cloneElement } from "react";
 import { 
   Wind, ArrowUpRight, ShoppingBag, Coffee, 
   Car, Building2, Zap, Brush, Eye, 
-  Flame, Droplets, LayoutGrid, ShieldCheck
+  Flame, Droplets, ShieldCheck, Plus, MoveUpRight
 } from "lucide-react";
 
 const amenities = [
-  { title: "Centralized AC", icon: <Wind />, category: "Climate", size: "small", desc: "Vrf system with individual zone control." },
+  { title: "Centralized AC", icon: <Wind />, category: "Climate", size: "small", desc: "VRF system with individual zone control." },
   { title: "Vertical Mobility", icon: <ArrowUpRight />, category: "Lifts & Escalators", size: "large", desc: "High-speed elevators & dual-path escalators." },
   { title: "Anchor Shops", icon: <ShoppingBag />, category: "Retail", size: "small", desc: "Premium retail floor space." },
   { title: "Dining Hub", icon: <Coffee />, category: "Lifestyle", size: "small", desc: "Multi-cuisine restaurants & cafes." },
@@ -23,79 +23,114 @@ const Amenities = () => {
   const [hovered, setHovered] = useState(null);
 
   return (
-    <section className="bg-[#B2BEB5] py-24 px-6 overflow-hidden">
-      <div className="max-w-7xl mx-auto">
+    <section
+      id="features"
+      className="bg-[#D6DDD9] py-24 px-6 relative overflow-hidden"
+    >
+      {/* Background Grid */}
+      <div
+        className="absolute inset-0 opacity-[0.04] pointer-events-none"
+        style={{
+          backgroundImage: `
+            linear-gradient(#000 1px, transparent 1px),
+            linear-gradient(90deg, #000 1px, transparent 1px)
+          `,
+          backgroundSize: "40px 40px",
+        }}
+      />
 
-        {/* Header Section */}
-        <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
-          <div className="max-w-xl">
-            <div className="flex items-center gap-3 text-teal-700 font-bold tracking-[0.2em] text-sm mb-4 uppercase">
-              <ShieldCheck size={20} />
-              Premier Specifications
+      <div className="max-w-7xl mx-auto relative z-10">
+
+        {/* Header */}
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-20 gap-8">
+          <div>
+            <div
+              style={{ fontFamily: "Montserrat, sans-serif" }}
+              className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#247994]/40 bg-[#247994]/10 text-[#247994] text-[10px] font-bold tracking-[0.2em] uppercase mb-6"
+            >
+              <ShieldCheck size={14} /> Premier Specifications
             </div>
-            <h2 className="text-5xl md:text-7xl font-bold text-[#1f2933] tracking-tighter">
-              A MASTERCLASS IN <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-600 to-blue-600">
-                INFRASTRUCTURE.
+
+            {/* 🔹 LINE-HEIGHT ADDED HERE */}
+            <h2
+              style={{ fontFamily: "Playfair Display, serif" }}
+              className="text-5xl md:text-7xl font-black text-[#1f2933] tracking-tight leading-[1.05]"
+            >
+              STEP INTO THE LAP <br />
+              <span className="text-[#247994]">
+                OF LUXURY
               </span>
             </h2>
           </div>
-          <p className="text-gray-700 text-lg max-w-xs border-l border-gray-400 pl-6">
+
+          <p
+            style={{ fontFamily: "Inter, sans-serif" }}
+            className="text-[#374151] text-lg max-w-xs border-l border-black/20 pl-6 italic"
+          >
             Engineered for high-traffic commercial success and safety.
           </p>
         </div>
 
-        {/* Bento Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 auto-rows-[160px]">
+        {/* Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-12 gap-4 auto-rows-[210px]">
           {amenities.map((item, idx) => (
             <div
               key={idx}
               onMouseEnter={() => setHovered(idx)}
               onMouseLeave={() => setHovered(null)}
               className={`
-                relative rounded-[2rem] p-6 transition-all duration-500 cursor-help border flex flex-col justify-between overflow-hidden
-                ${item.size === "large" ? "md:col-span-2 md:row-span-2" : ""}
-                ${item.size === "medium" ? "md:col-span-2" : ""}
-                ${hovered === idx 
-                  ? "bg-[#c3ccc6] border-teal-600/50 shadow-[0_0_30px_-5px_rgba(13,148,136,0.35)]" 
-                  : "bg-[#d1d8d3] border-black/5"}
+                relative group transition-all duration-500
+                ${item.size === "large" ? "md:col-span-2 lg:col-span-6 lg:row-span-2" : ""}
+                ${item.size === "medium" ? "md:col-span-2 lg:col-span-4" : "lg:col-span-3"}
+                ${hovered !== null && hovered !== idx ? "opacity-40 scale-[0.98]" : "opacity-100"}
               `}
             >
-              {/* Background Glow */}
-              <div className={`absolute -right-4 -top-4 w-24 h-24 bg-teal-500/20 blur-3xl transition-opacity duration-500 ${hovered === idx ? "opacity-100" : "opacity-0"}`} />
+              <div className="h-full w-full p-6 rounded-3xl bg-white/70 border border-black/10 group-hover:border-[#247994]/60 flex flex-col relative">
 
-              <div className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all duration-500 ${
-                hovered === idx 
-                  ? "bg-teal-600 text-white scale-110 shadow-lg" 
-                  : "bg-white/60 text-teal-700"
-              }`}>
-                {item.icon}
-              </div>
+                <div className={`absolute -right-10 -top-10 w-32 h-32 bg-[#247994]/20 blur-[50px] ${hovered === idx ? "opacity-100" : "opacity-0"}`} />
 
-              <div>
-                <p className="text-[10px] font-bold text-teal-700 uppercase tracking-widest mb-1">
-                  {item.category}
-                </p>
-                <h3 className="text-[#1f2933] font-bold text-lg leading-tight">
-                  {item.title}
-                </h3>
-                <p className={`text-gray-600 text-xs mt-2 transition-opacity duration-300 ${hovered === idx ? "opacity-100" : "opacity-0 md:hidden"}`}>
-                  {item.desc}
-                </p>
-              </div>
+                <div className="flex justify-between items-start mb-6">
+                  <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shadow-lg ${
+                    hovered === idx ? "bg-[#247994] text-white scale-110" : "bg-white text-[#247994]"
+                  }`}>
+                    {cloneElement(item.icon, { size: 22 })}
+                  </div>
+                  <Plus size={20} className={hovered === idx ? "text-[#247994] rotate-90" : "text-black/20"} />
+                </div>
 
-              {/* Corner Icon */}
-              <div className="absolute top-6 right-6">
-                <LayoutGrid
-                  size={14}
-                  className={`transition-all duration-500 ${
-                    hovered === idx ? "text-teal-600 rotate-90" : "text-black/20"
-                  }`}
-                />
+                <div className="mt-auto">
+                  <p
+                    style={{ fontFamily: "Montserrat, sans-serif" }}
+                    className="text-[10px] uppercase tracking-[0.2em] text-[#6b7280] mb-1"
+                  >
+                    {item.category}
+                  </p>
+
+                  <h3
+                    style={{ fontFamily: "Playfair Display, serif" }}
+                    className="text-xl font-bold text-[#1f2933] leading-tight"
+                  >
+                    {item.title}
+                  </h3>
+
+                  <p
+                    style={{ fontFamily: "Inter, sans-serif" }}
+                    className={`text-xs text-[#374151] mt-3 border-l border-[#247994]/60 pl-3 transition-all ${
+                      hovered === idx ? "opacity-100" : "opacity-0"
+                    }`}
+                  >
+                    {item.desc}
+                  </p>
+                </div>
+
+                {item.size === "large" && (
+                  <MoveUpRight size={40} className="absolute bottom-6 right-6 text-black/10 group-hover:text-[#247994]/60" />
+                )}
               </div>
             </div>
           ))}
         </div>
+
       </div>
     </section>
   );
