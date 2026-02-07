@@ -66,7 +66,7 @@ const Contact = () => {
           <div className="absolute top-10 md:top-1/2 left-0 md:-translate-y-1/2 w-full md:w-[450px] lg:w-[500px]">
             <div
               className="
-                bg-[#247994]/70
+                bg-[#247994]/50
                 backdrop-blur-xl
                 p-8 md:p-12
                 rounded-[2.5rem]

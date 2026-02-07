@@ -54,17 +54,26 @@ const Amenities = () => {
         {/* HEADER */}
         <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-20 gap-8">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#247994]/40 bg-[#247994]/10 text-[#247994] text-[10px] font-bold tracking-[0.2em] uppercase mb-6">
+            <div
+              style={{ fontFamily: "Montserrat, sans-serif" }}
+              className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#247994]/40 bg-[#247994]/10 text-[#247994] text-[10px] font-bold tracking-[0.2em] uppercase mb-6"
+            >
               <ShieldCheck size={14} /> Premier Specifications
             </div>
 
-            <h2 className="text-4xl md:text-5xl font-bold text-[#1f2933] leading-tight">
+            <h2
+              style={{ fontFamily: "Playfair Display, serif" }}
+              className="text-4xl md:text-5xl font-bold text-[#1f2933] leading-tight"
+            >
               STEP INTO THE LAP <br />
               <span className="text-[#247994]">OF LUXURY</span>
             </h2>
           </div>
 
-          <p className="text-[#374151] text-lg max-w-xs border-l border-black/20 pl-6 italic">
+          <p
+            style={{ fontFamily: "Inter, sans-serif" }}
+            className="text-[#374151] text-lg max-w-xs border-l border-black/20 pl-6 italic"
+          >
             Engineered for high-traffic commercial success and safety.
           </p>
         </div>
@@ -83,12 +92,12 @@ const Amenities = () => {
                 ${hovered !== null && hovered !== idx ? "opacity-40 scale-[0.98]" : ""}
               `}
             >
-              <div className="h-full w-full p-6 rounded-3xl bg-white/60 backdrop-blur-md border border-black/10 relative overflow-hidden">
+              <div className="h-full w-full p-6 rounded-3xl bg-white/65 backdrop-blur-md border border-black/10 relative overflow-hidden">
 
-                {/* 🖼️ IMAGE LAYER */}
+                {/* IMAGE LAYER */}
                 <div
-                  className={`absolute inset-0 z-0 transition-all duration-500 ${
-                    hovered === idx ? "opacity-35" : "opacity-20"
+                  className={`absolute inset-0 z-0 transition-opacity duration-500 ${
+                    hovered === idx ? "opacity-40" : "opacity-30"
                   }`}
                   style={{
                     backgroundImage: `url(${item.img})`,
@@ -104,35 +113,53 @@ const Amenities = () => {
                 {/* CONTENT */}
                 <div className="relative z-10 h-full flex flex-col">
                   <div className="flex justify-between items-start mb-6">
-                    <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shadow-lg ${
-                      hovered === idx ? "bg-[#247994] text-white" : "bg-white text-[#247994]"
-                    }`}>
+                    <div
+                      className={`w-12 h-12 rounded-2xl flex items-center justify-center shadow-lg ${
+                        hovered === idx
+                          ? "bg-[#247994] text-white"
+                          : "bg-white text-[#247994]"
+                      }`}
+                    >
                       {cloneElement(item.icon, { size: 22 })}
                     </div>
-                    <Plus size={20} className={hovered === idx ? "text-[#247994] rotate-90" : "text-black/20"} />
+                    <Plus
+                      size={20}
+                      className={hovered === idx ? "text-[#247994] rotate-90" : "text-black/20"}
+                    />
                   </div>
 
                   <div className="mt-auto">
-                    <p className="text-[10px] uppercase tracking-[0.2em] text-[#6b7280] mb-1">
+                    <p
+                      style={{ fontFamily: "Montserrat, sans-serif" }}
+                      className="text-[10px] uppercase tracking-[0.2em] text-[#6b7280] mb-1"
+                    >
                       {item.category}
                     </p>
 
-                    <h3 className="text-xl font-bold text-[#1f2933]">
+                    <h3
+                      style={{ fontFamily: "Montserrat, sans-serif" }}
+                      className="text-xl font-bold text-[#1f2933]"
+                    >
                       {item.title}
                     </h3>
 
-                    <p className={`text-xs text-[#374151] mt-3 border-l border-[#247994]/60 pl-3 transition-all ${
-                      hovered === idx ? "opacity-100" : "opacity-0"
-                    }`}>
+                    <p
+                      style={{ fontFamily: "Inter, sans-serif" }}
+                      className={`text-xs text-[#374151] mt-3 border-l border-[#247994]/60 pl-3 transition-all ${
+                        hovered === idx ? "opacity-100" : "opacity-0"
+                      }`}
+                    >
                       {item.desc}
                     </p>
                   </div>
 
                   {item.size === "large" && (
-                    <MoveUpRight size={40} className="absolute bottom-6 right-6 text-black/10" />
+                    <MoveUpRight
+                      size={40}
+                      className="absolute bottom-6 right-6 text-black/10"
+                    />
                   )}
                 </div>
-
               </div>
             </div>
           ))}

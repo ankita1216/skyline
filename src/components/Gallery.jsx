@@ -1,5 +1,12 @@
-import { useState, useRef } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useRef, useState } from "react";
+import {
+  motion,
+  useScroll,
+  useTransform,
+  useSpring,
+  AnimatePresence
+} from "framer-motion";
+import { X } from "lucide-react";
 
 import hero from "../assets/hero-banner.jpg";
 import g1 from "../assets/gallery-2.jpg";
@@ -9,145 +16,117 @@ import g4 from "../assets/gallery-5.jpg";
 import g5 from "../assets/gallery-6.jpg";
 import g6 from "../assets/gallery-7.jpg";
 
-const images = [
-  { src: hero, label: "Aakash Skyline" },
-  { src: g1, label: "Aerial View" },
-  { src: g2, label: "Retail View" },
-  { src: g3, label: "Retail Corridor" },
-  { src: g4, label: "Retail Space" },
-  { src: g5, label: "Road View" },
-  { src: g6, label: "Semi Aerial" },
-];
+const images = [hero, g1, g2, g3, g4, g5, g6, hero, g1];
+
+const Column = ({ images, y, className, onImageClick }) => {
+  return (
+    <motion.div
+      style={{ y }}
+      className={`flex flex-col gap-8 w-full ${className}`}
+    >
+      {images.map((src, i) => (
+        <motion.div
+          key={i}
+          whileHover={{ y: -10, transition: { duration: 0.4 } }}
+          onClick={() => onImageClick(src)}
+          className="relative rounded-xl overflow-hidden cursor-pointer group shadow-2xl"
+        >
+          <div className="overflow-hidden aspect-[16/10] w-full">
+            <img
+              src={src}
+              alt="Architecture"
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+          </div>
+          <div className="absolute inset-0 bg-[#247994]/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+        </motion.div>
+      ))}
+    </motion.div>
+  );
+};
 
 const Gallery = () => {
-  const [active, setActive] = useState(null);
-  const scrollRef = useRef(null);
+  const [selectedImg, setSelectedImg] = useState(null);
+  const container = useRef(null);
 
-  const scroll = (direction) => {
-    if (!scrollRef.current) return;
-    const { scrollLeft, clientWidth } = scrollRef.current;
-    const moveBy = clientWidth * 0.8;
+  const { scrollYProgress } = useScroll({
+    target: container,
+    offset: ["start end", "end start"]
+  });
 
-    scrollRef.current.scrollTo({
-      left: direction === "left" ? scrollLeft - moveBy : scrollLeft + moveBy,
-      behavior: "smooth",
-    });
-  };
+  const y1 = useSpring(useTransform(scrollYProgress, [0, 1], [0, -300]), {
+    stiffness: 80,
+    damping: 25
+  });
+  const y2 = useSpring(useTransform(scrollYProgress, [0, 1], [0, 300]), {
+    stiffness: 80,
+    damping: 25
+  });
+  const y3 = useSpring(useTransform(scrollYProgress, [0, 1], [0, -500]), {
+    stiffness: 80,
+    damping: 25
+  });
 
   return (
     <section
+      ref={container}
       id="gallery"
-      style={{ fontFamily: "Inter, sans-serif" }}
-      className="py-24 bg-[#D6DDD9] relative overflow-hidden"
+      className="relative bg-[#D6DDD9] py-20 overflow-hidden h-[180vh] flex flex-col"
     >
       {/* HEADER */}
-      <div className="max-w-7xl mx-auto px-6 mb-12 flex justify-between items-end relative z-10">
-        <div>
+      <div className="absolute top-16 left-0 w-full z-30 px-6 md:px-20">
+        <div className="max-w-7xl mx-auto">
           <h3
             style={{ fontFamily: "Playfair Display, serif" }}
-            className="text-4xl md:text-5xl font-bold text-[#247994] tracking-tight leading-tight"
+            className="text-[#247994] text-4xl md:text-5xl font-bold leading-tight tracking-tight"
           >
-            OUR <span className="italic">VISION</span>
+            OUR <span className="italic font-normal">VISION</span>
           </h3>
-          <p
-            style={{ fontFamily: "Montserrat, sans-serif" }}
-            className="text-gray-700 mt-2 uppercase tracking-[0.3em] text-xs"
-          >
-            Architecture in motion
-          </p>
+
+          <div className="flex items-center gap-4 mt-2">
+            <div className="h-[2px] w-16 bg-[#247994]" />
+            <p
+              style={{ fontFamily: "Montserrat, sans-serif" }}
+              className="text-gray-700 text-[10px] md:text-xs font-bold tracking-[0.6em] uppercase"
+            >
+              Architecture in motion
+            </p>
+          </div>
         </div>
       </div>
 
-      {/* ARROWS */}
-      <button
-        onClick={() => scroll("left")}
-        className="hidden md:flex absolute left-6 top-1/2 -translate-y-1/2 z-[40]
-                   w-14 h-14 rounded-full bg-white shadow-xl
-                   items-center justify-center hover:bg-black hover:text-white transition"
-      >
-        <ChevronLeft size={24} />
-      </button>
-
-      <button
-        onClick={() => scroll("right")}
-        className="hidden md:flex absolute right-6 top-1/2 -translate-y-1/2 z-[40]
-                   w-14 h-14 rounded-full bg-white shadow-xl
-                   items-center justify-center hover:bg-black hover:text-white transition"
-      >
-        <ChevronRight size={24} />
-      </button>
-
-      {/* SLIDER CONTAINER */}
-      <div
-        ref={scrollRef}
-        className="flex flex-nowrap px-6 md:px-[10vw]
-                   overflow-x-auto no-scrollbar snap-x snap-mandatory"
-        style={{ 
-            perspective: "2000px",
-            perspectiveOrigin: "center"
-        }}
-      >
-        {images.map((img, idx) => (
-          <div
-            key={idx}
-            onClick={() => setActive(img)}
-            className="relative min-w-[85vw] md:min-w-[450px] h-[450px] md:h-[600px]
-                       transition-all duration-700 ease-out
-                       md:rotate-y-[-25deg] md:hover:rotate-y-0 md:hover:scale-105 md:hover:z-50
-                       group snap-center cursor-pointer
-                       /* This creates the uniform gap between every single image */
-                       mx-3 md:mx-6" 
-            style={{ transformStyle: "preserve-3d" }}
-          >
-            <div className="w-full h-full rounded-lg overflow-hidden shadow-2xl bg-white">
-              <img
-                src={img.src}
-                alt={img.label}
-                className="w-full h-full object-cover scale-110
-                           group-hover:scale-100 transition-transform duration-1000"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-              <div className="absolute bottom-6 left-6">
-                <h4
-                  style={{ fontFamily: "Montserrat, sans-serif" }}
-                  className="text-white text-2xl font-bold uppercase tracking-wide"
-                >
-                  {img.label}
-                </h4>
-                <div className="h-[2px] w-12 bg-white mt-2" />
-              </div>
-            </div>
-          </div>
-        ))}
-        {/* End Spacer */}
-        <div className="min-w-[10vw] hidden md:block shrink-0" />
+      {/* PARALLAX COLUMNS */}
+      <div className="flex flex-row gap-6 md:gap-10 px-6 md:px-20 h-full mt-80 justify-center relative z-20 max-w-[1600px] mx-auto w-full">
+        <Column images={[images[0], images[1], images[2]]} y={y1} onImageClick={setSelectedImg} />
+        <Column images={[images[3], images[4], images[5]]} y={y2} onImageClick={setSelectedImg} className="mt-[-15%]" />
+        <Column images={[images[6], images[0], images[1]]} y={y3} onImageClick={setSelectedImg} className="hidden lg:flex" />
       </div>
 
       {/* LIGHTBOX */}
-      {active && (
-        <div
-          className="fixed inset-0 bg-black/95 z-[100] flex items-center justify-center p-6"
-          onClick={() => setActive(null)}
-        >
-          <img
-            src={active.src}
-            alt={active.label}
-            className="max-h-[85vh] max-w-full object-contain rounded-lg"
-          />
-        </div>
-      )}
+      <AnimatePresence>
+        {selectedImg && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedImg(null)}
+            className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-md flex items-center justify-center p-4 cursor-zoom-out"
+          >
+            <motion.button className="absolute top-8 right-8 text-white hover:scale-110 transition-transform">
+              <X size={40} />
+            </motion.button>
+            <motion.img
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.9, y: 20 }}
+              src={selectedImg}
+              className="max-h-[85vh] w-auto max-w-[90vw] rounded-lg shadow-2xl object-contain"
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-      <style dangerouslySetInnerHTML={{ __html: `
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
-        
-        .rotate-y-\\[-25deg\\] {
-          transform: rotateY(-25deg);
-        }
-        .hover\\:rotate-y-0:hover {
-          transform: rotateY(0deg);
-        }
-      `}} />
+      <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-[#D6DDD9] via-transparent to-[#D6DDD9] z-10" />
     </section>
   );
 };
