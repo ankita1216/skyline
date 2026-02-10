@@ -135,8 +135,7 @@ const Contact = () => {
           {/* CONTACT PILLS */}
           <div className="hidden lg:flex flex-col gap-4 absolute top-1/2 right-0 -translate-y-1/2">
             {[
-              { icon: <Phone />, label: "+91 98765 43210", href: "tel:+919876543210" },
-              { icon: <Mail />, label: "sales@aakash.com", href: "mailto:sales@aakash.com" },
+              
               { icon: <MapPin />, label: "Site Location", href: "#" },
             ].map((item, i) => (
               <a

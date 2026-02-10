@@ -1,11 +1,10 @@
-import { useState, cloneElement } from "react";
 import {
   Wind, ArrowUpRight, ShoppingBag, Coffee,
   Car, Building2, Zap, Brush, Eye,
-  Flame, Droplets, ShieldCheck, Plus, MoveUpRight
+  Flame, Droplets, ShieldCheck
 } from "lucide-react";
 
-// 🖼️ IMAGES
+// IMAGES
 import acImg from "../assets/ac.png";
 import elevatorImg from "../assets/elevator.png";
 import retailImg from "../assets/retail.png";
@@ -19,147 +18,90 @@ import fireImg from "../assets/fire.png";
 import ecoImg from "../assets/eco.png";
 
 const amenities = [
-  { title: "Centralized AC", icon: <Wind />, category: "Climate", size: "small", desc: "VRF system with individual zone control.", img: acImg },
-  { title: "Vertical Mobility", icon: <ArrowUpRight />, category: "Lifts & Escalators", size: "large", desc: "High-speed elevators & dual-path escalators.", img: elevatorImg },
-  { title: "Anchor Shops", icon: <ShoppingBag />, category: "Retail", size: "small", desc: "Premium retail floor space.", img: retailImg },
-  { title: "Dining Hub", icon: <Coffee />, category: "Lifestyle", size: "small", desc: "Multi-cuisine restaurants & cafes.", img: diningImg },
-  { title: "Ample Parking", icon: <Car />, category: "Logistics", size: "medium", desc: "Dedicated slots for 2W & 4W vehicles.", img: parkingImg },
-  { title: "Glass Facade", icon: <Building2 />, category: "Architecture", size: "medium", desc: "Heat-reflective high-performance glass.", img: glassImg },
-  { title: "Silent Power", icon: <Zap />, category: "Utility", size: "small", desc: "100% DG backup with silent tech.", img: powerImg },
-  { title: "In-house Team", icon: <Brush />, category: "Service", size: "small", desc: "24/7 housekeeping & maintenance.", img: serviceImg },
-  { title: "CCTV & Security", icon: <Eye />, category: "Safety", size: "small", desc: "AI surveillance & trained guards.", img: cctvImg },
-  { title: "Fire Defense", icon: <Flame />, category: "Safety", size: "small", desc: "Addressable fire & smoke detection.", img: fireImg },
-  { title: "Eco-Drainage", icon: <Droplets />, category: "Infrastructure", size: "medium", desc: "Modern sewage & drainage system.", img: ecoImg },
+  { title: "Centralized Air Conditioning", icon: Wind, desc: "VRF system with independent zone control", img: acImg },
+  { title: "High-Speed Elevators", icon: ArrowUpRight, desc: "Efficient vertical mobility with escalators", img: elevatorImg },
+  { title: "Anchor Retail Spaces", icon: ShoppingBag, desc: "Large-format premium retail zones", img: retailImg },
+  { title: "Dining & Cafés", icon: Coffee, desc: "Curated food & beverage destinations", img: diningImg },
+  { title: "Ample Parking", icon: Car, desc: "Well-planned parking for 2W & 4W", img: parkingImg },
+  { title: "Glass Facade", icon: Building2, desc: "Energy-efficient architectural glazing", img: glassImg },
+  { title: "100% Power Backup", icon: Zap, desc: "Silent DG backup for uninterrupted operations", img: powerImg },
+  { title: "Facility Management", icon: Brush, desc: "In-house housekeeping & maintenance", img: serviceImg },
+  { title: "CCTV Surveillance", icon: Eye, desc: "Advanced security monitoring systems", img: cctvImg },
+  { title: "Fire Safety Systems", icon: Flame, desc: "Modern fire detection & suppression", img: fireImg },
+  { title: "Eco Infrastructure", icon: Droplets, desc: "Efficient drainage & waste systems", img: ecoImg },
 ];
 
-const Amenities = () => {
-  const [hovered, setHovered] = useState(null);
+// ✅ SOFT BACKGROUND VARIANTS FOR TEXT AREA
+const contentBgVariants = [
+  "bg-white/70",
+  "bg-[#E8F1F4]",
+  "bg-[#EEF3F0]",
+  "bg-[#F2F4EE]",
+  "bg-[#E9EEF1]",
+];
 
+export default function Amenities() {
   return (
-    <section className="bg-[#D6DDD9] py-24 px-6 relative overflow-hidden">
-      {/* GRID BACKGROUND */}
-      <div
-        className="absolute inset-0 opacity-[0.04] pointer-events-none"
-        style={{
-          backgroundImage: `
-            linear-gradient(#000 1px, transparent 1px),
-            linear-gradient(90deg, #000 1px, transparent 1px)
-          `,
-          backgroundSize: "40px 40px",
-        }}
-      />
-
-      <div className="max-w-7xl mx-auto relative z-10">
+    <section className="bg-[#D6DDD9] py-24 px-6">
+      <div className="max-w-7xl mx-auto">
 
         {/* HEADER */}
-        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-20 gap-8">
-          <div>
-            <div
-              style={{ fontFamily: "Montserrat, sans-serif" }}
-              className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[#247994]/40 bg-[#247994]/10 text-[#247994] text-[10px] font-bold tracking-[0.2em] uppercase mb-6"
-            >
-              <ShieldCheck size={14} /> Premier Specifications
-            </div>
-
-            <h2
-              style={{ fontFamily: "Playfair Display, serif" }}
-              className="text-4xl md:text-5xl font-bold text-[#1f2933] leading-tight"
-            >
-              STEP INTO THE LAP <br />
-              <span className="text-[#247994]">OF LUXURY</span>
-            </h2>
+        <div className="max-w-3xl mb-16">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full
+            bg-[#247994]/10 text-[#247994] text-xs font-semibold mb-5">
+            <ShieldCheck size={14} />
+            World-Class Amenities
           </div>
 
-          <p
-            style={{ fontFamily: "Inter, sans-serif" }}
-            className="text-[#374151] text-lg max-w-xs border-l border-black/20 pl-6 italic"
+          <h2
+            style={{ fontFamily: "Playfair Display, serif" }}
+            className="text-4xl md:text-5xl font-bold text-[#1f2933]"
           >
-            Engineered for high-traffic commercial success and safety.
+            Designed for <span className="text-[#247994]">Modern Commerce</span>
+          </h2>
+
+          <p className="mt-4 text-base text-[#374151] max-w-xl">
+            Thoughtfully planned amenities supporting high-footfall retail,
+            operational efficiency, and safety.
           </p>
         </div>
 
-        {/* GRID */}
-        <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-12 gap-4 auto-rows-[210px]">
+        {/* GRID – SMALL CARDS */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {amenities.map((item, idx) => (
             <div
               key={idx}
-              onMouseEnter={() => setHovered(idx)}
-              onMouseLeave={() => setHovered(null)}
-              className={`
-                relative transition-all duration-500
-                ${item.size === "large" ? "md:col-span-2 lg:col-span-6 lg:row-span-2" : ""}
-                ${item.size === "medium" ? "md:col-span-2 lg:col-span-4" : "lg:col-span-3"}
-                ${hovered !== null && hovered !== idx ? "opacity-40 scale-[0.98]" : ""}
-              `}
+              className="group rounded-2xl overflow-hidden
+                bg-[#247994]/10 border border-[#247994]/20
+                hover:shadow-lg transition-all duration-300"
             >
-              <div className="h-full w-full p-6 rounded-3xl bg-white/65 backdrop-blur-md border border-black/10 relative overflow-hidden">
-
-                {/* IMAGE LAYER */}
-                <div
-                  className={`absolute inset-0 z-0 transition-opacity duration-500 ${
-                    hovered === idx ? "opacity-40" : "opacity-30"
-                  }`}
-                  style={{
-                    backgroundImage: `url(${item.img})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    clipPath:
-                      item.size === "large"
-                        ? "polygon(35% 0%, 100% 0%, 100% 100%, 10% 100%)"
-                        : "polygon(55% 0%, 100% 0%, 100% 100%, 25% 100%)",
-                  }}
+              {/* IMAGE */}
+              <div className="h-36 overflow-hidden">
+                <img
+                  src={item.img}
+                  alt={item.title}
+                  className="w-full h-full object-cover
+                    group-hover:scale-105 transition-transform duration-500"
                 />
+              </div>
 
-                {/* CONTENT */}
-                <div className="relative z-10 h-full flex flex-col">
-                  <div className="flex justify-between items-start mb-6">
-                    <div
-                      className={`w-12 h-12 rounded-2xl flex items-center justify-center shadow-lg ${
-                        hovered === idx
-                          ? "bg-[#247994] text-white"
-                          : "bg-white text-[#247994]"
-                      }`}
-                    >
-                      {cloneElement(item.icon, { size: 22 })}
-                    </div>
-                    <Plus
-                      size={20}
-                      className={hovered === idx ? "text-[#247994] rotate-90" : "text-black/20"}
-                    />
-                  </div>
-
-                  <div className="mt-auto">
-                    <p
-                      style={{ fontFamily: "Montserrat, sans-serif" }}
-                      className="text-[10px] uppercase tracking-[0.2em] text-[#6b7280] mb-1"
-                    >
-                      {item.category}
-                    </p>
-
-                    <h3
-                      style={{ fontFamily: "Montserrat, sans-serif" }}
-                      className="text-xl font-bold text-[#1f2933]"
-                    >
-                      {item.title}
-                    </h3>
-
-                    <p
-                      style={{ fontFamily: "Inter, sans-serif" }}
-                      className={`text-xs text-[#374151] mt-3 border-l border-[#247994]/60 pl-3 transition-all ${
-                        hovered === idx ? "opacity-100" : "opacity-0"
-                      }`}
-                    >
-                      {item.desc}
-                    </p>
-                  </div>
-
-                  {item.size === "large" && (
-                    <MoveUpRight
-                      size={40}
-                      className="absolute bottom-6 right-6 text-black/10"
-                    />
-                  )}
+              {/* CONTENT (DIFFERENT BG COLOR) */}
+              <div
+                className={`p-5 border-t border-black/5
+                ${contentBgVariants[idx % contentBgVariants.length]}`}
+              >
+                <div className="w-10 h-10 rounded-lg bg-white
+                  flex items-center justify-center mb-3 text-[#247994]">
+                  <item.icon size={18} />
                 </div>
+
+                <h3 className="text-[15px] font-semibold text-[#1f2933]">
+                  {item.title}
+                </h3>
+
+                <p className="mt-1 text-sm text-[#374151]">
+                  {item.desc}
+                </p>
               </div>
             </div>
           ))}
@@ -168,6 +110,4 @@ const Amenities = () => {
       </div>
     </section>
   );
-};
-
-export default Amenities;
+}
