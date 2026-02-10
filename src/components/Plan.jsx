@@ -1,29 +1,32 @@
 import { useState } from "react";
-import { X, CheckCircle2, Ruler, Layers, Home } from "lucide-react";
+import { X, CheckCircle2, Ruler, Layers, Home, ZoomIn, ZoomOut, Maximize } from "lucide-react";
 
-import planA from "../assets/plan-a.jpg"; // UNIT PLAN (Residential)
+import planA from "../assets/plan-a.jpg"; // LOWER GROUND – MAIN ANCHOR
 import planB from "../assets/plan-b.jpg"; // TYPICAL FLOOR (Commercial)
 import planC from "../assets/plan-c.jpg"; // 1ST FLOOR (Commercial)
 
 /* =======================
-   PLAN DATA (CORRECT)
+   PLAN DATA (COMMERCIAL)
    ======================= */
 
 const plans = [
   {
     id: 1,
-    name: "UNIT PLAN – TYPE E",
-    bhk: "3 BHK / 2 Toilets",
-    area: "SBUA 1370 Sq.Ft",
-    floors: "3rd – 11th Floor",
+    name: "LOWER GROUND – MAIN ANCHOR",
+    bhk: "Commercial Anchor Floor",
+    area: "Carpet 13,902 Sq.Ft | BUA 14,369 Sq.Ft | SBUA 19,500 Sq.Ft",
+    floors: "Lower Ground Floor",
     image: planA,
-    highlight: "Well-planned residential unit with efficient space utilization",
+    highlight:
+      "Large anchor commercial space with dedicated access, service zones, and efficient circulation",
     features: [
-      "Living & Dining Area",
-      "3 Bedrooms",
-      "2 Toilets",
-      "Balcony",
-      "Kitchen with Utility",
+      "Main Anchor Commercial Space",
+      "Dedicated Commercial Drop-off",
+      "Wide 6m Internal Roads",
+      "Service & Utility Areas",
+      "Fire Staircases & Lift Cores",
+      "Escalator & Vertical Circulation",
+      "Parking & Ramp Connectivity",
     ],
   },
   {
@@ -63,35 +66,32 @@ const plans = [
 const Plan = () => {
   const [active, setActive] = useState(plans[0]);
   const [showImage, setShowImage] = useState(false);
+  
+  // New State for Zoom Level
+  const [zoom, setZoom] = useState(1);
+
+  const handleZoomIn = () => setZoom((prev) => Math.min(prev + 0.25, 3));
+  const handleZoomOut = () => setZoom((prev) => Math.max(prev - 0.25, 0.5));
+  const resetZoom = () => setZoom(1);
 
   return (
     <section id="plan" className="py-24 bg-white relative overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-[400px] bg-[#247994]" />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-
         {/* HEADER */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
           <div className="max-w-2xl">
-            <span
-              style={{ fontFamily: "Montserrat, sans-serif" }}
-              className="text-amber-400 font-bold tracking-[0.3em] text-xs uppercase"
-            >
+            <span className="text-amber-400 font-bold tracking-[0.3em] text-xs uppercase">
               Architectural Plans
             </span>
 
-            <h2
-              style={{ fontFamily: "Playfair Display, serif" }}
-              className="text-4xl md:text-5xl font-black text-white mt-4 leading-tight"
-            >
+            <h2 className="text-4xl md:text-5xl font-black text-white mt-4 leading-tight">
               Detailed <span className="italic">Floor Layouts.</span>
             </h2>
           </div>
 
-          <p
-            style={{ fontFamily: "Inter, sans-serif" }}
-            className="text-teal-50/80 max-w-sm text-sm md:text-base"
-          >
+          <p className="text-teal-50/80 max-w-sm text-sm md:text-base">
             Clear planning for residential comfort and commercial efficiency.
           </p>
         </div>
@@ -101,8 +101,10 @@ const Plan = () => {
           {plans.map((plan) => (
             <button
               key={plan.id}
-              onClick={() => setActive(plan)}
-              style={{ fontFamily: "Montserrat, sans-serif" }}
+              onClick={() => {
+                setActive(plan);
+                resetZoom(); // Reset zoom if switching plans while modal is open
+              }}
               className={`flex-shrink-0 px-8 py-4 rounded-xl font-bold transition-all border-2 flex items-center gap-3 ${
                 active.id === plan.id
                   ? "bg-amber-400 border-amber-400 text-black shadow-lg scale-105"
@@ -122,7 +124,6 @@ const Plan = () => {
 
         {/* MAIN CARD */}
         <div className="bg-white rounded-[2rem] shadow-2xl overflow-hidden border border-gray-100 flex flex-col lg:flex-row min-h-[500px]">
-
           {/* IMAGE */}
           <div className="lg:w-1/2 p-6 md:p-10 bg-gray-50 flex flex-col justify-center">
             <div
@@ -163,9 +164,7 @@ const Plan = () => {
 
             <div className="grid grid-cols-2 gap-6 mb-10">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-gray-50 rounded-xl flex items-center justify-center text-[#247994]">
-                  <Layers size={22} />
-                </div>
+                <Layers size={22} className="text-[#247994]" />
                 <div>
                   <p className="text-xs text-gray-400 font-bold uppercase">
                     Floor
@@ -177,9 +176,7 @@ const Plan = () => {
               </div>
 
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-gray-50 rounded-xl flex items-center justify-center text-[#247994]">
-                  <Ruler size={22} />
-                </div>
+                <Ruler size={22} className="text-[#247994]" />
                 <div>
                   <p className="text-xs text-gray-400 font-bold uppercase">
                     Area Info
@@ -206,20 +203,63 @@ const Plan = () => {
         </div>
       </div>
 
-      {/* MODAL */}
+      {/* MODAL WITH ZOOM FEATURE */}
       {showImage && (
-        <div className="fixed inset-0 bg-black/95 z-[100] flex items-center justify-center p-6">
-          <button
-            onClick={() => setShowImage(false)}
-            className="absolute top-8 right-8 text-white hover:text-amber-400"
-          >
-            <X size={40} />
-          </button>
-          <img
-            src={active.image}
-            alt="Plan"
-            className="max-w-full max-h-full object-contain rounded-lg"
-          />
+        <div className="fixed inset-0 bg-black/95 z-[100] flex flex-col items-center justify-center p-6">
+          
+          {/* Modal Header Controls */}
+          <div className="absolute top-8 right-8 flex items-center gap-6 z-[110]">
+             <div className="flex items-center gap-2 bg-white/10 rounded-full p-2 border border-white/20">
+                <button 
+                  onClick={handleZoomOut}
+                  className="p-2 hover:bg-white/20 text-white rounded-full transition-colors"
+                  title="Zoom Out"
+                >
+                  <ZoomOut size={24} />
+                </button>
+                <button 
+                  onClick={resetZoom}
+                  className="p-2 hover:bg-white/20 text-white rounded-full transition-colors"
+                  title="Reset"
+                >
+                  <Maximize size={20} />
+                </button>
+                <button 
+                  onClick={handleZoomIn}
+                  className="p-2 hover:bg-white/20 text-white rounded-full transition-colors"
+                  title="Zoom In"
+                >
+                  <ZoomIn size={24} />
+                </button>
+             </div>
+
+            <button
+              onClick={() => {
+                setShowImage(false);
+                resetZoom();
+              }}
+              className="text-white hover:text-amber-400 transition-colors"
+            >
+              <X size={40} />
+            </button>
+          </div>
+
+          {/* Zoomable Image Container */}
+          <div className="w-full h-full overflow-auto flex items-center justify-center cursor-move">
+            <img
+              src={active.image}
+              alt="Plan"
+              style={{ 
+                transform: `scale(${zoom})`,
+                transition: "transform 0.2s ease-out" 
+              }}
+              className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
+            />
+          </div>
+
+          <div className="absolute bottom-8 text-white/50 text-xs font-medium uppercase tracking-[0.2em]">
+            Use controls to inspect details • Zoom: {Math.round(zoom * 100)}%
+          </div>
         </div>
       )}
     </section>

@@ -6,7 +6,7 @@ import {
   useSpring,
   AnimatePresence
 } from "framer-motion";
-import { X } from "lucide-react";
+import { X, ZoomIn, ZoomOut, Maximize } from "lucide-react"; // Added new icons
 
 import hero from "../assets/hero-banner.jpg";
 import g1 from "../assets/gallery-2.jpg";
@@ -47,6 +47,7 @@ const Column = ({ images, y, className, onImageClick }) => {
 
 const Gallery = () => {
   const [selectedImg, setSelectedImg] = useState(null);
+  const [zoom, setZoom] = useState(1); // Zoom state
   const container = useRef(null);
 
   const { scrollYProgress } = useScroll({
@@ -66,6 +67,22 @@ const Gallery = () => {
     stiffness: 80,
     damping: 25
   });
+
+  // Zoom Handlers
+  const handleZoomIn = (e) => {
+    e?.stopPropagation();
+    setZoom((prev) => Math.min(prev + 0.5, 4));
+  };
+
+  const handleZoomOut = (e) => {
+    e?.stopPropagation();
+    setZoom((prev) => Math.max(prev - 0.5, 1));
+  };
+
+  const handleReset = (e) => {
+    e?.stopPropagation();
+    setZoom(1);
+  };
 
   return (
     <section
@@ -102,26 +119,81 @@ const Gallery = () => {
         <Column images={[images[6], images[0], images[1]]} y={y3} onImageClick={setSelectedImg} className="hidden lg:flex" />
       </div>
 
-      {/* LIGHTBOX */}
+      {/* LIGHTBOX WITH ZOOM */}
       <AnimatePresence>
         {selectedImg && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={() => setSelectedImg(null)}
-            className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-md flex items-center justify-center p-4 cursor-zoom-out"
+            onClick={() => {
+              setSelectedImg(null);
+              setZoom(1); // Reset zoom on close
+            }}
+            className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-md flex items-center justify-center p-4"
           >
-            <motion.button className="absolute top-8 right-8 text-white hover:scale-110 transition-transform">
-              <X size={40} />
-            </motion.button>
-            <motion.img
-              initial={{ scale: 0.9, y: 20 }}
-              animate={{ scale: 1, y: 0 }}
-              exit={{ scale: 0.9, y: 20 }}
-              src={selectedImg}
-              className="max-h-[85vh] w-auto max-w-[90vw] rounded-lg shadow-2xl object-contain"
-            />
+            {/* Control Bar */}
+            <div className="absolute top-8 right-8 flex items-center gap-4 z-[110]">
+              <div 
+                onClick={(e) => e.stopPropagation()} 
+                className="flex items-center gap-2 bg-white/10 rounded-full p-1.5 border border-white/20 backdrop-blur-sm"
+              >
+                <button
+                  onClick={handleZoomOut}
+                  className="p-2 text-white hover:bg-white/20 rounded-full transition-colors"
+                >
+                  <ZoomOut size={24} />
+                </button>
+                <button
+                  onClick={handleReset}
+                  className="p-2 text-white hover:bg-white/20 rounded-full transition-colors"
+                >
+                  <Maximize size={20} />
+                </button>
+                <button
+                  onClick={handleZoomIn}
+                  className="p-2 text-white hover:bg-white/20 rounded-full transition-colors"
+                >
+                  <ZoomIn size={24} />
+                </button>
+              </div>
+
+              <button 
+                onClick={() => { setSelectedImg(null); setZoom(1); }}
+                className="text-white hover:text-amber-400 transition-colors p-2"
+              >
+                <X size={40} />
+              </button>
+            </div>
+
+            {/* Image Container */}
+            <div 
+              className="w-full h-full flex items-center justify-center overflow-auto"
+              onWheel={(e) => {
+                if (e.deltaY < 0) handleZoomIn();
+                else handleZoomOut();
+              }}
+            >
+              <motion.img
+                key={selectedImg}
+                initial={{ scale: 0.9 }}
+                animate={{ 
+                  scale: zoom,
+                  transition: { type: "spring", stiffness: 300, damping: 30 } 
+                }}
+                exit={{ scale: 0.9 }}
+                src={selectedImg}
+                onClick={(e) => e.stopPropagation()}
+                className={`max-h-[85vh] w-auto max-w-[90vw] rounded-lg shadow-2xl object-contain ${zoom > 1 ? 'cursor-move' : 'cursor-default'}`}
+              />
+            </div>
+
+            {/* Zoom Indicator */}
+            {zoom > 1 && (
+              <div className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/50 text-[10px] uppercase tracking-widest bg-black/40 px-4 py-2 rounded-full border border-white/10">
+                Zoomed: {Math.round(zoom * 100)}% • Use scroll wheel to zoom
+              </div>
+            )}
           </motion.div>
         )}
       </AnimatePresence>
