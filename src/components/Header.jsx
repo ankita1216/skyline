@@ -18,7 +18,7 @@ export default function Header() {
 
   const navLinks = [
     { label: "About", id: "about" },
-    { label: "Features", id: "features" },
+    { label: "Amenities", id: "amenities" },
     { label: "Plan", id: "plan" },
     { label: "Gallery", id: "gallery" },
     { label: "Location", id: "location" },

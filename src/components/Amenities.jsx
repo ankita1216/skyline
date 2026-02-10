@@ -31,7 +31,7 @@ const amenities = [
   { title: "Eco Infrastructure", icon: Droplets, desc: "Efficient drainage & waste systems", img: ecoImg },
 ];
 
-// ✅ SOFT BACKGROUND VARIANTS FOR TEXT AREA
+// SOFT BACKGROUND VARIANTS
 const contentBgVariants = [
   "bg-white/70",
   "bg-[#E8F1F4]",
@@ -42,7 +42,10 @@ const contentBgVariants = [
 
 export default function Amenities() {
   return (
-    <section className="bg-[#D6DDD9] py-24 px-6">
+    <section
+      id="amenities"
+      className="bg-[#D6DDD9] py-24 px-6 scroll-mt-24"
+    >
       <div className="max-w-7xl mx-auto">
 
         {/* HEADER */}
@@ -66,7 +69,7 @@ export default function Amenities() {
           </p>
         </div>
 
-        {/* GRID – SMALL CARDS */}
+        {/* GRID */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {amenities.map((item, idx) => (
             <div
@@ -85,7 +88,7 @@ export default function Amenities() {
                 />
               </div>
 
-              {/* CONTENT (DIFFERENT BG COLOR) */}
+              {/* CONTENT */}
               <div
                 className={`p-5 border-t border-black/5
                 ${contentBgVariants[idx % contentBgVariants.length]}`}

@@ -7,7 +7,7 @@ const Footer = () => {
   const exploreLinks = [
     "Home",
     "About",
-    "Features",
+    "Amenities",
     " Plan",
     "Gallery",
     "Location",
