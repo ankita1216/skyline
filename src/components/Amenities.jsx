@@ -1,10 +1,12 @@
+import React from "react";
+import { motion } from "framer-motion";
 import {
   Wind, ArrowUpRight, ShoppingBag, Coffee,
   Car, Building2, Zap, Brush, Eye,
   Flame, Droplets, ShieldCheck
 } from "lucide-react";
 
-// IMAGES
+// IMAGES (Keep your imports as they are)
 import acImg from "../assets/ac.png";
 import elevatorImg from "../assets/elevator.png";
 import retailImg from "../assets/retail.png";
@@ -31,85 +33,98 @@ const amenities = [
   { title: "Eco Infrastructure", icon: Droplets, desc: "Efficient drainage & waste systems", img: ecoImg },
 ];
 
-// SOFT BACKGROUND VARIANTS
-const contentBgVariants = [
-  "bg-white/70",
-  "bg-[#E8F1F4]",
-  "bg-[#EEF3F0]",
-  "bg-[#F2F4EE]",
-  "bg-[#E9EEF1]",
-];
+// Animation Variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1 }
+  }
+};
+
+const cardVariants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: { y: 0, opacity: 1, transition: { duration: 0.5, ease: "easeOut" } }
+};
 
 export default function Amenities() {
   return (
-    <section
-      id="amenities"
-      className="bg-[#D6DDD9] py-24 px-6 scroll-mt-24"
-    >
+    <section id="amenities" className="bg-[#f8fafc] py-24 px-6 scroll-mt-24 overflow-hidden">
       <div className="max-w-7xl mx-auto">
-
+        
         {/* HEADER */}
-        <div className="max-w-3xl mb-16">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full
-            bg-[#247994]/10 text-[#247994] text-xs font-semibold mb-5">
-            <ShieldCheck size={14} />
-            World-Class Amenities
+        <motion.div 
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          className="max-w-3xl mb-16"
+        >
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full
+            bg-[#247994]/10 text-[#247994] text-[13px] font-medium mb-6 border border-[#247994]/20">
+            <ShieldCheck size={16} />
+            <span>World-Class Amenities</span>
           </div>
 
           <h2
             style={{ fontFamily: "Playfair Display, serif" }}
-            className="text-4xl md:text-5xl font-bold text-[#1f2933]"
+            className="text-4xl md:text-6xl font-bold text-[#1a202c] leading-tight"
           >
-            Designed for <span className="text-[#247994]">Modern Commerce</span>
+            Designed for <span className="text-[#247994] italic">Modern Commerce</span>
           </h2>
 
-          <p className="mt-4 text-base text-[#374151] max-w-xl">
-            Thoughtfully planned amenities supporting high-footfall retail,
-            operational efficiency, and safety.
+          <p className="mt-6 text-lg text-slate-600 max-w-xl leading-relaxed">
+            Thoughtfully planned infrastructure supporting high-footfall retail,
+            operational excellence, and future-ready safety.
           </p>
-        </div>
+        </motion.div>
 
         {/* GRID */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
           {amenities.map((item, idx) => (
-            <div
+            <motion.div
               key={idx}
-              className="group rounded-2xl overflow-hidden
-                bg-[#247994]/10 border border-[#247994]/20
-                hover:shadow-lg transition-all duration-300"
+              variants={cardVariants}
+              whileHover={{ y: -8 }}
+              className="group relative bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300"
             >
-              {/* IMAGE */}
-              <div className="h-36 overflow-hidden">
+              {/* IMAGE WRAPPER */}
+              <div className="relative h-52 overflow-hidden">
                 <img
                   src={item.img}
                   alt={item.title}
-                  className="w-full h-full object-cover
-                    group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </div>
+
+              {/* FLOATING ICON */}
+              <div className="absolute top-44 left-6 z-10">
+                <div className="w-14 h-14 rounded-2xl bg-white shadow-lg flex items-center justify-center text-[#247994] group-hover:bg-[#247994] group-hover:text-white transition-colors duration-300">
+                  <item.icon size={26} strokeWidth={1.5} />
+                </div>
               </div>
 
               {/* CONTENT */}
-              <div
-                className={`p-5 border-t border-black/5
-                ${contentBgVariants[idx % contentBgVariants.length]}`}
-              >
-                <div className="w-10 h-10 rounded-lg bg-white
-                  flex items-center justify-center mb-3 text-[#247994]">
-                  <item.icon size={18} />
-                </div>
-
-                <h3 className="text-[15px] font-semibold text-[#1f2933]">
+              <div className="pt-10 pb-8 px-8">
+                <h3 className="text-xl font-bold text-[#1a202c] mb-2 group-hover:text-[#247994] transition-colors">
                   {item.title}
                 </h3>
-
-                <p className="mt-1 text-sm text-[#374151]">
+                <p className="text-slate-500 leading-relaxed text-sm">
                   {item.desc}
                 </p>
+                
+                {/* DECORATIVE LINE */}
+                <div className="mt-6 w-8 h-1 bg-[#247994]/20 group-hover:w-full transition-all duration-500" />
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
-
+        </motion.div>
       </div>
     </section>
   );
