@@ -1,11 +1,9 @@
-import { useState, useEffect } from "react";
+"use client";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, MapPin, Download, X } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import heroImg from "../assets/hero-banner.jpg";
-
-
-
 
 export default function Hero() {
   const [open, setOpen] = useState(false);
@@ -40,8 +38,9 @@ export default function Hero() {
 
   return (
     <>
-      <section className="relative min-h-screen bg-[#F8F9F8] overflow-hidden flex items-center pt-24 lg:pt-0">
+      <section className="relative min-h-screen bg-[#F8F9F8] overflow-hidden flex items-center pt-[80px]">
 
+        {/* Background Shape */}
         <div
           className="absolute inset-0 z-0"
           style={{
@@ -50,55 +49,77 @@ export default function Hero() {
           }}
         />
 
-        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 py-20">
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-6 py-12 md:py-20">
           <div className="grid lg:grid-cols-12 gap-14 items-center">
 
+            {/* LEFT CONTENT */}
             <div className="lg:col-span-7">
               <motion.div
                 initial={{ opacity: 0, x: -70 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, ease: "circOut" }}
               >
-                <div className="inline-flex items-center gap-3 mb-8">
+
+                {/* TOP LABEL */}
+                <div className="inline-flex items-center gap-3 mb-6">
                   <span className="w-10 h-[1px] bg-[#247994]" />
-                  <span className="uppercase tracking-[0.4em] text-[10px] font-bold text-[#247994]">
-                    Project Skyline / 2026
+                  <span
+                    style={{ fontFamily: "Montserrat, sans-serif" }}
+                    className="uppercase tracking-[0.4em] text-[10px] font-semibold text-[#247994]"
+                  >
+                    PROJECT SKYLINE / 2026
                   </span>
                 </div>
 
-                <h1 className="font-serif">
-                  <span className="block text-[52px] md:text-[90px] font-bold text-[#247994] leading-none tracking-tight">
-                    AKASH
+                {/* MAIN HEADING */}
+                <h1 style={{ fontFamily: "Playfair Display, serif" }}>
+
+                  <span className="block text-[38px] md:text-[70px] lg:text-[85px] font-bold text-[#247994] leading-[1.1]">
+                    THE EPICENTRE
                   </span>
+
+                  <span className="block text-[38px] md:text-[70px] lg:text-[85px] font-bold text-[#247994] leading-[1.1]">
+                    OF LUXURY
+                  </span>
+
                   <span
-                    className="block text-[60px] md:text-[110px] font-normal leading-none tracking-tight"
+                    className="block text-[42px] md:text-[90px] lg:text-[105px] font-normal leading-none mt-2"
                     style={{
                       color: "transparent",
                       WebkitTextStroke: "1.5px #247994",
                     }}
                   >
-                    SKYLINE
+                    LIFESTYLE
                   </span>
+
                 </h1>
 
+                {/* DESCRIPTION + BUTTONS */}
                 <div className="mt-10 flex items-start gap-8">
                   <div className="hidden md:block h-24 w-[1px] bg-[#247994]/20 mt-2" />
 
                   <div>
-                    <p className="text-base md:text-lg text-[#374151] max-w-md leading-relaxed font-light">
+                    <p
+                      style={{ fontFamily: "Inter, sans-serif" }}
+                      className="text-base md:text-lg text-[#374151] max-w-md leading-[1.75]"
+                    >
                       Redefining the Jamshedpur horizon through{" "}
-                      <span className="font-bold text-[#247994]">brutalist elegance</span> and
-                      curated commercial spaces.
+                      <span className="font-semibold text-[#247994]">
+                        brutalist elegance
+                      </span>{" "}
+                      and curated commercial spaces.
                     </p>
 
                     <div className="mt-8 flex flex-wrap gap-6 items-center">
 
+                      {/* ENQUIRE */}
                       <button
                         onClick={() => setOpen(true)}
+                        style={{ fontFamily: "Montserrat, sans-serif" }}
                         className="group flex items-center gap-3 bg-[#247994] text-white px-8 py-4 rounded-full hover:opacity-90 transition-all duration-300"
                       >
-                        <span className="font-bold text-sm tracking-widest uppercase">
-                          Enquire
+                        <span className="font-semibold text-sm tracking-[0.2em] uppercase">
+                          ENQUIRE
                         </span>
                         <ArrowUpRight
                           size={20}
@@ -106,22 +127,25 @@ export default function Hero() {
                         />
                       </button>
 
-                      {/* Brochure now opens same form */}
+                      {/* BROCHURE */}
                       <button
                         onClick={() => setOpen(true)}
-                        className="flex items-center gap-2 text-[#247994] font-bold text-sm tracking-widest uppercase hover:underline decoration-2 underline-offset-8"
+                        style={{ fontFamily: "Montserrat, sans-serif" }}
+                        className="flex items-center gap-2 text-[#247994] font-semibold text-sm tracking-[0.2em] uppercase hover:underline decoration-2 underline-offset-8"
                       >
                         <Download size={18} />
-                        Brochure
+                        BROCHURE
                       </button>
 
                     </div>
                   </div>
                 </div>
+
               </motion.div>
             </div>
 
-            <div className="lg:col-span-5 relative">
+            {/* RIGHT IMAGE */}
+            <div className="lg:col-span-5 relative mt-12 lg:mt-0">
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -137,15 +161,22 @@ export default function Hero() {
                   <div className="absolute inset-0 bg-[#247994]/10 mix-blend-multiply" />
                 </div>
 
-                <div className="absolute -bottom-8 right-6 bg-white py-6 px-10 rounded-xl shadow-xl flex items-center gap-4 border border-slate-100">
+                {/* LOCATION CARD */}
+                <div className="absolute -bottom-8 right-6 bg-white py-6 px-8 rounded-xl shadow-xl flex items-center gap-4 border border-slate-100">
                   <div className="p-3 bg-[#D6DDD9] rounded-full">
                     <MapPin size={22} className="text-[#247994]" />
                   </div>
                   <div>
-                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-                      Location
+                    <p
+                      style={{ fontFamily: "Montserrat, sans-serif" }}
+                      className="text-[10px] font-semibold text-slate-400 uppercase tracking-[0.35em]"
+                    >
+                      LOCATION
                     </p>
-                    <p className="text-lg font-black text-[#247994]">
+                    <p
+                      style={{ fontFamily: "Inter, sans-serif" }}
+                      className="text-lg font-bold text-[#247994]"
+                    >
                       Mango, Jamshedpur
                     </p>
                   </div>
@@ -158,7 +189,7 @@ export default function Hero() {
         </div>
       </section>
 
-      {/* POPUP */}
+      {/* POPUP FORM */}
       <AnimatePresence>
         {open && (
           <motion.div
@@ -188,7 +219,6 @@ export default function Hero() {
               </h2>
 
               <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
-
                 <input type="text" placeholder="Full Name *" required className="md:col-span-2 border p-3 rounded-lg focus:ring-2 focus:ring-[#247994]" />
                 <input type="tel" placeholder="Mobile Number *" required className="border p-3 rounded-lg focus:ring-2 focus:ring-[#247994]" />
                 <input type="email" placeholder="Email Address" className="border p-3 rounded-lg focus:ring-2 focus:ring-[#247994]" />
@@ -218,7 +248,6 @@ export default function Hero() {
                 >
                   Get Price & Availability
                 </button>
-
               </form>
             </motion.div>
           </motion.div>
