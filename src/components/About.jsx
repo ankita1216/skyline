@@ -22,14 +22,12 @@ const STATS = [
 ];
 
 export default function WhySkyline() {
-  // --- 3D TILT LOGIC ---
   const x = useMotionValue(0);
   const y = useMotionValue(0);
 
   const mouseXSpring = useSpring(x);
   const mouseYSpring = useSpring(y);
 
-  // Map mouse position to rotation degrees
   const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["10deg", "-10deg"]);
   const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-10deg", "10deg"]);
 
@@ -53,14 +51,14 @@ export default function WhySkyline() {
   };
 
   return (
-    <section id="about" className="py-20 bg-white overflow-hidden">
+    <section id="overview" className="py-28 bg-white overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
 
-          {/* LEFT — 3D IMAGE CONTAINER */}
-          <div 
+          {/* LEFT IMAGE */}
+          <div
             className="relative cursor-pointer group"
-            style={{ perspective: "1200px" }} 
+            style={{ perspective: "1200px" }}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
           >
@@ -70,38 +68,36 @@ export default function WhySkyline() {
                 rotateY,
                 transformStyle: "preserve-3d",
               }}
-              className="relative h-[520px] w-full transition-all duration-200 ease-out"
+              className="relative h-[560px] w-full transition-all duration-200 ease-out"
             >
-              {/* Outer Shadow Layer */}
               <div className="absolute inset-0 rounded-tl-[300px] rounded-br-[300px] shadow-[0_40px_80px_-15px_rgba(0,0,0,0.3)] -z-10 group-hover:shadow-[0_60px_100px_-20px_rgba(11,100,127,0.3)] transition-all duration-500" />
 
-              {/* The "3D Edge" thickness */}
               <div className="absolute inset-0 translate-x-[8px] translate-y-[8px] rounded-tl-[300px] rounded-br-[300px] bg-[#0b647f]/10 -z-20" />
 
-              {/* Main Image Container */}
               <div className="absolute inset-0 rounded-tl-[300px] rounded-br-[300px] overflow-hidden border-b-4 border-r-4 border-white/20 shadow-inner">
                 <motion.img
                   src={skylineImg}
                   alt="Sky Line Development"
                   className="w-full h-full object-cover"
-                  style={{ transform: "translateZ(50px) scale(1.1)" }} 
+                  style={{ transform: "translateZ(50px) scale(1.1)" }}
                 />
               </div>
             </motion.div>
           </div>
 
-          {/* RIGHT — CONTENT */}
+          {/* RIGHT CONTENT */}
           <div>
             <p
               style={{ fontFamily: "Montserrat, sans-serif" }}
-              className="uppercase tracking-[0.35em] text-sm text-[#0b647f] font-semibold mb-3"
+              className="uppercase tracking-[0.35em] text-sm text-[#0b647f] font-semibold mb-4"
             >
               WHY SKYLINE
             </p>
 
+            {/* FIXED HEADING */}
             <h2
               style={{ fontFamily: "Playfair Display, serif" }}
-              className="text-4xl md:text-5xl font-bold text-slate-900 mb-6"
+              className="uppercase text-4xl md:text-5xl font-bold leading-[1.15] text-slate-900 mb-8"
             >
               EXPERIENCE A TRUE RETAIL{" "}
               <span className="text-[#247994]">
@@ -109,9 +105,10 @@ export default function WhySkyline() {
               </span>
             </h2>
 
+            {/* FIXED PARAGRAPH */}
             <p
               style={{ fontFamily: "Inter, sans-serif" }}
-              className="text-slate-600 text-lg leading-relaxed max-w-xl mb-10"
+              className="text-slate-600 text-lg leading-[1.75] max-w-xl mb-12"
             >
               Step into a world perfectly curated to bring you the luxury lifestyle
               of your dreams! Aakash Skyline is ready to transform your living,
@@ -121,7 +118,7 @@ export default function WhySkyline() {
               Aakash Skyline!
             </p>
 
-            <div className="grid grid-cols-2 gap-x-12 gap-y-10">
+            <div className="grid grid-cols-2 gap-x-12 gap-y-12">
               {STATS.map((item, index) => {
                 const Icon = item.icon;
                 return (
@@ -156,6 +153,7 @@ export default function WhySkyline() {
                 );
               })}
             </div>
+
           </div>
         </div>
       </div>

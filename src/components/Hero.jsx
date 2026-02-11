@@ -1,12 +1,16 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowUpRight, MapPin, Download, X } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import heroImg from "../assets/hero-banner.jpg";
 
-export default function Hero() {
 
+
+
+export default function Hero() {
   const [open, setOpen] = useState(false);
   const [utm, setUtm] = useState({});
+  const navigate = useNavigate();
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -27,6 +31,12 @@ export default function Hero() {
 
     setUtm(collected);
   }, []);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setOpen(false);
+    navigate("/thank-you");
+  };
 
   return (
     <>
@@ -96,16 +106,14 @@ export default function Hero() {
                         />
                       </button>
 
-                      {/* ✅ BROCHURE LINK ADDED */}
-                      <a
-                        href="/Skyline-brochure.pdf"
-                        target="_blank"
-                        rel="noopener noreferrer"
+                      {/* Brochure now opens same form */}
+                      <button
+                        onClick={() => setOpen(true)}
                         className="flex items-center gap-2 text-[#247994] font-bold text-sm tracking-widest uppercase hover:underline decoration-2 underline-offset-8"
                       >
                         <Download size={18} />
                         Brochure
-                      </a>
+                      </button>
 
                     </div>
                   </div>
@@ -129,13 +137,6 @@ export default function Hero() {
                   <div className="absolute inset-0 bg-[#247994]/10 mix-blend-multiply" />
                 </div>
 
-                <InfoSlab
-                  number="02"
-                  title="Smart Living"
-                  desc="Future-ready homes"
-                  pos="hidden lg:block bottom-24 -left-12"
-                />
-
                 <div className="absolute -bottom-8 right-6 bg-white py-6 px-10 rounded-xl shadow-xl flex items-center gap-4 border border-slate-100">
                   <div className="p-3 bg-[#D6DDD9] rounded-full">
                     <MapPin size={22} className="text-[#247994]" />
@@ -157,7 +158,7 @@ export default function Hero() {
         </div>
       </section>
 
-      {/* ================= POPUP ================= */}
+      {/* POPUP */}
       <AnimatePresence>
         {open && (
           <motion.div
@@ -186,12 +187,11 @@ export default function Hero() {
                 Commercial Enquiry
               </h2>
 
-              <form className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
                 <input type="text" placeholder="Full Name *" required className="md:col-span-2 border p-3 rounded-lg focus:ring-2 focus:ring-[#247994]" />
                 <input type="tel" placeholder="Mobile Number *" required className="border p-3 rounded-lg focus:ring-2 focus:ring-[#247994]" />
                 <input type="email" placeholder="Email Address" className="border p-3 rounded-lg focus:ring-2 focus:ring-[#247994]" />
-                <input type="text" placeholder="Company / Brand Name" className="md:col-span-2 border p-3 rounded-lg focus:ring-2 focus:ring-[#247994]" />
 
                 <select className="border p-3 rounded-lg focus:ring-2 focus:ring-[#247994]">
                   <option>Type of Requirement</option>
@@ -225,24 +225,5 @@ export default function Hero() {
         )}
       </AnimatePresence>
     </>
-  );
-}
-
-function InfoSlab({ number, title, desc, pos }) {
-  return (
-    <motion.div
-      whileHover={{ y: -5 }}
-      className={`absolute ${pos} z-20 bg-white/90 backdrop-blur-md p-6 rounded-lg shadow-lg border-l-4 border-[#247994] min-w-[200px]`}
-    >
-      <span className="text-[10px] font-black text-[#D6DDD9] block mb-1 tracking-tighter">
-        {number}
-      </span>
-      <h4 className="text-sm font-bold text-[#247994] uppercase">
-        {title}
-      </h4>
-      <p className="text-[11px] text-slate-500 font-medium">
-        {desc}
-      </p>
-    </motion.div>
   );
 }

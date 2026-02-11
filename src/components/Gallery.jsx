@@ -18,7 +18,6 @@ import g5 from "../assets/gallery-6.jpg";
 import g6 from "../assets/gallery-7.jpg";
 import g7 from "../assets/gallery-8.jpg";
 
-/* ✅ NO DUPLICATES – EACH IMAGE ONLY ONCE */
 const images = [hero, g1, g2, g3, g4, g5, g6, g7];
 
 const Column = ({ images, y, className = "", onImageClick }) => {
@@ -92,32 +91,45 @@ const Gallery = () => {
     <section
       ref={container}
       id="gallery"
-      className="relative bg-[#D6DDD9] py-20 overflow-hidden h-[180vh] flex flex-col"
+      className="relative bg-[#D6DDD9] py-28 overflow-hidden h-[180vh] flex flex-col"
     >
       {/* HEADER */}
       <div className="absolute top-16 left-0 w-full z-30 px-6 md:px-20">
         <div className="max-w-7xl mx-auto">
-          <h3
-            style={{ fontFamily: "Playfair Display, serif" }}
-            className="text-[#247994] text-4xl md:text-5xl font-bold leading-tight"
-          >
-            OUR <span className="italic font-normal">VISION</span>
-          </h3>
 
-          <div className="flex items-center gap-4 mt-2">
-            <div className="h-[2px] w-16 bg-[#247994]" />
-            <p
-              style={{ fontFamily: "Montserrat, sans-serif" }}
-              className="text-gray-700 text-[10px] md:text-xs font-bold tracking-[0.6em] uppercase"
-            >
-              Architecture in motion
-            </p>
-          </div>
+          {/* SECTION LABEL */}
+          <p
+            style={{ fontFamily: "Montserrat, sans-serif" }}
+            className="uppercase tracking-[0.35em] text-sm text-[#247994] font-semibold mb-6"
+          >
+            GALLERY
+          </p>
+
+          {/* MAIN HEADING */}
+          <h2
+            style={{ fontFamily: "Playfair Display, serif" }}
+            className="uppercase text-4xl md:text-5xl font-bold leading-[1.15] text-[#247994]"
+          >
+            OUR{" "}
+            <span className="text-slate-900">
+              VISION
+            </span>
+          </h2>
+
+          {/* SUBTEXT */}
+          <p
+            style={{ fontFamily: "Inter, sans-serif" }}
+            className="text-slate-700 text-lg leading-[1.75] mt-6 max-w-xl"
+          >
+            A curated glimpse into the architectural expression,
+            spatial planning, and visual identity of the development.
+          </p>
+
         </div>
       </div>
 
-      {/* PARALLAX GRID – NO DUPLICATES */}
-      <div className="flex gap-6 md:gap-10 px-6 md:px-20 h-full mt-80 justify-center relative z-20 max-w-[1600px] mx-auto w-full">
+      {/* PARALLAX GRID */}
+      <div className="flex gap-6 md:gap-10 px-6 md:px-20 h-full mt-96 justify-center relative z-20 max-w-[1600px] mx-auto w-full">
         <Column
           images={[images[0], images[1], images[2]]}
           y={y1}
@@ -152,7 +164,6 @@ const Gallery = () => {
             }}
             className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-md flex items-center justify-center p-4"
           >
-            {/* CONTROLS */}
             <div className="absolute top-8 right-8 flex items-center gap-4 z-[110]">
               <div
                 onClick={(e) => e.stopPropagation()}
@@ -180,7 +191,6 @@ const Gallery = () => {
               </button>
             </div>
 
-            {/* IMAGE */}
             <div
               className="w-full h-full flex items-center justify-center overflow-auto"
               onWheel={(e) =>

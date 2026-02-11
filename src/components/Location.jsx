@@ -49,37 +49,39 @@ const locationData = [
 const Location = () => {
   const [activeTab, setActiveTab] = useState(0);
 
-  // ✅ GOOGLE MAP WITH RED PIN (NO API KEY)
   const mapSrc =
     "https://www.google.com/maps?q=Aakash+Skyline,+Near+Chepapul,+Chepapul,+Mango,+Jamshedpur,+Tamlia,+Jharkhand+831020&output=embed";
 
   return (
-    <section
-      id="location"
-      className="py-20 bg-slate-50 overflow-hidden font-sans"
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        {/* HEADER */}
-        <div className="relative mb-20 text-center">
-          <h2 className="text-6xl md:text-8xl font-black text-slate-200 absolute -top-10 left-1/2 -translate-x-1/2 uppercase tracking-tighter opacity-30 select-none whitespace-nowrap">
-            Connectivity
-          </h2>
+    <section id="location" className="py-28 bg-slate-50 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6">
 
-          <div className="relative z-10">
-            <span className="bg-[#247994] text-white px-5 py-1.5 text-xs font-bold uppercase tracking-widest rounded-full shadow-lg">
-              Location
+        {/* HEADER */}
+        <div className="mb-20 text-center">
+
+          {/* SECTION LABEL */}
+          <p
+            style={{ fontFamily: "Montserrat, sans-serif" }}
+            className="uppercase tracking-[0.35em] text-sm text-[#247994] font-semibold mb-4"
+          >
+            LOCATION ADVANTAGE
+          </p>
+
+          {/* MAIN HEADING */}
+          <h2
+            style={{ fontFamily: "Playfair Display, serif" }}
+            className="uppercase text-4xl md:text-5xl font-bold leading-[1.15] text-slate-900"
+          >
+            ARRIVE AT YOUR{" "}
+            <span className="text-[#247994]">
+              PERFECT ADDRESS
             </span>
-            <h3 className="text-4xl md:text-5xl font-bold text-slate-900 mt-6 leading-tight">
-              ARRIVE AT YOUR,{" "}
-              <span className="text-[#247994] italic">
-                PERFECT ADDRESS
-              </span>
-            </h3>
-          </div>
+          </h2>
         </div>
 
         <div className="grid lg:grid-cols-12 gap-12 items-start">
-          {/* LEFT – INTERACTIVE CARDS */}
+
+          {/* LEFT */}
           <div className="lg:col-span-5 order-2 lg:order-1">
             <div className="flex flex-col gap-5">
               {locationData.map((item, index) => {
@@ -102,10 +104,6 @@ const Location = () => {
                           : "bg-white/50 hover:bg-white/80 shadow-md"
                       }`}
                     >
-                      {isActive && (
-                        <div className="absolute right-0 bottom-0 w-full h-full border-r-4 border-b-4 border-[#247994] rounded-3xl -z-10 translate-x-1 translate-y-1" />
-                      )}
-
                       <div
                         className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-colors ${
                           isActive
@@ -118,6 +116,7 @@ const Location = () => {
 
                       <div className="flex-1">
                         <h4
+                          style={{ fontFamily: "Playfair Display, serif" }}
                           className={`text-lg font-bold ${
                             isActive
                               ? "text-slate-900"
@@ -126,7 +125,11 @@ const Location = () => {
                         >
                           {item.title}
                         </h4>
-                        <p className="text-xs text-slate-400 font-medium">
+
+                        <p
+                          style={{ fontFamily: "Inter, sans-serif" }}
+                          className="text-sm text-slate-400 font-medium"
+                        >
                           Nearby Landmarks
                         </p>
                       </div>
@@ -158,7 +161,10 @@ const Location = () => {
                                   size={10}
                                   className="text-[#247994] rotate-45"
                                 />
-                                <span className="text-sm font-medium">
+                                <span
+                                  style={{ fontFamily: "Inter, sans-serif" }}
+                                  className="text-sm font-medium"
+                                >
                                   {place}
                                 </span>
                               </div>
@@ -173,7 +179,7 @@ const Location = () => {
             </div>
           </div>
 
-          {/* RIGHT – GOOGLE MAP */}
+          {/* RIGHT MAP */}
           <div className="lg:col-span-7 order-1 lg:order-2">
             <div className="relative bg-white rounded-[2.5rem] shadow-2xl overflow-hidden">
               <div className="relative w-full aspect-square sm:aspect-video lg:aspect-square">
@@ -186,16 +192,21 @@ const Location = () => {
                 />
               </div>
 
-              {/* FLOATING ADDRESS CARD */}
               <div className="absolute bottom-6 left-6 right-6 bg-white/95 backdrop-blur-md p-4 rounded-2xl shadow-2xl border border-white/50 flex items-center gap-4">
                 <div className="w-10 h-10 bg-[#247994] rounded-xl flex items-center justify-center text-white shrink-0">
                   <Navigation size={20} />
                 </div>
                 <div>
-                  <p className="text-[10px] uppercase tracking-widest font-bold text-[#247994]">
-                    Official Address
+                  <p
+                    style={{ fontFamily: "Montserrat, sans-serif" }}
+                    className="text-[10px] uppercase tracking-widest font-bold text-[#247994]"
+                  >
+                    OFFICIAL ADDRESS
                   </p>
-                  <p className="text-xs sm:text-sm font-bold text-slate-800">
+                  <p
+                    style={{ fontFamily: "Inter, sans-serif" }}
+                    className="text-xs sm:text-sm font-bold text-slate-800"
+                  >
                     Aakash Skyline, Near Chepapul, Chepapul, Mango,
                     Jamshedpur, Tamlia, Jharkhand 831020
                   </p>
@@ -203,6 +214,7 @@ const Location = () => {
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </section>
