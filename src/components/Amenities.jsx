@@ -81,7 +81,7 @@ export default function Amenities() {
 
   return (
     <>
-      <section id="amenities" className="bg-[#f8fafc] py-28 px-6 overflow-hidden">
+      <section id="amenities" className="bg-[#113225] py-28 px-6 overflow-hidden">
         <div className="max-w-7xl mx-auto">
 
           {/* HEADER */}
@@ -96,24 +96,26 @@ export default function Amenities() {
 
               <p
                 style={{ fontFamily: "Montserrat, sans-serif" }}
-                className="uppercase tracking-[0.35em] text-sm text-[#247994] font-semibold mb-4"
+                className="uppercase tracking-[0.35em] text-sm text-[#C9F27B] font-semibold mb-4"
               >
                 WORLD-CLASS AMENITIES
               </p>
 
               <h2
                 style={{ fontFamily: "Playfair Display, serif" }}
-                className="uppercase text-4xl md:text-5xl font-bold leading-[1.15] text-slate-900 mb-8"
+                className="uppercase text-4xl md:text-5xl font-bold leading-[1.15] text-white mb-8"
+
               >
                 DESIGNED FOR{" "}
-                <span className="text-[#247994]">
+                <span className="text-[#C9F27B]">
                   MODERN COMMERCE
                 </span>
               </h2>
 
               <p
                 style={{ fontFamily: "Inter, sans-serif" }}
-                className="text-slate-600 text-lg leading-[1.75] max-w-xl"
+                className="text-white text-lg leading-[1.75] max-w-xl"
+
               >
                 Thoughtfully planned infrastructure supporting high-footfall retail,
                 operational excellence, and future-ready safety.
@@ -124,13 +126,14 @@ export default function Amenities() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => setOpen(true)}
-              className="relative overflow-hidden group px-10 py-4 rounded-full font-semibold text-white bg-[#247994] shadow-lg"
+              className="relative overflow-hidden group px-10 py-4 rounded-full font-semibold text-black bg-[#C9F27B] shadow-lg"
+
             >
               <span className="relative z-10 flex items-center gap-3">
                 <Download size={18} />
                 Download Brochure
               </span>
-              <span className="absolute inset-0 bg-gradient-to-r from-[#247994] via-[#2da6c9] to-[#247994] opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-lg" />
+              <span className="absolute inset-0 bg-gradient-to-r from-[#C9F27B] via-[#C9F27B] to-[#C9F27B] opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-lg" />
             </motion.button>
           </motion.div>
 
@@ -172,7 +175,7 @@ export default function Amenities() {
                     {item.desc}
                   </p>
 
-                  <div className="mt-6 w-10 h-1 bg-[#247994]/20 group-hover:w-full transition-all duration-500" />
+                  <div className="mt-6 w-10 h-1 bg-[#C9F27B]/20 group-hover:w-full transition-all duration-500" />
                 </div>
               </motion.div>
             ))}
@@ -207,20 +210,20 @@ export default function Amenities() {
 
               <h2
                 style={{ fontFamily: "Playfair Display, serif" }}
-                className="uppercase text-2xl md:text-3xl font-bold mb-6 text-[#247994]"
+                className="uppercase text-2xl md:text-3xl font-bold mb-6 text-[#113225]"
               >
                 DOWNLOAD BROCHURE
               </h2>
 
               <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
 
-                <input type="text" placeholder="Full Name *" required className="md:col-span-2 border p-3 rounded-lg focus:ring-2 focus:ring-[#247994]" />
+                <input type="text" placeholder="Full Name *" required className="md:col-span-2 border p-3 rounded-lg focus:ring-2 focus:ring-[#C9F27B]" />
 
-                <input type="tel" placeholder="Mobile Number *" required className="border p-3 rounded-lg focus:ring-2 focus:ring-[#247994]" />
+                <input type="tel" placeholder="Mobile Number *" required className="border p-3 rounded-lg focus:ring-2 focus:ring-[#C9F27B]" />
 
-                <input type="email" placeholder="Email Address" className="border p-3 rounded-lg focus:ring-2 focus:ring-[#247994]" />
+                <input type="email" placeholder="Email Address" className="border p-3 rounded-lg focus:ring-2 focus:ring-[#C9F27B]" />
 
-                <select className="border p-3 rounded-lg focus:ring-2 focus:ring-[#247994]">
+                <select className="border p-3 rounded-lg focus:ring-2 focus:ring-[#C9F27B]">
                   <option>Type of Requirement</option>
                   <option>Retail Shop</option>
                   <option>F&B / Restaurant</option>
@@ -228,7 +231,7 @@ export default function Amenities() {
                   <option>Investment</option>
                 </select>
 
-                <select className="border p-3 rounded-lg focus:ring-2 focus:ring-[#247994]">
+                <select className="border p-3 rounded-lg focus:ring-2 focus:ring-[#C9F27B]">
                   <option>Area Required</option>
                   <option>150–300 Sq.Ft</option>
                   <option>300–600 Sq.Ft</option>
@@ -241,7 +244,8 @@ export default function Amenities() {
 
                 <button
                   type="submit"
-                  className="md:col-span-2 bg-[#247994] text-white py-3 rounded-lg font-semibold hover:opacity-90 transition"
+                  className="md:col-span-2 bg-[#113225] text-white py-3 rounded-lg font-semibold hover:opacity-90 transition"
+
                 >
                   Get Price & Availability
                 </button>

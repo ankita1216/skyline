@@ -57,7 +57,7 @@ const Contact = () => {
 
           <div
             style={{ fontFamily: "Montserrat, sans-serif" }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/30 w-fit mb-6 bg-[#247994]"
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/30 w-fit mb-6 bg-[#C9F27B]"
           >
             <span className="relative inline-flex rounded-full h-2 w-2 bg-white" />
             <span className="text-white text-[10px] font-semibold uppercase tracking-[0.35em]">
@@ -70,7 +70,7 @@ const Contact = () => {
             className="uppercase text-4xl md:text-5xl font-bold text-black leading-[1.15]"
           >
             LET’S BUILD YOUR{" "}
-            <span className="text-[#247994]">
+            <span className="text-[#C9F27B]">
               DREAMSCAPE
             </span>
           </h2>
@@ -90,7 +90,7 @@ const Contact = () => {
 
           {/* FORM */}
           <div className="absolute top-10 md:top-1/2 left-0 md:-translate-y-1/2 w-full md:w-[450px] lg:w-[500px]">
-            <div className="bg-[#247994]/50 backdrop-blur-xl p-8 md:p-12 rounded-[2.5rem] border border-white/25 shadow-[0_30px_80px_rgba(0,0,0,0.35)]">
+            <div className="bg-[#113225]/50 backdrop-blur-xl p-8 md:p-12 rounded-[2.5rem] border border-white/25 shadow-[0_30px_80px_rgba(0,0,0,0.35)]">
 
               <div className="mb-8">
                 <h3
@@ -178,7 +178,7 @@ const Contact = () => {
 
                 <button
                   type="submit"
-                  className="w-full mt-6 bg-white text-[#247994] font-semibold py-5 rounded-2xl hover:opacity-90 transition-all flex items-center justify-center gap-3"
+                  className="w-full mt-6 bg-[#113225] text-[#FFFFFF] font-semibold py-5 rounded-2xl hover:opacity-90 transition-all flex items-center justify-center gap-3"
                 >
                   SEND INQUIRY <ArrowUpRight size={20} />
                 </button>
@@ -191,7 +191,7 @@ const Contact = () => {
           <div className="hidden lg:flex flex-col gap-4 absolute top-1/2 right-0 -translate-y-1/2">
             <a
               href="#"
-              className="flex items-center gap-4 bg-[#247994]/90 backdrop-blur-md border border-white/30 p-4 rounded-2xl text-white transition-all hover:-translate-x-2"
+              className="flex items-center gap-4 bg-[#113225]/90 backdrop-blur-md border border-white/30 p-4 rounded-2xl text-white transition-all hover:-translate-x-2"
             >
               <MapPin />
               <span

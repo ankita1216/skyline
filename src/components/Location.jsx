@@ -62,7 +62,7 @@ const Location = () => {
           {/* SECTION LABEL */}
           <p
             style={{ fontFamily: "Montserrat, sans-serif" }}
-            className="uppercase tracking-[0.35em] text-sm text-[#247994] font-semibold mb-4"
+            className="uppercase tracking-[0.35em] text-sm text-[#C9F27B] font-semibold mb-4"
           >
             LOCATION ADVANTAGE
           </p>
@@ -73,7 +73,7 @@ const Location = () => {
             className="uppercase text-4xl md:text-5xl font-bold leading-[1.15] text-slate-900"
           >
             ARRIVE AT YOUR{" "}
-            <span className="text-[#247994]">
+            <span className="text-[#C9F27B]">
               PERFECT ADDRESS
             </span>
           </h2>
@@ -137,7 +137,7 @@ const Location = () => {
                       <ChevronRight
                         className={`transition-all duration-300 ${
                           isActive
-                            ? "rotate-90 text-[#247994] scale-125"
+                            ? "rotate-90 text-[#113225] scale-125"
                             : "text-slate-300"
                         }`}
                       />
@@ -159,7 +159,7 @@ const Location = () => {
                               >
                                 <Navigation
                                   size={10}
-                                  className="text-[#247994] rotate-45"
+                                  className="text-[#C9F27B] rotate-45"
                                 />
                                 <span
                                   style={{ fontFamily: "Inter, sans-serif" }}
@@ -193,13 +193,13 @@ const Location = () => {
               </div>
 
               <div className="absolute bottom-6 left-6 right-6 bg-white/95 backdrop-blur-md p-4 rounded-2xl shadow-2xl border border-white/50 flex items-center gap-4">
-                <div className="w-10 h-10 bg-[#247994] rounded-xl flex items-center justify-center text-white shrink-0">
+                <div className="w-10 h-10 bg-[#113225] rounded-xl flex items-center justify-center text-white shrink-0">
                   <Navigation size={20} />
                 </div>
                 <div>
                   <p
                     style={{ fontFamily: "Montserrat, sans-serif" }}
-                    className="text-[10px] uppercase tracking-widest font-bold text-[#247994]"
+                    className="text-[10px] uppercase tracking-widest font-bold text-[#C9F27B]"
                   >
                     OFFICIAL ADDRESS
                   </p>

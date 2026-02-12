@@ -16,7 +16,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="relative bg-[#21718b] text-white overflow-hidden pt-20 pb-10">
+    <footer className="relative bg-[#113225] text-white overflow-hidden pt-20 pb-10">
 
       <div className="absolute top-0 right-0 w-1/3 h-full bg-white/5 -skew-x-12 translate-x-1/2 pointer-events-none" />
       
@@ -174,7 +174,7 @@ const Footer = () => {
           <div className="relative flex justify-center">
             <button 
               onClick={scrollToTop}
-              className="bg-[#21718b] px-4 py-4 rounded-full border border-white/10 hover:border-blue-200 transition-all shadow-2xl"
+              className="bg-[#C9F27B] px-4 py-4 rounded-full border border-white/10 hover:border-blue-200 transition-all shadow-2xl"
             >
               <ArrowUp size={20} />
             </button>

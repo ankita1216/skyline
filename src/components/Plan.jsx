@@ -71,7 +71,7 @@ const Plan = () => {
 
   return (
     <section id="plan" className="py-28 bg-white relative overflow-hidden">
-      <div className="absolute top-0 left-0 w-full h-[400px] bg-[#247994]" />
+      <div className="absolute top-0 left-0 w-full h-[400px] bg-[#ffffff]" />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
 
@@ -80,17 +80,17 @@ const Plan = () => {
           <div className="max-w-2xl">
             <p
               style={{ fontFamily: "Montserrat, sans-serif" }}
-              className="uppercase tracking-[0.35em] text-sm text-amber-300 font-semibold"
+              className="uppercase tracking-[0.35em] text-sm text-[#C9F27B] font-semibold"
             >
               ARCHITECTURAL PLANS
             </p>
 
             <h2
               style={{ fontFamily: "Playfair Display, serif" }}
-              className="uppercase text-4xl md:text-5xl font-bold leading-[1.15] text-white mt-6"
+              className="uppercase text-4xl md:text-5xl font-bold leading-[1.15] text-black mt-6"
             >
               DETAILED{" "}
-              <span className="text-amber-300">
+              <span className="text-[#C9F27B]">
                 FLOOR LAYOUTS
               </span>
             </h2>
@@ -98,7 +98,7 @@ const Plan = () => {
 
           <p
             style={{ fontFamily: "Inter, sans-serif" }}
-            className="text-white/80 max-w-sm text-lg leading-[1.75]"
+            className="text-black max-w-sm text-lg leading-[1.75]"
           >
             Clear planning for residential comfort and commercial efficiency.
           </p>
@@ -115,8 +115,8 @@ const Plan = () => {
               }}
               className={`flex-shrink-0 px-8 py-4 rounded-xl border-2 flex items-center gap-3 transition-all ${
                 active.id === plan.id
-                  ? "bg-amber-400 border-amber-400 text-black shadow-lg scale-105"
-                  : "bg-white/10 border-white/20 text-white hover:bg-white/20"
+                  ? "bg-[#C9F27B] border-[#C9F27B] text-black shadow-lg scale-105"
+                  : "bg-white/10 border-white/20 text-black hover:bg-white/20"
               }`}
             >
               <Home size={18} />
@@ -168,7 +168,7 @@ const Plan = () => {
             <div className="mb-8">
               <span
                 style={{ fontFamily: "Montserrat, sans-serif" }}
-                className="bg-[#247994]/10 text-[#247994] px-4 py-1 rounded-full text-xs font-semibold uppercase tracking-wider"
+                className="bg-[#113225]/10 text-[#113225] px-4 py-1 rounded-full text-xs font-semibold uppercase tracking-wider"
               >
                 PLAN INFORMATION
               </span>
@@ -197,7 +197,7 @@ const Plan = () => {
 
             <div className="grid grid-cols-2 gap-6 mb-10">
               <div className="flex items-center gap-4">
-                <Layers size={22} className="text-[#247994]" />
+                <Layers size={22} className="text-[#113225]" />
                 <div>
                   <p
                     style={{ fontFamily: "Montserrat, sans-serif" }}
@@ -215,7 +215,7 @@ const Plan = () => {
               </div>
 
               <div className="flex items-center gap-4">
-                <Ruler size={22} className="text-[#247994]" />
+                <Ruler size={22} className="text-[#113225]" />
                 <div>
                   <p
                     style={{ fontFamily: "Montserrat, sans-serif" }}

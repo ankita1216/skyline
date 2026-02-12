@@ -91,7 +91,7 @@ const Gallery = () => {
     <section
       ref={container}
       id="gallery"
-      className="relative bg-[#D6DDD9] py-28 overflow-hidden h-[180vh] flex flex-col"
+      className="relative bg-[#113225] py-28 overflow-hidden h-[180vh] flex flex-col"
     >
       {/* HEADER */}
       <div className="absolute top-16 left-0 w-full z-30 px-6 md:px-20">
@@ -100,7 +100,7 @@ const Gallery = () => {
           {/* SECTION LABEL */}
           <p
             style={{ fontFamily: "Montserrat, sans-serif" }}
-            className="uppercase tracking-[0.35em] text-sm text-[#247994] font-semibold mb-6"
+            className="uppercase tracking-[0.35em] text-sm text-[#C9F27B] font-semibold mb-6"
           >
             GALLERY
           </p>
@@ -108,10 +108,10 @@ const Gallery = () => {
           {/* MAIN HEADING */}
           <h2
             style={{ fontFamily: "Playfair Display, serif" }}
-            className="uppercase text-4xl md:text-5xl font-bold leading-[1.15] text-[#247994]"
+            className="uppercase text-4xl md:text-5xl font-bold leading-[1.15] text-[#C9F27B]"
           >
             OUR{" "}
-            <span className="text-slate-900">
+            <span className="text-white">
               VISION
             </span>
           </h2>
@@ -119,7 +119,7 @@ const Gallery = () => {
           {/* SUBTEXT */}
           <p
             style={{ fontFamily: "Inter, sans-serif" }}
-            className="text-slate-700 text-lg leading-[1.75] mt-6 max-w-xl"
+            className="text-white text-lg leading-[1.75] mt-6 max-w-xl"
           >
             A curated glimpse into the architectural expression,
             spatial planning, and visual identity of the development.
@@ -209,7 +209,7 @@ const Gallery = () => {
         )}
       </AnimatePresence>
 
-      <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-[#D6DDD9] via-transparent to-[#D6DDD9]" />
+      <div className="absolute inset-0 pointer-events-none bg-gradient-to-b from-[#113225] via-transparent to-[#113225]" />
     </section>
   );
 };
