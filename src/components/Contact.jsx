@@ -12,7 +12,7 @@ const Contact = () => {
     email: "",
     type: "",
     area: "",
-    budget: "", // Added budget field
+    budget: "",
   });
 
   const [utm, setUtm] = useState({});
@@ -47,14 +47,11 @@ const Contact = () => {
   };
 
   return (
-    <section
-      id="contact"
-      className="py-28 md:py-32 relative overflow-hidden"
-    >
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
+    <section id="contact" className="py-28 md:py-32 relative overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
 
         {/* HEADER */}
-        <div className="flex flex-col mb-20">
+        <div className="flex flex-col mb-16 md:mb-20">
           <div
             style={{ fontFamily: "Montserrat, sans-serif" }}
             className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/30 w-fit mb-6 bg-[#113225]/90 backdrop-blur-md"
@@ -67,19 +64,17 @@ const Contact = () => {
 
           <h2
             style={{ fontFamily: "Playfair Display, serif" }}
-            className="uppercase text-4xl md:text-5xl font-bold text-black leading-[1.15]"
+            className="uppercase text-3xl md:text-5xl font-bold text-black leading-[1.15]"
           >
-            LET’S BUILD YOUR{" "}
-            <span className="text-[#C9F27B]">
-              DREAMSCAPE
-            </span>
+            LET’S BUILD YOUR <span className="text-[#C9F27B]">DREAMSCAPE</span>
           </h2>
         </div>
 
         <div className="relative">
 
           {/* IMAGE */}
-          <div className="relative w-full h-[600px] md:h-[750px] rounded-[3rem] overflow-hidden border border-white/30">
+          <div className="relative w-full h-[260px] sm:h-[360px] md:h-[750px] rounded-[3rem] overflow-hidden border border-white/30">
+
             <img
               src={buildingImg}
               alt="Project Building"
@@ -89,13 +84,14 @@ const Contact = () => {
           </div>
 
           {/* FORM */}
-          <div className="absolute top-10 md:top-1/2 left-0 md:-translate-y-1/2 w-full md:w-[450px] lg:w-[500px]">
-            <div className="bg-[#113225]/60 backdrop-blur-xl p-8 md:p-12 rounded-[2.5rem] border border-white/25 shadow-[0_30px_80px_rgba(0,0,0,0.35)]">
+          <div className="relative md:absolute top-[-60px] md:top-1/2 left-0 md:-translate-y-1/2 w-full md:w-[450px] lg:w-[500px] mt-0 md:mt-0 px-2">
 
-              <div className="mb-8">
+            <div className="bg-[#113225]/60 backdrop-blur-xl p-5 md:p-12 rounded-[2.5rem] border border-white/25 shadow-[0_30px_80px_rgba(0,0,0,0.35)]">
+
+              <div className="mb-6 md:mb-8">
                 <h3
                   style={{ fontFamily: "Playfair Display, serif" }}
-                  className="text-3xl font-bold text-white mb-4"
+                  className="text-2xl md:text-3xl font-bold text-white mb-4"
                 >
                   CONNECT.
                 </h3>
@@ -121,10 +117,11 @@ const Contact = () => {
                   required
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full bg-transparent border-b border-white/40 py-3 text-white placeholder:text-white/70 focus:outline-none focus:border-[#C9F27B] transition-colors"
+                  className="w-full bg-transparent border-b border-white/40 py-3 text-white placeholder:text-white/70 focus:outline-none focus:border-[#C9F27B]"
                 />
 
-                <div className="grid md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-2 gap-4 md:gap-6">
+
                   <input
                     type="tel"
                     name="phone"
@@ -132,7 +129,7 @@ const Contact = () => {
                     required
                     value={formData.phone}
                     onChange={handleChange}
-                    className="w-full bg-transparent border-b border-white/40 py-3 text-white placeholder:text-white/70 focus:outline-none focus:border-[#C9F27B] transition-colors"
+                    className="w-full bg-transparent border-b border-white/40 py-3 text-white placeholder:text-white/70 focus:outline-none focus:border-[#C9F27B]"
                   />
 
                   <input
@@ -141,16 +138,16 @@ const Contact = () => {
                     placeholder="Email Address"
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full bg-transparent border-b border-white/40 py-3 text-white placeholder:text-white/70 focus:outline-none focus:border-[#C9F27B] transition-colors"
+                    className="w-full bg-transparent border-b border-white/40 py-3 text-white placeholder:text-white/70 focus:outline-none focus:border-[#C9F27B]"
                   />
                 </div>
 
-                <div className="grid md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
                   <select
                     name="type"
                     value={formData.type}
                     onChange={handleChange}
-                    className="w-full bg-transparent border-b border-white/40 py-3 text-white focus:outline-none focus:border-[#C9F27B] cursor-pointer"
+                    className="w-full bg-transparent border-b border-white/40 py-3 text-white focus:outline-none focus:border-[#C9F27B]"
                   >
                     <option value="" className="text-black">Requirement Type</option>
                     <option className="text-black">Retail Shop</option>
@@ -163,7 +160,7 @@ const Contact = () => {
                     name="area"
                     value={formData.area}
                     onChange={handleChange}
-                    className="w-full bg-transparent border-b border-white/40 py-3 text-white focus:outline-none focus:border-[#C9F27B] cursor-pointer"
+                    className="w-full bg-transparent border-b border-white/40 py-3 text-white focus:outline-none focus:border-[#C9F27B]"
                   >
                     <option value="" className="text-black">Area Required</option>
                     <option className="text-black">150–300 Sq.Ft</option>
@@ -172,12 +169,11 @@ const Contact = () => {
                   </select>
                 </div>
 
-                {/* NEW BUDGET FIELD */}
                 <select
                   name="budget"
                   value={formData.budget}
                   onChange={handleChange}
-                  className="w-full bg-transparent border-b border-white/40 py-3 text-white focus:outline-none focus:border-[#C9F27B] cursor-pointer"
+                  className="w-full bg-transparent border-b border-white/40 py-3 text-white focus:outline-none focus:border-[#C9F27B]"
                 >
                   <option value="" className="text-black">Budget Range</option>
                   <option className="text-black">₹25 Lakh to ₹50 Lakh</option>
@@ -192,7 +188,7 @@ const Contact = () => {
 
                 <button
                   type="submit"
-                  className="w-full mt-8 bg-[#C9F27B] text-[#113225] font-bold py-5 rounded-2xl hover:bg-white transition-all flex items-center justify-center gap-3 shadow-lg"
+                  className="w-full mt-6 md:mt-8 bg-[#C9F27B] text-[#113225] font-bold py-5 rounded-2xl hover:bg-white transition-all flex items-center justify-center gap-3 shadow-lg"
                 >
                   SEND INQUIRY <ArrowUpRight size={20} />
                 </button>

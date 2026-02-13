@@ -7,9 +7,10 @@ import heroImg from "../assets/hero-banner.jpg";
 
 // ➕ elevation images
 import elev1 from "../assets/hero-banner.jpg";
-import elev2 from "../assets/gallery-5.jpg";
-import elev3 from "../assets/gallery-6.jpg";
+import elev2 from "../assets/gallery-8.jpg";
+
 import elev4 from "../assets/gallery-2.jpg";
+import elev3 from "../assets/gallery-9.jpg";
 
 export default function Hero() {
   const [open, setOpen] = useState(false);
@@ -129,12 +130,15 @@ export default function Hero() {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="bg-white w-full max-w-xl rounded-3xl overflow-hidden shadow-2xl relative"
+              className="bg-white w-full max-w-xl rounded-3xl overflow-hidden shadow-2xl relative max-h-[90vh] flex flex-col"
+
             >
-              <div className="bg-[#062C22] p-8 text-white relative">
+              <div className="bg-[#062C22] p-6 md:p-8 text-white relative">
+
                 <button
                   onClick={() => setOpen(false)}
-                  className="absolute top-6 right-6 text-white/50 hover:text-[#C9F27B] transition-colors"
+                  className="absolute top-4 right-4 p-2 text-white/50 hover:text-[#C9F27B] transition-colors"
+
                 >
                   <X size={24} />
                 </button>
@@ -145,61 +149,74 @@ export default function Hero() {
                 </p>
               </div>
 
-              <form onSubmit={handleSubmit} className="p-8 grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-8">
-                <input 
-                  type="text" 
-                  placeholder="Full Name *" 
-                  required 
-                  className="md:col-span-2 border-b border-gray-200 py-3 outline-none focus:border-[#062C22] transition-colors" 
-                />
-                
-                <input 
-                  type="tel" 
-                  placeholder="Mobile Number *" 
-                  required 
-                  className="border-b border-gray-200 py-3 outline-none focus:border-[#062C22] transition-colors" 
-                />
-                
-                <input 
-                  type="email" 
-                  placeholder="Email Address" 
-                  className="border-b border-gray-200 py-3 outline-none focus:border-[#062C22] transition-colors" 
-                />
+              <form 
+  onSubmit={handleSubmit} 
+  className="p-6 md:p-8 grid grid-cols-2 md:grid-cols-2 gap-x-4 md:gap-x-6 gap-y-5 md:gap-y-6 overflow-y-auto"
 
-                <select className="border-b border-gray-200 py-3 outline-none bg-transparent focus:border-[#062C22] transition-colors cursor-pointer text-gray-600">
-                  <option disabled selected>Type of Requirement</option>
-                  <option>Retail Shop</option>
-                  <option>F&B / Restaurant</option>
-                  <option>Showroom</option>
-                  <option>Investment</option>
-                </select>
+>
+  {/* Full Name */}
+  <input 
+    type="text" 
+    placeholder="Full Name *" 
+    required 
+    className="col-span-2 border-b border-gray-300 py-3 text-sm md:text-base outline-none focus:border-[#062C22] transition-colors"
+  />
 
-                <select className="border-b border-gray-200 py-3 outline-none bg-transparent focus:border-[#062C22] transition-colors cursor-pointer text-gray-600">
-                  <option disabled selected>Area Required</option>
-                  <option>150–300 Sq.Ft</option>
-                  <option>300–600 Sq.Ft</option>
-                  <option>600+ Sq.Ft</option>
-                </select>
+  {/* Mobile */}
+  <input 
+    type="tel" 
+    placeholder="Mobile Number *" 
+    required 
+    className="col-span-1 border-b border-gray-300 py-3 text-sm md:text-base outline-none focus:border-[#062C22] transition-colors"
+  />
 
-                <select className="border-b border-gray-200 py-3 outline-none bg-transparent focus:border-[#062C22] transition-colors cursor-pointer text-gray-600">
-                  <option disabled selected>Budget Range</option>
-                  <option>₹25 Lakh to ₹50 Lakh</option>
-                  <option>₹50 Lakh to ₹75 Lakh</option>
-                  <option>₹75 Lakh to ₹1 Cr</option>
-                  <option>₹1 Cr Onwards</option>
-                </select>
+  {/* Email */}
+  <input 
+    type="email" 
+    placeholder="Email Address" 
+    className="col-span-1 border-b border-gray-300 py-3 text-sm md:text-base outline-none focus:border-[#062C22] transition-colors"
+  />
 
-                {Object.entries(utm).map(([key, value]) => (
-                  <input key={key} type="hidden" name={key} value={value} />
-                ))}
+  {/* Requirement */}
+  <select className="col-span-1 border-b border-gray-300 py-3 text-sm md:text-base outline-none bg-transparent focus:border-[#062C22] transition-colors text-gray-600">
+    <option value="">Type of Requirement</option>
+    <option>Retail Shop</option>
+    <option>F&B / Restaurant</option>
+    <option>Showroom</option>
+    <option>Investment</option>
+  </select>
 
-                <button
-                  type="submit"
-                  className="md:col-span-2 mt-4 bg-[#062C22] text-white py-5 rounded-xl font-bold uppercase tracking-widest hover:bg-[#0a3d2f] transition-colors shadow-lg shadow-[#062C22]/20"
-                >
-                  Send Enquiry
-                </button>
-              </form>
+  {/* Area */}
+  <select className="col-span-1 border-b border-gray-300 py-3 text-sm md:text-base outline-none bg-transparent focus:border-[#062C22] transition-colors text-gray-600">
+    <option value="">Area Required</option>
+    <option>150–300 Sq.Ft</option>
+    <option>300–600 Sq.Ft</option>
+    <option>600+ Sq.Ft</option>
+  </select>
+
+  {/* Budget */}
+  <select className="col-span-2 border-b border-gray-300 py-3 text-sm md:text-base outline-none bg-transparent focus:border-[#062C22] transition-colors text-gray-600">
+    <option value="">Budget Range</option>
+    <option>₹25 Lakh to ₹50 Lakh</option>
+    <option>₹50 Lakh to ₹75 Lakh</option>
+    <option>₹75 Lakh to ₹1 Cr</option>
+    <option>₹1 Cr Onwards</option>
+  </select>
+
+  {/* Hidden UTM */}
+  {Object.entries(utm).map(([key, value]) => (
+    <input key={key} type="hidden" name={key} value={value} />
+  ))}
+
+  {/* Submit Button */}
+  <button
+    type="submit"
+    className="col-span-2 mt-4 bg-[#062C22] text-white py-4 text-sm md:text-base rounded-xl font-bold uppercase tracking-widest hover:bg-[#0a3d2f] transition-colors shadow-lg shadow-[#062C22]/20"
+  >
+    Send Enquiry
+  </button>
+</form>
+
             </motion.div>
           </motion.div>
         )}
