@@ -12,6 +12,7 @@ const Contact = () => {
     email: "",
     type: "",
     area: "",
+    budget: "", // Added budget field
   });
 
   const [utm, setUtm] = useState({});
@@ -54,10 +55,9 @@ const Contact = () => {
 
         {/* HEADER */}
         <div className="flex flex-col mb-20">
-
           <div
             style={{ fontFamily: "Montserrat, sans-serif" }}
-            className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/30 w-fit mb-6 bg-[#C9F27B]"
+            className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/30 w-fit mb-6 bg-[#113225]/90 backdrop-blur-md"
           >
             <span className="relative inline-flex rounded-full h-2 w-2 bg-white" />
             <span className="text-white text-[10px] font-semibold uppercase tracking-[0.35em]">
@@ -79,18 +79,18 @@ const Contact = () => {
         <div className="relative">
 
           {/* IMAGE */}
-          <div className="relative w-full h-[500px] md:h-[700px] rounded-[3rem] overflow-hidden border border-white/30">
+          <div className="relative w-full h-[600px] md:h-[750px] rounded-[3rem] overflow-hidden border border-white/30">
             <img
               src={buildingImg}
               alt="Project Building"
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/35 via-black/15 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/45 via-black/15 to-transparent" />
           </div>
 
           {/* FORM */}
           <div className="absolute top-10 md:top-1/2 left-0 md:-translate-y-1/2 w-full md:w-[450px] lg:w-[500px]">
-            <div className="bg-[#113225]/50 backdrop-blur-xl p-8 md:p-12 rounded-[2.5rem] border border-white/25 shadow-[0_30px_80px_rgba(0,0,0,0.35)]">
+            <div className="bg-[#113225]/60 backdrop-blur-xl p-8 md:p-12 rounded-[2.5rem] border border-white/25 shadow-[0_30px_80px_rgba(0,0,0,0.35)]">
 
               <div className="mb-8">
                 <h3
@@ -111,7 +111,7 @@ const Contact = () => {
               <form
                 onSubmit={handleSubmit}
                 style={{ fontFamily: "Inter, sans-serif" }}
-                className="space-y-6"
+                className="space-y-5"
               >
 
                 <input
@@ -121,7 +121,7 @@ const Contact = () => {
                   required
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full bg-transparent border-b border-white/50 py-4 text-white placeholder:text-white/70 focus:outline-none focus:border-white"
+                  className="w-full bg-transparent border-b border-white/40 py-3 text-white placeholder:text-white/70 focus:outline-none focus:border-[#C9F27B] transition-colors"
                 />
 
                 <div className="grid md:grid-cols-2 gap-6">
@@ -132,7 +132,7 @@ const Contact = () => {
                     required
                     value={formData.phone}
                     onChange={handleChange}
-                    className="w-full bg-transparent border-b border-white/50 py-4 text-white placeholder:text-white/70 focus:outline-none focus:border-white"
+                    className="w-full bg-transparent border-b border-white/40 py-3 text-white placeholder:text-white/70 focus:outline-none focus:border-[#C9F27B] transition-colors"
                   />
 
                   <input
@@ -141,7 +141,7 @@ const Contact = () => {
                     placeholder="Email Address"
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full bg-transparent border-b border-white/50 py-4 text-white placeholder:text-white/70 focus:outline-none focus:border-white"
+                    className="w-full bg-transparent border-b border-white/40 py-3 text-white placeholder:text-white/70 focus:outline-none focus:border-[#C9F27B] transition-colors"
                   />
                 </div>
 
@@ -150,9 +150,9 @@ const Contact = () => {
                     name="type"
                     value={formData.type}
                     onChange={handleChange}
-                    className="w-full bg-transparent border-b border-white/50 py-4 text-white focus:outline-none focus:border-white"
+                    className="w-full bg-transparent border-b border-white/40 py-3 text-white focus:outline-none focus:border-[#C9F27B] cursor-pointer"
                   >
-                    <option value="" className="text-black">Type of Requirement</option>
+                    <option value="" className="text-black">Requirement Type</option>
                     <option className="text-black">Retail Shop</option>
                     <option className="text-black">F&B / Restaurant</option>
                     <option className="text-black">Showroom</option>
@@ -163,7 +163,7 @@ const Contact = () => {
                     name="area"
                     value={formData.area}
                     onChange={handleChange}
-                    className="w-full bg-transparent border-b border-white/50 py-4 text-white focus:outline-none focus:border-white"
+                    className="w-full bg-transparent border-b border-white/40 py-3 text-white focus:outline-none focus:border-[#C9F27B] cursor-pointer"
                   >
                     <option value="" className="text-black">Area Required</option>
                     <option className="text-black">150–300 Sq.Ft</option>
@@ -172,13 +172,27 @@ const Contact = () => {
                   </select>
                 </div>
 
+                {/* NEW BUDGET FIELD */}
+                <select
+                  name="budget"
+                  value={formData.budget}
+                  onChange={handleChange}
+                  className="w-full bg-transparent border-b border-white/40 py-3 text-white focus:outline-none focus:border-[#C9F27B] cursor-pointer"
+                >
+                  <option value="" className="text-black">Budget Range</option>
+                  <option className="text-black">₹25 Lakh to ₹50 Lakh</option>
+                  <option className="text-black">₹50 Lakh to ₹75 Lakh</option>
+                  <option className="text-black">₹75 Lakh to ₹1 Cr</option>
+                  <option className="text-black">₹1 Cr Onwards</option>
+                </select>
+
                 {Object.entries(utm).map(([key, value]) => (
                   <input key={key} type="hidden" name={key} value={value} />
                 ))}
 
                 <button
                   type="submit"
-                  className="w-full mt-6 bg-[#113225] text-[#FFFFFF] font-semibold py-5 rounded-2xl hover:opacity-90 transition-all flex items-center justify-center gap-3"
+                  className="w-full mt-8 bg-[#C9F27B] text-[#113225] font-bold py-5 rounded-2xl hover:bg-white transition-all flex items-center justify-center gap-3 shadow-lg"
                 >
                   SEND INQUIRY <ArrowUpRight size={20} />
                 </button>
@@ -193,7 +207,7 @@ const Contact = () => {
               href="#"
               className="flex items-center gap-4 bg-[#113225]/90 backdrop-blur-md border border-white/30 p-4 rounded-2xl text-white transition-all hover:-translate-x-2"
             >
-              <MapPin />
+              <MapPin className="text-[#C9F27B]" />
               <span
                 style={{ fontFamily: "Inter, sans-serif" }}
                 className="text-sm font-medium pr-4"

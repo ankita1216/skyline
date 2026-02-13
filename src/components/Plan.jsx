@@ -80,7 +80,7 @@ const Plan = () => {
           <div className="max-w-2xl">
             <p
               style={{ fontFamily: "Montserrat, sans-serif" }}
-              className="uppercase tracking-[0.35em] text-sm text-[#C9F27B] font-semibold"
+              className="uppercase tracking-[0.35em] text-sm text-[#113225] font-semibold"
             >
               ARCHITECTURAL PLANS
             </p>

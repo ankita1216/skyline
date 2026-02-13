@@ -62,7 +62,7 @@ const Location = () => {
           {/* SECTION LABEL */}
           <p
             style={{ fontFamily: "Montserrat, sans-serif" }}
-            className="uppercase tracking-[0.35em] text-sm text-[#C9F27B] font-semibold mb-4"
+            className="uppercase tracking-[0.35em] text-sm text-[#113225] font-semibold mb-4"
           >
             LOCATION ADVANTAGE
           </p>
