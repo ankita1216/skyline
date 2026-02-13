@@ -17,8 +17,9 @@ import g4 from "../assets/gallery-5.jpg";
 import g5 from "../assets/gallery-6.jpg";
 import g6 from "../assets/gallery-7.jpg";
 import g7 from "../assets/gallery-8.jpg";
+import g8 from "../assets/gallery-9.jpg";
 
-const images = [hero, g1, g2, g3, g4, g5, g6, g7];
+const images = [hero, g1, g2, g3, g4, g5, g6, g7, g8];
 
 const Column = ({ images, y, className = "", onImageClick }) => {
   return (
@@ -144,7 +145,7 @@ const Gallery = () => {
         />
 
         <Column
-          images={[images[6], images[7]]}
+          images={[images[6], images[7], images[8]]}
           y={y3}
           onImageClick={setSelectedImg}
           className="hidden lg:flex"

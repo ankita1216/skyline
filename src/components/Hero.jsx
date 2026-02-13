@@ -5,8 +5,10 @@ import heroImg from "../assets/hero-banner.jpg";
 
 // ➕ elevation images
 import elev1 from "../assets/hero-banner.jpg";
-import elev2 from "../assets/gallery-3.jpg";
-import elev3 from "../assets/gallery-4.jpg";
+import elev2 from "../assets/gallery-5.jpg";
+import elev3 from "../assets/gallery-6.jpg";
+import elev4 from "../assets/gallery-2.jpg";
+
 
 export default function Hero() {
   return (
@@ -74,7 +76,8 @@ export default function Hero() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="hidden lg:block relative z-20"
+            className="block relative z-20"
+
           >
             <ElevationSlider />
           </motion.div>
@@ -88,7 +91,7 @@ export default function Hero() {
 
 /* 🔥 ELEVATION SLIDER */
 function ElevationSlider() {
-  const images = [elev1, elev2, elev3];
+  const images = [elev1, elev2, elev3, elev4];
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
@@ -99,7 +102,8 @@ function ElevationSlider() {
   }, [images.length]);
 
   return (
-    <div className="relative w-full h-[480px] lg:w-[110%] lg:-ml-[10%] group transition-all duration-500 ease-in-out">
+    <div className="relative w-full h-[320px] sm:h-[380px] md:h-[420px] lg:h-[480px] lg:w-[110%] lg:-ml-[10%] group">
+
       
       {/* Dynamic Background Glow */}
       <div className="absolute -inset-4 bg-[#C9F27B]/15 rounded-[2.5rem] blur-3xl transition-opacity duration-1000 group-hover:opacity-100 opacity-60" />
@@ -115,9 +119,9 @@ function ElevationSlider() {
         <AnimatePresence mode="wait">
           <motion.div
             key={index}
-            initial={{ opacity: 0, scale: 1.15, filter: "blur(15px)" }}
-            animate={{ opacity: 1, scale: 1.05, filter: "blur(0px)" }}
-            exit={{ opacity: 0, scale: 1, filter: "blur(15px)" }}
+            initial={{ opacity: 0, scale: 1.15,  }}
+            animate={{ opacity: 1, scale: 1.05, }}
+            exit={{ opacity: 0, scale: 1,  }}
             transition={{ duration: 1, ease: [0.43, 0.13, 0.23, 0.96] }}
             className="absolute inset-0"
           >
