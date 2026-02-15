@@ -69,14 +69,15 @@ const Location = () => {
 
           {/* MAIN HEADING */}
           <h2
-            style={{ fontFamily: "Playfair Display, serif" }}
-            className="uppercase text-4xl md:text-5xl font-bold leading-[1.15] text-slate-900"
-          >
-            ARRIVE AT YOUR{" "}
-            <span className="text-[#C9F27B]">
-              PERFECT ADDRESS
-            </span>
-          </h2>
+  style={{ fontFamily: "Playfair Display, serif" }}
+  className="text-4xl md:text-5xl font-bold leading-[1.15] text-slate-900"
+>
+  Arrive At Your{" "}
+  <span className="text-[#C9F27B]">
+    Perfect Address
+  </span>
+</h2>
+
         </div>
 
         <div className="grid lg:grid-cols-12 gap-12 items-start">

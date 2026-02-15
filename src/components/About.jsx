@@ -95,14 +95,14 @@ export default function WhySkyline() {
             </p>
 
             <h2
-              style={{ fontFamily: "Playfair Display, serif" }}
-              className="uppercase text-4xl md:text-5xl font-bold leading-[1.15] text-slate-900 mb-8"
-            >
-              EXPERIENCE A TRUE RETAIL{" "}
-              <span className="text-[#C9F27B]">
-                PARADISE
-              </span>
-            </h2>
+  style={{ fontFamily: "Playfair Display, serif" }}
+  className="text-4xl md:text-5xl font-bold leading-[1.15] text-slate-900 mb-8"
+>
+  Experience A True Retail{" "}
+  <span className="text-[#C9F27B]">
+    Paradise
+  </span>
+</h2>
 
             <p
               style={{ fontFamily: "Inter, sans-serif" }}

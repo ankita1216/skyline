@@ -69,17 +69,25 @@ export default function Hero() {
                 Mango, Jamshedpur
               </div>
 
-              <h1 className="text-5xl md:text-7xl font-extrabold text-white leading-[1.1] tracking-tight">
-                Elevate Your <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#C9F27B] to-[#C9F27B]">
-                  Lifestyle & Retail
-                </span>
-              </h1>
+              <h1
+  style={{ fontFamily: "Playfair Display, serif" }}
+  className="text-5xl md:text-7xl font-bold text-white leading-[1.1]"
+>
+  Elevate Your <br />
+  <span className="text-[#C9F27B]">
+    Lifestyle & Retail
+  </span>
+</h1>
 
-              <p className="mt-8 text-lg md:text-xl text-slate-300 max-w-xl leading-relaxed">
-                Experience <span className="text-white font-semibold">Akash Skyline</span>: 
-                A fusion of luxury living and a vibrant shopping arcade.
-              </p>
+
+                    <p
+                      style={{ fontFamily: "Inter, sans-serif" }}
+                      className="mt-8 text-lg md:text-xl text-slate-300 max-w-xl leading-relaxed"
+                    >
+                      Experience <span className="text-white font-semibold">Aakash Skyline</span>: 
+                      A fusion of luxury living and a vibrant shopping arcade.
+                    </p>
+
 
               <div className="mt-10 flex flex-col sm:flex-row gap-4">
                 <button
@@ -143,7 +151,13 @@ export default function Hero() {
                   <X size={24} />
                 </button>
 
-                <h2 className="text-3xl font-serif italic font-bold">Enquire Now</h2>
+                <h2
+  style={{ fontFamily: "Playfair Display, serif" }}
+  className="text-3xl font-bold italic"
+>
+  Enquire Now
+</h2>
+
                 <p className="text-white/60 mt-2">
                   Leave your details and our team will get back to you shortly.
                 </p>
@@ -211,7 +225,8 @@ export default function Hero() {
   {/* Submit Button */}
   <button
     type="submit"
-    className="col-span-2 mt-4 bg-[#062C22] text-white py-4 text-sm md:text-base rounded-xl font-bold uppercase tracking-widest hover:bg-[#0a3d2f] transition-colors shadow-lg shadow-[#062C22]/20"
+    className="col-span-2 mt-4 bg-[#062C22] text-white py-4 text-sm md:text-base rounded-xl font-bold hover:bg-[#0a3d2f] transition-colors shadow-lg shadow-[#062C22]/20"
+
   >
     Send Enquiry
   </button>
@@ -246,7 +261,7 @@ function ElevationSlider() {
       <div className="relative h-full w-full rounded-[2rem] overflow-hidden border border-white/20 bg-black/40 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.6)]">
         <div className="absolute top-6 left-8 z-30 flex items-center gap-3">
           <div className="h-2.5 w-2.5 rounded-full bg-[#C9F27B] animate-pulse" />
-          <span className="text-xs font-bold text-white uppercase tracking-[0.3em]">External View 0{index + 1}</span>
+          <span className="text-xs font-bold text-white tracking-[0.3em]">External View 0{index + 1}</span>
         </div>
         <AnimatePresence mode="wait">
           <motion.div

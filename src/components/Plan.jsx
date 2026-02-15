@@ -86,14 +86,12 @@ const Plan = () => {
             </p>
 
             <h2
-              style={{ fontFamily: "Playfair Display, serif" }}
-              className="uppercase text-4xl md:text-5xl font-bold leading-[1.15] text-black mt-6"
-            >
-              DETAILED{" "}
-              <span className="text-[#C9F27B]">
-                FLOOR LAYOUTS
-              </span>
-            </h2>
+  style={{ fontFamily: "Playfair Display, serif" }}
+  className="text-4xl md:text-5xl font-bold leading-[1.15] text-black mt-6"
+>
+  Detailed <span className="text-[#C9F27B]">Floor Layouts</span>
+</h2>
+
           </div>
 
           <p

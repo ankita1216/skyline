@@ -93,11 +93,12 @@ export default function Amenities() {
                 WORLD-CLASS AMENITIES
               </p>
               <h2
-                style={{ fontFamily: "Playfair Display, serif" }}
-                className="uppercase text-4xl md:text-5xl font-bold leading-[1.15] text-white mb-8"
-              >
-                DESIGNED FOR <span className="text-[#C9F27B]">MODERN COMMERCE</span>
-              </h2>
+  style={{ fontFamily: "Playfair Display, serif" }}
+  className="text-4xl md:text-5xl font-bold leading-[1.15] text-white mb-8"
+>
+  Designed For <span className="text-[#C9F27B]">Modern Commerce</span>
+</h2>
+
               <p
                 style={{ fontFamily: "Inter, sans-serif" }}
                 className="text-white text-lg leading-[1.75] max-w-xl"

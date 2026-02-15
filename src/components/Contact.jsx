@@ -63,11 +63,12 @@ const Contact = () => {
           </div>
 
           <h2
-            style={{ fontFamily: "Playfair Display, serif" }}
-            className="uppercase text-3xl md:text-5xl font-bold text-black leading-[1.15]"
-          >
-            LET’S BUILD YOUR <span className="text-[#C9F27B]">DREAMSCAPE</span>
-          </h2>
+  style={{ fontFamily: "Playfair Display, serif" }}
+  className="text-3xl md:text-5xl font-bold text-black leading-[1.15]"
+>
+  Let’s Build Your <span className="text-[#C9F27B]">Dreamscape</span>
+</h2>
+
         </div>
 
         <div className="relative">
