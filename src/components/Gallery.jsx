@@ -25,7 +25,7 @@ const Column = ({ images, y, className = "", onImageClick }) => {
   return (
     <motion.div
       style={{ y }}
-      className={`flex flex-col gap-8 w-full ${className}`}
+      className={`flex flex-col gap-6 md:gap-8 w-full ${className}`}
     >
       {images.map((src, i) => (
         <motion.div
@@ -59,124 +59,86 @@ const Gallery = () => {
   const [zoom, setZoom] = useState(1);
   const container = useRef(null);
 
-  /* 🔥 preload hero image */
   useEffect(() => {
     const img = new Image();
     img.src = hero;
   }, []);
-
-  /* 📱 detect mobile */
-  const isMobile =
-    typeof window !== "undefined" && window.innerWidth < 768;
 
   const { scrollYProgress } = useScroll({
     target: container,
     offset: ["start end", "end start"],
   });
 
-  /* ✅ reduced movement for mobile so images don't go out of view */
-  const y1 = useSpring(
-    useTransform(scrollYProgress, [0, 1], [0, isMobile ? -120 : -300]),
-    { stiffness: 80, damping: 25 }
-  );
+  // Smooth springs for desktop parallax
+  const y1 = useSpring(useTransform(scrollYProgress, [0, 1], [0, -300]), { stiffness: 80, damping: 25 });
+  const y2 = useSpring(useTransform(scrollYProgress, [0, 1], [0, 300]), { stiffness: 80, damping: 25 });
+  const y3 = useSpring(useTransform(scrollYProgress, [0, 1], [0, -500]), { stiffness: 80, damping: 25 });
 
-  const y2 = useSpring(
-    useTransform(scrollYProgress, [0, 1], [0, isMobile ? 120 : 300]),
-    { stiffness: 80, damping: 25 }
-  );
-
-  const y3 = useSpring(
-    useTransform(scrollYProgress, [0, 1], [0, isMobile ? -180 : -500]),
-    { stiffness: 80, damping: 25 }
-  );
-
-  const handleZoomIn = (e) => {
-    e?.stopPropagation();
-    setZoom((z) => Math.min(z + 0.5, 4));
-  };
-
-  const handleZoomOut = (e) => {
-    e?.stopPropagation();
-    setZoom((z) => Math.max(z - 0.5, 1));
-  };
-
-  const handleReset = (e) => {
-    e?.stopPropagation();
-    setZoom(1);
-  };
+  const handleZoomIn = (e) => { e?.stopPropagation(); setZoom((z) => Math.min(z + 0.5, 4)); };
+  const handleZoomOut = (e) => { e?.stopPropagation(); setZoom((z) => Math.max(z - 0.5, 1)); };
+  const handleReset = (e) => { e?.stopPropagation(); setZoom(1); };
 
   return (
     <section
       ref={container}
       id="gallery"
-      className="
-        relative bg-[#113225]
-        py-20 md:py-28
-        overflow-hidden
-        h-auto md:h-[160vh] lg:h-[180vh]
-        flex flex-col
-      "
+      className="relative bg-[#113225] py-20 md:py-28 overflow-hidden h-auto min-h-screen flex flex-col"
     >
       {/* HEADER */}
-      <div className="relative md:absolute top-0 md:top-16 left-0 w-full z-30 px-6 md:px-20">
-
+      <div className="relative md:absolute top-0 md:top-16 left-0 w-full z-30 px-6 md:px-20 mb-12 md:mb-0">
         <div className="max-w-7xl mx-auto">
           <p
             style={{ fontFamily: "Montserrat, sans-serif" }}
-            className="uppercase tracking-[0.35em] text-sm text-[#C9F27B] font-semibold mb-6"
+            className="uppercase tracking-[0.35em] text-xs md:text-sm text-[#C9F27B] font-semibold mb-4 md:mb-6"
           >
             GALLERY
           </p>
-
           <h2
             style={{ fontFamily: "Playfair Display, serif" }}
-            className="uppercase text-4xl md:text-5xl font-bold leading-[1.15] text-[#C9F27B]"
+            className="uppercase text-3xl md:text-5xl font-bold leading-[1.15] text-[#C9F27B]"
           >
             OUR <span className="text-white">VISION</span>
           </h2>
-
           <p
             style={{ fontFamily: "Inter, sans-serif" }}
-            className="text-white text-lg leading-[1.75] mt-6 max-w-xl"
+            className="text-white text-base md:text-lg leading-[1.75] mt-6 max-w-xl"
           >
-            A curated glimpse into the architectural expression,
-            spatial planning, and visual identity of the development.
+            A curated glimpse into the architectural expression, spatial planning, and visual identity of the development.
           </p>
         </div>
       </div>
 
-      {/* PARALLAX GRID */}
+      {/* 📱 MOBILE VIEW: Full-Width Stack (Shows all 9 images clearly) */}
+      <div className="flex md:hidden flex-col gap-6 px-6 relative z-20 mt-4">
+        {images.map((src, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            onClick={() => setSelectedImg(src)}
+            className="rounded-xl overflow-hidden shadow-xl active:scale-[0.98] transition-transform"
+          >
+            <img src={src} className="w-full aspect-[16/10] object-cover" alt="Architecture" />
+          </motion.div>
+        ))}
+      </div>
+
+      {/* 💻 DESKTOP VIEW: 3-Column Parallax Grid */}
       <div
         className="
-        flex gap-4 md:gap-10
-        px-4 md:px-20
-        h-full
-        mt-12 md:mt-96
-        justify-center
-        relative z-20
-        max-w-[1600px] mx-auto w-full
-      "
+          hidden md:flex gap-10
+          px-20
+          h-full
+          mt-96
+          justify-center
+          relative z-20
+          max-w-[1600px] mx-auto w-full
+        "
       >
-        <Column
-          images={[images[0], images[1], images[2]]}
-          y={y1}
-          onImageClick={setSelectedImg}
-        />
-
-        <Column
-          images={[images[3], images[4], images[5]]}
-          y={y2}
-          onImageClick={setSelectedImg}
-          className="mt-[-15%]"
-        />
-
-        {/* ✅ now visible on mobile also */}
-        <Column
-          images={[images[6], images[7], images[8]]}
-          y={y3}
-          onImageClick={setSelectedImg}
-          className="flex"
-        />
+        <Column images={[images[0], images[1], images[2]]} y={y1} onImageClick={setSelectedImg} />
+        <Column images={[images[3], images[4], images[5]]} y={y2} onImageClick={setSelectedImg} className="mt-[-15%]" />
+        <Column images={[images[6], images[7], images[8]]} y={y3} onImageClick={setSelectedImg} />
       </div>
 
       {/* LIGHTBOX */}
@@ -186,57 +148,31 @@ const Gallery = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={() => {
-              setSelectedImg(null);
-              setZoom(1);
-            }}
+            onClick={() => { setSelectedImg(null); setZoom(1); }}
             className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-md flex items-center justify-center p-4"
           >
-            <div className="absolute top-8 right-8 flex items-center gap-4 z-[110]">
+            <div className="absolute top-4 right-4 md:top-8 md:right-8 flex items-center gap-4 z-[110]">
               <div
                 onClick={(e) => e.stopPropagation()}
-                className="flex items-center gap-2 bg-white/10 rounded-full p-1.5 border border-white/20"
+                className="flex items-center gap-2 bg-white/10 rounded-full p-1 md:p-1.5 border border-white/20"
               >
-                <button onClick={handleZoomOut} className="p-2 text-white">
-                  <ZoomOut size={24} />
-                </button>
-                <button onClick={handleReset} className="p-2 text-white">
-                  <Maximize size={20} />
-                </button>
-                <button onClick={handleZoomIn} className="p-2 text-white">
-                  <ZoomIn size={24} />
-                </button>
+                <button onClick={handleZoomOut} className="p-2 text-white"><ZoomOut size={20} /></button>
+                <button onClick={handleReset} className="p-2 text-white"><Maximize size={18} /></button>
+                <button onClick={handleZoomIn} className="p-2 text-white"><ZoomIn size={20} /></button>
               </div>
-
-              <button
-                onClick={() => {
-                  setSelectedImg(null);
-                  setZoom(1);
-                }}
-                className="text-white p-2"
-              >
-                <X size={40} />
+              <button onClick={() => { setSelectedImg(null); setZoom(1); }} className="text-white p-2">
+                <X size={32} />
               </button>
             </div>
 
-            <div
-              className="w-full h-full flex items-center justify-center overflow-auto"
-              onWheel={(e) =>
-                e.deltaY < 0 ? handleZoomIn() : handleZoomOut()
-              }
-            >
+            <div className="w-full h-full flex items-center justify-center overflow-auto"
+                 onWheel={(e) => e.deltaY < 0 ? handleZoomIn() : handleZoomOut()}>
               <motion.img
                 src={selectedImg}
-                loading="eager"
-                decoding="sync"
                 animate={{ scale: zoom }}
                 transition={{ type: "spring", stiffness: 300, damping: 30 }}
                 onClick={(e) => e.stopPropagation()}
-                style={{
-                  imageRendering: "auto",
-                  backfaceVisibility: "hidden",
-                }}
-                className="max-h-[85vh] max-w-[90vw] rounded-lg object-contain"
+                className="max-h-[80vh] md:max-h-[85vh] max-w-[95vw] md:max-w-[90vw] rounded-lg object-contain shadow-2xl"
               />
             </div>
           </motion.div>

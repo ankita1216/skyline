@@ -143,7 +143,7 @@ export default function Hero() {
                   <X size={24} />
                 </button>
 
-                <h2 className="text-3xl font-serif italic font-bold">Request details</h2>
+                <h2 className="text-3xl font-serif italic font-bold">Enquire Now</h2>
                 <p className="text-white/60 mt-2">
                   Leave your details and our team will get back to you shortly.
                 </p>
@@ -263,7 +263,7 @@ function ElevationSlider() {
         </AnimatePresence>
         <div className="absolute bottom-0 left-0 right-0 p-10 z-20">
           <div className="flex items-end justify-between gap-4 mb-6 text-white">
-            <h3 className="text-3xl font-extrabold">Project Elevation</h3>
+            <h3 className="text-3xl font-extrabold">Aakash Skyline</h3>
             <div className="font-mono">0{index + 1} / 04</div>
           </div>
           <div className="flex gap-3 h-1.5 w-full">
