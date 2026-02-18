@@ -266,7 +266,7 @@ export default function Amenities() {
         {/* Submit Button */}
         <button
           type="submit"
-          className="col-span-2 mt-4 bg-[#062C22] text-white py-4 text-sm md:text-base rounded-xl font-bold uppercase tracking-widest hover:bg-[#0a3d2f] transition-colors shadow-lg shadow-[#062C22]/20"
+          className="col-span-2 mt-4 bg-[#E3F988] text-black py-4 text-sm md:text-base rounded-xl font-bold uppercase tracking-widest hover:bg-[#0a3d2f] transition-colors shadow-lg shadow-[#062C22]/20"
         >
           Send Enquiry
         </button>
