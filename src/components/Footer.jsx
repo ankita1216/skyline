@@ -34,7 +34,7 @@ const Footer = () => {
               <img
                 src={logo}
                 alt="Aakash Skyline"
-                className="h-20 object-contain"
+                className="h-20 object-contain brightness-0 invert"
               />
             </motion.div>
             
